@@ -1,0 +1,22 @@
+.item {
+  position: absolute;
+  left: calc(1px + var(--subgrid-offset-x) + var(--item-x) * var(--grid-unit));
+  top: calc(1px + var(--subgrid-offset-y) + var(--item-y) * var(--grid-unit));
+  width: var(--grid-unit);
+  height: var(--grid-unit);
+}
+
+.item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.item>img {
+  object-fit: contain;
+}
+
+.item>.stackSize {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

@@ -1,18 +1,23 @@
-.container {
-  position: absolute;
+.view {
   display: block;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  --grid-unit: 50px;
-  --grid-color: gray;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .grid {
   background-size: var(--grid-unit) var(--grid-unit);
-  background-position: -1px -1px;
+  background-position-x: var(--grid-offset-x);
+  background-position-y: var(--grid-offset-y);
   background-image:
-    linear-gradient(to right, var(--grid-color), transparent 1px),
-    linear-gradient(to bottom, var(--grid-color), transparent 1px);
+    linear-gradient(to right, var(--grid-outline), transparent 1px),
+    linear-gradient(to bottom, var(--grid-outline), transparent 1px);
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }

@@ -1,0 +1,19 @@
+.cursor {
+  position: fixed;
+  left: var(--cursor-x);
+  top: var(--cursor-y);
+  width: var(--cursor-unit);
+  height: var(--cursor-unit);
+  pointer-events: none;
+}
+
+.contained {
+  background-color: red;
+  width: 100%;
+  height: 100%;
+  --grid-unit: 50px;
+  --grid-offset-x: -1px;
+  --grid-offset-y: -1px;
+  --grid-outline: #333333;
+  --grid-background: #111111;
+}

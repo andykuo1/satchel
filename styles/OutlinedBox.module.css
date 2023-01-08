@@ -1,0 +1,54 @@
+.contained {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.subgrid {
+  background-size: var(--grid-unit) var(--grid-unit);
+  background-position-x: var(--subgrid-offset-x);
+  background-position-y: var(--subgrid-offset-x);
+  background-image:
+    linear-gradient(to right, var(--subgrid-outline), transparent 1px),
+    linear-gradient(to bottom, var(--subgrid-outline), transparent 1px);
+}
+
+.itembox {
+  --subgrid-offset-x: -4px;
+  --subgrid-offset-y: -4px;
+  --subgrid-outline: var(--grid-outline);
+  --subgrid-shadow: #AAAAAA;
+  --subgrid-background: var(--grid-background);
+  --subgrid-text: var(--grid-outline);
+}
+
+.itembox > legend {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--subgrid-shadow);
+  border-top-right-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
+  padding: 0 0.5em;
+  color: var(--subgrid-text);
+  max-width: 60%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.insetGrid {
+  border-radius: 0.6em;
+  border: 8px solid var(--subgrid-shadow);
+  border-bottom: 1px solid var(--subgrid-shadow);
+  border-right: 1px solid var(--subgrid-shadow);
+  background-color: var(--subgrid-background);
+}
+
+.outsetGrid {
+  border-radius: 0.6em;
+  border: 8px solid var(--subgrid-shadow);
+  border-top: 1px solid var(--subgrid-shadow);
+  border-left: 1px solid var(--subgrid-shadow);
+  background-color: var(--subgrid-background);
+}

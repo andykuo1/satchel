@@ -84,6 +84,6 @@ drag select box to move multiple items
 - after the box is drawn, all items within "pop" into the middle and that can be dragged around to the next spot. On lose focus, it dumps its items into its neighbors in the original position if possible.
 
 
-metadata should force no stacksize. This way we can have item containers that store their item info in the metadata.
+metadata should force no stacksize. This way we can have item views that store their item info in the metadata.
 
 
