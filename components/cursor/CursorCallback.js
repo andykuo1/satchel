@@ -1,17 +1,14 @@
-import { hasHeldItem, pickUp, putDown, setHeldItem } from './CursorTransfer';
-import { getSlotCoordsByIndex, getSlotIndexByItemId } from './inv/InvSlots';
-import { copyItem } from './inv/Item';
-import { isInputDisabled, isOutputCopied, isOutputDisabled } from './inv/View';
-import { CursorStore } from './store';
+import { getCursor, hasHeldItem, pickUp, putDown, setHeldItem } from './CursorTransfer';
+import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/InvSlots';
+import { copyItem } from '../inv/Item';
+import { isInputDisabled, isOutputCopied, isOutputDisabled } from '../inv/View';
+import { getInv } from '../store/InvTransfer';
 
 /**
- * @typedef {import('react').RefObject} RefObject
- * @typedef {import('./store').Store} Store
- * @typedef {import('./inv/Item').Item} Item
- * @typedef {import('./inv/View').View} View
+ * @typedef {import('../store').Store} Store
+ * @typedef {import('../inv/Item').Item} Item
+ * @typedef {import('../inv/View').View} View
  */
-
-const UNIT_SIZE = 50;
 
 /**
  * Perform pickup logic for item elements.
@@ -21,20 +18,21 @@ const UNIT_SIZE = 50;
  * @param {Item} item
  * @param {View} view
  * @param {HTMLElement} containerElement
- * @param {number} unitSize The item unit size.
  * @returns {boolean} Whether to allow the event to propagate.
  */
-export function itemMouseDownCallback(mouseEvent, store, item, view, containerElement, unitSize = UNIT_SIZE) {
+export function itemMouseDownCallback(mouseEvent, store, item, view, containerElement) {
   if (isOutputDisabled(view)) {
     return;
   }
-  const boundingRect = containerElement.getBoundingClientRect();
-  const clientCoordX = getClientCoordX(boundingRect, mouseEvent.clientX, unitSize);
-  const clientCoordY = getClientCoordY(boundingRect, mouseEvent.clientY, unitSize);
-
-  const itemId = item.itemId;
+  const cursor = getCursor(store);
+  const containerGridUnit = cursor.gridUnit;
   const invId = view.invId;
-  const cursor = CursorStore.get(store);
+  const inv = getInv(store, invId);
+  const itemId = item.itemId;
+
+  const boundingRect = containerElement.getBoundingClientRect();
+  const clientCoordX = getClientCoordX(boundingRect, mouseEvent.clientX, containerGridUnit);
+  const clientCoordY = getClientCoordY(boundingRect, mouseEvent.clientY, containerGridUnit);
 
   let result;
   if (isOutputCopied(view)) {
@@ -90,15 +88,13 @@ export function itemMouseDownCallback(mouseEvent, store, item, view, containerEl
  * @param {Store} store
  * @param {View} view
  * @param {HTMLElement} containerElement
- * @param {number} unitSize The item unit size.
  * @returns {boolean} Whether to allow the event to propagate.
  */
 export function containerMouseUpCallback(
   mouseEvent,
   store,
   view,
-  containerElement,
-  unitSize = UNIT_SIZE
+  containerElement
 ) {
   if (mouseEvent.button !== 0) {
     return;
@@ -106,23 +102,16 @@ export function containerMouseUpCallback(
   if (isInputDisabled(view)) {
     return;
   }
+  const cursor = getCursor(store);
+  const containerGridUnit = cursor.gridUnit;
   const invId = view.invId;
-  const rootElement = containerElement;
+  const shiftKey = mouseEvent.shiftKey;
+  const boundingRect = containerElement.getBoundingClientRect();
+  const clientCoordX = getClientCoordX(boundingRect, mouseEvent.clientX, containerGridUnit);
+  const clientCoordY = getClientCoordY(boundingRect, mouseEvent.clientY, containerGridUnit);
+
   const swappable = !isOutputDisabled(view);
   const mergable = !isInputDisabled(view);
-  const shiftKey = mouseEvent.shiftKey;
-  const boundingRect = rootElement.getBoundingClientRect();
-  const clientCoordX = getClientCoordX(
-    boundingRect,
-    mouseEvent.clientX,
-    unitSize
-  );
-  const clientCoordY = getClientCoordY(
-    boundingRect,
-    mouseEvent.clientY,
-    unitSize
-  );
-  const cursor = CursorStore.get(store);
   let result = putDown(cursor, store, invId, clientCoordX, clientCoordY, swappable, mergable, shiftKey);
   if (result) {
     // HACK: This should really grab focus to the item.

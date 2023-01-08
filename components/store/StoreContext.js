@@ -1,6 +1,6 @@
 import { createStoreContext } from '../../lib/store/StoreContext';
 import { RecordStoreable } from '../../lib/store/RecordStoreable';
-import { CursorState } from '../CursorTransfer';
+import { CursorState } from '../cursor/CursorState';
 
 /**
  * @typedef {ReturnType<useStore>} Store

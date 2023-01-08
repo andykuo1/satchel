@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import styles from '../styles/ItemStack.module.css';
-import { itemMouseDownCallback } from './CursorCallback';
+import { itemMouseDownCallback } from './cursor/CursorCallback';
 
 /**
  * @typedef {import('./inv/View').View} View
  * @typedef {import('./store').Store} Store
+ * @typedef {import('./inv/Item').Item} Item
  */
 
 /**

@@ -3,7 +3,7 @@ import { useAnimationFrame } from '../lib/hooks/UseAnimationFrame';
 import { useEventListener } from '../lib/hooks/UseEventListener';
 import { uuid } from '../lib/util/uuid';
 import styles from '../styles/Cursor.module.css';
-import { getCursor, getCursorInvId, getCursorViewId } from './CursorTransfer';
+import { getCursor, getCursorInvId, getCursorViewId } from './cursor/CursorTransfer';
 import { createItem } from './inv/Item';
 import Playground from './Playground';
 import { useStore, createSocketInvViewInStore } from './store';
@@ -25,8 +25,8 @@ export default function Cursor() {
   const cursor = getCursor(store);
   useEventListener(() => window.document, 'mousemove', cursor.onMouseMove, undefined, []);
 
-  function onAnimationFrame() {
-    cursor.onAnimationFrame();
+  function onAnimationFrame(now) {
+    cursor.onAnimationFrame(now);
     setPos([cursor.getCursorScreenX(), cursor.getCursorScreenY()]);
   }
   useAnimationFrame(onAnimationFrame, []);

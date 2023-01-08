@@ -3,7 +3,7 @@ import { getItemAtSlotIndex } from './store/InvTransfer';
 import { getSlotCoordsByIndex } from './inv/InvSlots';
 import OutlinedBox from './box/OutlinedBox';
 import ItemStack from './ItemStack';
-import { containerMouseUpCallback } from './CursorCallback';
+import { containerMouseUpCallback } from './cursor/CursorCallback';
 import { useRef } from 'react';
 
 export default function GridView({ viewId }) {
