@@ -20,6 +20,8 @@ export default function App() {
       let item = createItem(uuid());
       item.imgSrc = '/images/potion.png';
       item.background = '#FF0000';
+      item.displayName = 'Potion';
+      item.stackSize = 10;
       let coordX = Math.floor(Math.random() * inv.width - 1);
       let coordY = Math.floor(Math.random() * inv.height - 1);
       addItemToInv(store, invId, item, coordX, coordY);
