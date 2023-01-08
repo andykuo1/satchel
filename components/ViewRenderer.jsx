@@ -30,7 +30,7 @@ export default function ViewRenderer({ store, view, inv, containerProps, itemCon
       );
     case 'ground':
       return (
-        <GridViewRenderer store={store} view={view} inv={inv} shadow="none" containerProps={containerProps} itemContainerPropsCallback={itemContainerPropsCallback} />
+        <GridViewRenderer store={store} view={view} inv={inv} shadow="one" containerProps={containerProps} itemContainerPropsCallback={itemContainerPropsCallback} />
       );
     case 'socket':
       return (

@@ -7,6 +7,7 @@
   pointer-events: none;
   filter: brightness(70%);
   opacity: 1;
+  z-index: 1000;
 }
 
 .contained {

@@ -70,6 +70,7 @@ fieldset.contained legend {
   border: 8px solid var(--subgrid-shadow);
   border-bottom: 1px solid var(--subgrid-shadow);
   border-right: 1px solid var(--subgrid-shadow);
+  z-index: -1;
 }
 
 .outsetShadow {
@@ -82,4 +83,5 @@ fieldset.contained legend {
   border: 8px solid var(--subgrid-shadow);
   border-top: 1px solid var(--subgrid-shadow);
   border-left: 1px solid var(--subgrid-shadow);
+  z-index: 1;
 }
