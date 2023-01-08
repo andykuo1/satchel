@@ -16,10 +16,10 @@ export default function OutlinedBox({ x = 0, y = 0, w = 1, h = 1, title = "", co
   const { className = '', ...props } = containerProps;
   return (
     <Box x={x} y={y} w={w} h={h} containerProps={{
-        className: `${className} ${styles.contained} ${styles.subgrid} ${styles.itembox} ${shadow ? styles.outsetShadow : styles.noShadow}`,
+        className: `${className} ${styles.container} ${styles.subgrid} ${styles.itembox} ${shadow ? styles.outsetShadow : styles.noShadow}`,
         ...props,
       }}>
-      <fieldset>
+      <fieldset className={`${styles.contained}`}>
         <legend title={title}>{title}</legend>
         {children}
       </fieldset>

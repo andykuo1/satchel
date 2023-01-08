@@ -2,7 +2,7 @@
   position: absolute;
   left: calc(var(--grid-offset-x) + var(--box-x) * var(--grid-unit));
   top: calc(var(--grid-offset-y) + var(--box-y) * var(--grid-unit));
-  width: calc(var(--box-w) * var(--grid-unit));
-  height: calc(var(--box-h) * var(--grid-unit));
+  width: calc(var(--grid-offset-w) + var(--box-w) * var(--grid-unit));
+  height: calc(var(--grid-offset-h) + var(--box-h) * var(--grid-unit));
   overflow: auto;
 }
