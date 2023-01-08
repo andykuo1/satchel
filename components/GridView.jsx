@@ -6,8 +6,8 @@ import ItemStack from './ItemStack';
 
 export default function GridView({ viewId }) {
   const store = useStore();
-  const view = ViewStore.use(store, viewId);
-  const inv = InvStore.use(store, view ? view.invId : '');
+  const view = ViewStore.useValue(store, viewId);
+  const inv = InvStore.useValue(store, view ? view.invId : '');
   if (!view || !inv) {
     return null;
   }

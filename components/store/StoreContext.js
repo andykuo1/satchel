@@ -1,4 +1,5 @@
 import { createStoreContext } from '../../lib/store/StoreContext';
+import { RecordStoreable } from '../../lib/store/RecordStoreable';
 
 /**
  * @typedef {ReturnType<useStore>} Store
@@ -8,7 +9,6 @@ import { createStoreContext } from '../../lib/store/StoreContext';
  * @typedef {import('../inv/View').ViewId} ViewId
  */
 
-export const KEYS_LISTENERS = Symbol('keys');
 export const { StoreContext, StoreProvider, useStore } = createStoreContext({
     values: {
         /** @type {Record<InvId, Inv>} */
@@ -18,12 +18,13 @@ export const { StoreContext, StoreProvider, useStore } = createStoreContext({
     },
     listeners: {
         /** @type {Record<InvId, Array<Function>>} */
-        invs: {
-            [KEYS_LISTENERS]: [],
-        },
+        invs: {},
         /** @type {Record<ViewId, Array<Function>} */
-        views: {
-            [KEYS_LISTENERS]: [],
-        }
+        views: {}
     },
 });
+
+/** @type {RecordStoreable<Store, InvId, Inv>} */
+export const InvStore = new RecordStoreable(s => s.values.invs, s => s.listeners.invs);
+/** @type {RecordStoreable<Store, ViewId, View>} */
+export const ViewStore = new RecordStoreable(s => s.values.views, s => s.listeners.views);

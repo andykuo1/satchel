@@ -1,4 +1,4 @@
-import { InvStore } from '.';
+import { InvStore, ViewStore } from '.';
 import { clearItems, getItemByItemId, getItemIdBySlotCoords, getItemIdBySlotIndex, getItemIds, getItems, hasItem, putItem, removeItem } from '../inv/InvItems';
 import { cloneItem } from '../inv/Item';
 
@@ -7,6 +7,8 @@ import { cloneItem } from '../inv/Item';
  * @typedef {import('../inv/Inv').InvId} InvId
  * @typedef {import('../inv/Inv').Inv} Inv
  * @typedef {import('../inv/Item').Item} Item
+ * @typedef {import('../inv/View').ViewId} ViewId
+ * @typedef {import('../inv/View').View} View
  */
 
 export function getItemInInv(store, invId, itemId) {
@@ -144,6 +146,21 @@ export function getInv(store, invId) {
     return InvStore.get(store, invId);
   } else {
     throw new Error(`Cannot get non-existant inventory '${invId}'.`);
+  }
+}
+
+/**
+ * Get an existing view. Will throw if it does not exist.
+ *
+ * @param {Store} store
+ * @param {ViewId} viewId
+ * @returns {View}
+ */
+export function getView(store, viewId) {
+  if (ViewStore.has(store, viewId)) {
+    return ViewStore.get(store,  viewId);
+  } else {
+    throw new Error(`Cannot get non-existant view '${viewId}'.`);
   }
 }
 

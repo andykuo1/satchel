@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import styles from '../styles/Workspace.module.css';
 import Playground from './Playground';
-import { ViewIdsStore, ViewStore, useStore } from './store';
+import { ViewStore, useStore } from './store';
 
 export default function Workspace() {
   const store = useStore();
-  const viewIds = ViewIdsStore.use(store)
+  const viewIds = ViewStore.useKeys(store)
     .filter(viewId => ViewStore.get(store, viewId).topics.includes('workspace'));
   const [pos, setPos] = useState([0, 0]);
   return (

@@ -1,12 +1,13 @@
 import { createContext, useEffect, useRef, useState } from 'react';
 import { useAnimationFrame } from '../lib/hooks/UseAnimationFrame';
 import { useEventListener } from '../lib/hooks/UseEventListener';
+import { distanceSquared } from '../lib/util/math';
 import { uuid } from '../lib/util/uuid';
 import styles from '../styles/Cursor.module.css';
 import { createItem } from './inv/Item';
 import Playground from './Playground';
-import { createViewInStore, createSocketInvInStore, useStore } from './store';
-import { addItemToInv, getInv } from './store/InvTransfer';
+import { useStore, createSocketInvViewInStore } from './store';
+import { addItemToInv, getView } from './store/InvTransfer';
 
 const CursorContext = createContext(null);
 const CURSOR_INV_ID = 'cursor';
@@ -29,8 +30,9 @@ export default function Cursor() {
 
   let store = useStore();
   useEffect(() => {
-    let invId = createSocketInvInStore(store, CURSOR_INV_ID);
-    let viewId = createViewInStore(store, CURSOR_VIEW_ID, invId, 0, 0, ['cursor']);
+    let viewId = createSocketInvViewInStore(store, CURSOR_VIEW_ID, CURSOR_INV_ID, 0, 0, ['cursor']);
+    let view = getView(store, viewId);
+    let invId = view.invId;
     let item = createItem(uuid());
     item.imgSrc = '/images/potion.png';
     addItemToInv(store, invId, item, 0, 0);
