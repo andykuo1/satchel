@@ -1,5 +1,6 @@
 import { createStoreContext } from '../../lib/store/StoreContext';
 import { RecordStoreable } from '../../lib/store/RecordStoreable';
+import { CursorState } from '../CursorTransfer';
 
 /**
  * @typedef {ReturnType<useStore>} Store
@@ -10,6 +11,7 @@ import { RecordStoreable } from '../../lib/store/RecordStoreable';
  */
 
 export const { StoreContext, StoreProvider, useStore } = createStoreContext({
+    cursor: new CursorState(),
     values: {
         /** @type {Record<InvId, Inv>} */
         invs: {},
@@ -28,3 +30,10 @@ export const { StoreContext, StoreProvider, useStore } = createStoreContext({
 export const InvStore = new RecordStoreable(s => s.values.invs, s => s.listeners.invs);
 /** @type {RecordStoreable<Store, ViewId, View>} */
 export const ViewStore = new RecordStoreable(s => s.values.views, s => s.listeners.views);
+
+export const CursorStore = {
+    /** @param {Store} store */
+    get(store) {
+        return store.cursor;
+    }
+};

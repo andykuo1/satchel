@@ -3,9 +3,12 @@ import { getItemAtSlotIndex } from './store/InvTransfer';
 import { getSlotCoordsByIndex } from './inv/InvSlots';
 import OutlinedBox from './box/OutlinedBox';
 import ItemStack from './ItemStack';
+import { containerMouseUpCallback } from './CursorCallback';
+import { useRef } from 'react';
 
 export default function GridView({ viewId }) {
   const store = useStore();
+  const containerRef = useRef(null);
   const view = ViewStore.useValue(store, viewId);
   const inv = InvStore.useValue(store, view ? view.invId : '');
   if (!view || !inv) {
@@ -22,13 +25,21 @@ export default function GridView({ viewId }) {
       }
       let [x, y] = getSlotCoordsByIndex(inv, i);
       itemKeys.push(item.itemId);
-      itemElements.push(<ItemStack key={`${i}:${item.itemId}`} x={x} y={y} slotIndex={i} item={item} />);
+      itemElements.push(<ItemStack key={`${i}:${item.itemId}`}
+        x={x} y={y} slotIndex={i} item={item}
+        store={store} view={view} containerRef={containerRef} />);
     }
   }
+
+  function onMouseUp(e) {
+    containerMouseUpCallback(e, store, view, containerRef.current);
+  }
+
   return (
     <OutlinedBox x={view.coordX} y={view.coordY}
         w={inv.width} h={inv.height}
-        title={inv.displayName + inv.invId}>
+        title={inv.displayName + inv.invId}
+        containerProps={{ ref: containerRef, onMouseUp }}>
       {itemElements}
     </OutlinedBox>
   );
