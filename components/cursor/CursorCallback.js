@@ -3,6 +3,7 @@ import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/InvSlots';
 import { copyItem } from '../inv/Item';
 import { isInputDisabled, isOutputCopied, isOutputDisabled } from '../inv/View';
 import { getInv } from '../store/InvTransfer';
+import { InvStore } from '../store';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -60,7 +61,8 @@ export function itemMouseDownCallback(mouseEvent, store, item, view, containerEl
       let newItem = copyItem(item);
       newItem.stackSize = newStackSize;
       item.stackSize = remaining;
-      // dispatchItemChange(store, itemId);
+      // NOTE: Item change.
+      InvStore.dispatch(store, invId);
       const slotIndex = getSlotIndexByItemId(inv, itemId);
       const [fromItemX, fromItemY] = getSlotCoordsByIndex(inv, slotIndex);
       setHeldItem(cursor, store, newItem, fromItemX - clientCoordX, fromItemY - clientCoordY);

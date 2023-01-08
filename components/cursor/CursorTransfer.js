@@ -2,7 +2,7 @@ import { dijkstra2d } from '../../lib/util/dijkstra2d';
 import { getItemByItemId } from '../inv/InvItems';
 import { getSlotCoordsByIndex, getSlotIndexByItemId, isSlotIndexEmpty } from '../inv/InvSlots';
 import { copyItem } from '../inv/Item';
-import { createGridInvViewInStore, createGroundInvViewInStore, CursorStore } from '../store';
+import { createGroundInvViewInStore, CursorStore, InvStore } from '../store';
 import { addItemToInv, clearItemsInInv, getInv, getItemAtSlotCoords, getItemAtSlotIndex, getItemIdAtSlotCoords, getView, removeItemFromInv } from '../store/InvTransfer';
 
 /**
@@ -131,10 +131,12 @@ export function putDown(cursorState, store, invId, coordX, coordY, swappable, me
   const invType = toInventory.type;
   switch (invType) {
     case 'socket':
-      return putDownToSocketInventory(cursorState, store, invId, coordX, coordY, swappable, mergable, shiftKey);
+      return putDownToSocketInventory(
+        cursorState, store, getCursorInvId(store), invId,
+        coordX, coordY, swappable, mergable, shiftKey);
     case 'grid':
       return putDownToGridInventory(
-        cursorState, store, invId,
+        cursorState, store, getCursorInvId(store), invId,
         coordX + cursorState.heldOffsetX,
         coordY + cursorState.heldOffsetY,
         swappable, mergable, shiftKey);
@@ -190,6 +192,7 @@ export function putDownInGround(cursorState, store, clientX = 0, clientY = 0) {
 export function putDownToSocketInventory(
   cursorState,
   store,
+  heldInvId,
   toInvId,
   coordX,
   coordY,
@@ -212,7 +215,7 @@ export function putDownToSocketInventory(
       prevItemY = y;
       prevItem = getItemByItemId(inv, prevItemId);
       // If we can merge, do it now.
-      if (tryMergeItems(cursorState, store, prevItem, heldItem, mergable, shiftKey)) {
+      if (tryMergeItems(cursorState, store, toInvId, prevItem, heldInvId, heldItem, mergable, shiftKey)) {
         return true;
       }
       // ...otherwise we continue with the swap.
@@ -221,7 +224,7 @@ export function putDownToSocketInventory(
       // Cannot swap. Exit early.
       return false;
     }
-  } else if (tryDropPartialItem(store, toInvId, heldItem, mergable, shiftKey, 0, 0)) {
+  } else if (tryDropPartialItem(store, heldInvId, toInvId, heldItem, mergable, shiftKey, 0, 0)) {
     // No item in the way and we want to partially drop singles.
     return true;
   }
@@ -241,6 +244,7 @@ export function putDownToSocketInventory(
 /**
  * @param {CursorState} cursorState
  * @param {Store} store
+ * @param {InvId} heldInvId
  * @param {InvId} toInvId
  * @param {number} itemX The root slot coordinates to place item (includes holding offset)
  * @param {number} itemY The root slot coordinates to place item (includes holding offset)
@@ -251,6 +255,7 @@ export function putDownToSocketInventory(
 export function putDownToGridInventory(
   cursorState,
   store,
+  heldInvId,
   toInvId,
   itemX,
   itemY,
@@ -308,12 +313,12 @@ export function putDownToGridInventory(
       prevItemY = y;
       prevItem = getItemByItemId(inv, prevItemId);
       // If we can merge, do it now.
-      if (tryMergeItems(cursorState, store, prevItem, heldItem, mergable, shiftKey)) {
+      if (tryMergeItems(cursorState, store, toInvId, prevItem, heldInvId, heldItem, mergable, shiftKey)) {
         return true;
       }
       // ...otherwise we continue with the swap.
       removeItemFromInv(store, toInvId, prevItemId);
-    } else if (tryDropPartialItem(store, toInvId, heldItem, mergable, shiftKey, targetCoordX, targetCoordY)) {
+    } else if (tryDropPartialItem(store, heldInvId, toInvId, heldItem, mergable, shiftKey, targetCoordX, targetCoordY)) {
       // No item in the way and we want to partially drop singles.
       return true;
     }
@@ -349,21 +354,21 @@ export function putDownToGridInventory(
   }
 }
 
-export function tryTakeOneItem(store, item) {
+export function tryTakeOneItem(store, fromInvId, item) {
   if (item.stackSize > 1) {
     let amount = 1;
     let remaining = item.stackSize - amount;
     let newItem = copyItem(item);
     newItem.stackSize = amount;
     item.stackSize = remaining;
-    // dispatchItemChange(store, item.itemId);
+    InvStore.dispatch(store, fromInvId);
     return newItem;
   } else {
     return null;
   }
 }
 
-function tryDropPartialItem(store, toInvId, heldItem, mergable, shiftKey, targetCoordX, targetCoordY) {
+function tryDropPartialItem(store, heldInvId, toInvId, heldItem, mergable, shiftKey, targetCoordX, targetCoordY) {
   if (mergable && shiftKey && heldItem.stackSize > 1) {
     // No item in the way and we want to partially drop singles.
     let amount = 1;
@@ -371,14 +376,14 @@ function tryDropPartialItem(store, toInvId, heldItem, mergable, shiftKey, target
     let newItem = copyItem(heldItem);
     newItem.stackSize = amount;
     heldItem.stackSize = remaining;
-    // dispatchItemChange(store, heldItem.itemId);
+    InvStore.dispatch(store, heldInvId);
     addItemToInv(store, toInvId, newItem, targetCoordX, targetCoordY);
     return true;
   }
   return false;
 }
 
-function tryMergeItems(cursorState, store, prevItem, heldItem, mergable, shiftKey) {
+function tryMergeItems(cursorState, store, prevInvId, prevItem, heldInvId, heldItem, mergable, shiftKey) {
   // If we can merge, do it now.
   if (!mergable || !isMergableItems(prevItem, heldItem)) {
     return false;
@@ -386,7 +391,7 @@ function tryMergeItems(cursorState, store, prevItem, heldItem, mergable, shiftKe
   // Full merge!
   if (!shiftKey) {
     mergeItems(prevItem, heldItem);
-    // dispatchItemChange(store, prevItem.itemId);
+    InvStore.dispatch(store, prevInvId);
     // Merged successfully! Discard the held item.
     clearHeldItem(cursorState, store);
     return true;
@@ -400,8 +405,8 @@ function tryMergeItems(cursorState, store, prevItem, heldItem, mergable, shiftKe
   let remaining = heldItem.stackSize - amount;
   prevItem.stackSize += amount;
   heldItem.stackSize = remaining;
-  // dispatchItemChange(store, prevItem.itemId);
-  // dispatchItemChange(store, heldItem.itemId);
+  InvStore.dispatch(store, prevInvId);
+  InvStore.dispatch(store, heldInvId);
   return true;
 }
 

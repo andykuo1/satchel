@@ -178,6 +178,6 @@ export function updateItem(store, invId, itemId, state) {
   }
   cloneItem(state, item);
 
+  // NOTE: Item change.
   InvStore.dispatch(store, invId);
-  // NOTE: Dispatch for item?
 }
