@@ -6,7 +6,7 @@ import styles from '../styles/Cursor.module.css';
 import { getCursor, getCursorInvId, getCursorViewId } from './cursor/CursorTransfer';
 import { createItem } from './inv/Item';
 import Playground from './Playground';
-import { useStore, createSocketInvViewInStore } from './store';
+import { useStore, createCursorInvViewInStore } from './store';
 import { addItemToInv, getView } from './store/InvTransfer';
 
 export default function Cursor() {
@@ -14,7 +14,7 @@ export default function Cursor() {
 
   const store = useStore();
   useEffect(() => {
-    let viewId = createSocketInvViewInStore(store, getCursorViewId(store), getCursorInvId(store), 0, 0, ['cursor']);
+    let viewId = createCursorInvViewInStore(store, getCursorViewId(store), getCursorInvId(store));
     let view = getView(store, viewId);
     let invId = view.invId;
     let item = createItem(uuid());
@@ -30,14 +30,15 @@ export default function Cursor() {
     setPos([cursor.getCursorScreenX(), cursor.getCursorScreenY()]);
   }
   useAnimationFrame(onAnimationFrame, []);
-
-  const cursorStyle = {
-    '--cursor-x': `${pos[0]}px`,
-    '--cursor-y': `${pos[1]}px`,
-    '--cursor-unit': `${cursor.gridUnit}px`,
-  };
+  
   return (
-    <div className={styles.cursor} style={cursorStyle}>
+    <div className={styles.cursor}
+      style={{
+        // @ts-ignore
+        '--cursor-x': `${pos[0]}px`,
+        '--cursor-y': `${pos[1]}px`,
+        '--cursor-unit': `${cursor.gridUnit}px`,
+      }}>
       <Playground className={styles.contained} viewIds={[getCursorViewId(store)]} />
     </div>
   );

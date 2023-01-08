@@ -8,7 +8,6 @@
 }
 
 .contained {
-  background-color: red;
   width: 100%;
   height: 100%;
   --grid-unit: 50px;

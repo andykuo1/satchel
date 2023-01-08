@@ -11,6 +11,8 @@
   background-image:
     linear-gradient(to right, var(--subgrid-outline), transparent 1px),
     linear-gradient(to bottom, var(--subgrid-outline), transparent 1px);
+  background-color: var(--subgrid-background);
+  border-radius: 0.6em;
 }
 
 .itembox {
@@ -37,18 +39,19 @@
   overflow: hidden;
 }
 
-.insetGrid {
-  border-radius: 0.6em;
+.noShadow {
+  --subgrid-offset-x: -1px;
+  --subgrid-offset-y: -1px;
+}
+
+.insetShadow {
   border: 8px solid var(--subgrid-shadow);
   border-bottom: 1px solid var(--subgrid-shadow);
   border-right: 1px solid var(--subgrid-shadow);
-  background-color: var(--subgrid-background);
 }
 
-.outsetGrid {
-  border-radius: 0.6em;
+.outsetShadow {
   border: 8px solid var(--subgrid-shadow);
   border-top: 1px solid var(--subgrid-shadow);
   border-left: 1px solid var(--subgrid-shadow);
-  background-color: var(--subgrid-background);
 }

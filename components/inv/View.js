@@ -4,6 +4,7 @@ import { uuid } from '../../lib/util/uuid';
  * @typedef {string} ViewId
  * @typedef {string} InvId
  * @typedef {'all'|'readonly'|'inputonly'|'outputonly'|'copy'} ViewUsage
+ * @typedef {'cursor'|'grid'|'socket'} ViewType
  *
  * @typedef View
  * @property {ViewId} viewId
@@ -12,6 +13,7 @@ import { uuid } from '../../lib/util/uuid';
  * @property {number} coordY
  * @property {Array<string>} topics
  * @property {ViewUsage} usage
+ * @property {ViewType} type
  */
 
 /**
@@ -23,9 +25,10 @@ import { uuid } from '../../lib/util/uuid';
  * @param {number} coordY
  * @param {Array<string>} topics
  * @param {ViewUsage} usage
+ * @param {ViewType} type
  * @returns {View}
  */
-export function createView(viewId, invId, coordX, coordY, topics, usage) {
+export function createView(viewId, invId, coordX, coordY, topics, usage, type) {
   let view = {
     viewId,
     invId,
@@ -33,6 +36,7 @@ export function createView(viewId, invId, coordX, coordY, topics, usage) {
     coordY,
     topics,
     usage,
+    type,
   };
   return view;
 }
@@ -63,8 +67,9 @@ export function cloneView(other, dst = undefined, opts = {}) {
   const coordY = Number(other.coordY) || 1;
   const topics = [...other.topics] || [];
   const usage = other.usage || 'all';
+  const type = other.type || 'grid';
   if (!dst) {
-    dst = createView(viewId, invId, coordX, coordY, topics, usage);
+    dst = createView(viewId, invId, coordX, coordY, topics, usage, type);
   } else {
     dst.viewId = viewId;
     dst.invId = invId;
@@ -72,6 +77,7 @@ export function cloneView(other, dst = undefined, opts = {}) {
     dst.coordY = coordY;
     dst.topics = topics;
     dst.usage = usage;
+    dst.type = type;
   }
   return dst;
 }

@@ -8,13 +8,14 @@ import Box from './Box';
  * @param {number} [props.w]
  * @param {number} [props.h]
  * @param {string} [props.title]
+ * @param {boolean} [props.shadow]
  * @param {object} [props.containerProps]
  * @param {import('react').ReactNode} props.children
  */
-export default function OutlinedBox({ x = 0, y = 0, w = 1, h = 1, title = "", containerProps = {}, children }) {
+export default function OutlinedBox({ x = 0, y = 0, w = 1, h = 1, title = "", containerProps = {}, shadow=true, children }) {
   return (
     <Box x={x} y={y} w={w} h={h} containerProps={containerProps}>
-      <fieldset className={styles.contained + ' ' + styles.subgrid + ' ' + styles.itembox + ' ' + styles.outsetGrid}>
+      <fieldset className={styles.contained + ' ' + styles.subgrid + ' ' + styles.itembox + ' ' + (shadow ? styles.outsetShadow : styles.noShadow)}>
         <legend title={title}>{title}</legend>
         {children}
       </fieldset>
