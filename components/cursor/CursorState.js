@@ -15,8 +15,11 @@ export class CursorState {
     this.gridUnit = 50;
     this.visible = false;
 
+    this.forceUpdate = null;
+
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onAnimationFrame = this.onAnimationFrame.bind(this);
+    this.onComponentMount = this.onComponentMount.bind(this);
   }
 
   /** @param {MouseEvent} e */
@@ -34,6 +37,13 @@ export class CursorState {
     }
   }
 
+  /**
+   * @param {Function} forceUpdate 
+   */
+  onComponentMount(forceUpdate) {
+    this.forceUpdate = forceUpdate;
+  }
+
   getCursorScreenX() {
     return this.clientX + this.heldOffsetX * this.gridUnit;
   }
@@ -49,11 +59,17 @@ export class CursorState {
     this.startHeldY = this.clientY;
     this.heldOffsetX = Math.min(0, offsetX);
     this.heldOffsetY = Math.min(0, offsetY);
+    if (this.forceUpdate) {
+      this.forceUpdate();
+    }
     // playSound('pickup');
   }
 
   setEmpty() {
     this.visible = false;
     this.ignoreFirstPutDown = false;
+    if (this.forceUpdate) {
+      this.forceUpdate();
+    }
   }
 }

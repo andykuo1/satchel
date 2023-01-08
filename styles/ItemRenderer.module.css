@@ -2,8 +2,8 @@
   position: absolute;
   left: calc(1px + var(--subgrid-offset-x) + var(--item-x) * var(--grid-unit));
   top: calc(1px + var(--subgrid-offset-y) + var(--item-y) * var(--grid-unit));
-  width: var(--grid-unit);
-  height: var(--grid-unit);
+  width: calc(var(--item-w) * var(--grid-unit));
+  height: calc(var(--item-h) * var(--grid-unit));
 }
 
 .item:hover {
@@ -13,6 +13,7 @@
 
 .item>img {
   object-fit: contain;
+  padding: 10%;
 }
 
 .item>.stackSize {

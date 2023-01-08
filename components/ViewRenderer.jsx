@@ -68,6 +68,8 @@ function GridViewRenderer({ store, view, inv, containerProps, itemContainerProps
 }
 
 function CursorViewRenderer({ store, view, inv }) {
+    let maxWidth = inv.width;
+    let maxHeight = inv.height;
     let elements = [];
     let keys = [];
     for (let i = 0; i < inv.length; ++i) {
@@ -81,10 +83,12 @@ function CursorViewRenderer({ store, view, inv }) {
             keys.push(item.itemId);
             elements.push(<ItemRenderer key={`${i}:${item.itemId}`}
                 store={store} item={item} x={x} y={y} />);
+            maxWidth = Math.max(item.width, maxWidth);
+            maxHeight = Math.max(item.height, maxHeight);
         }
     }
     return (
-        <OutlinedBox x={view.coordX} y={view.coordY} w={inv.width} h={inv.height} shadow={false}>
+        <OutlinedBox x={view.coordX} y={view.coordY} w={maxWidth} h={maxHeight} shadow={false}>
             {elements}
         </OutlinedBox>
     );

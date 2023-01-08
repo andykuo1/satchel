@@ -21,6 +21,8 @@ export default function ItemRenderer({ store, item, x, y, containerProps = {} })
         // @ts-ignore
         '--item-x': x,
         '--item-y': y,
+        '--item-w': item.width,
+        '--item-h': item.height,
       }}
       title={item.displayName}
       {...containerProps}>

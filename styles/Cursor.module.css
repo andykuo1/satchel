@@ -5,6 +5,8 @@
   width: var(--cursor-unit);
   height: var(--cursor-unit);
   pointer-events: none;
+  filter: brightness(70%);
+  opacity: 1;
 }
 
 .contained {
@@ -15,4 +17,14 @@
   --grid-offset-y: -1px;
   --grid-outline: #333333;
   --grid-background: #111111;
+}
+
+.danger {
+  opacity: 0.8;
+  filter: brightness(70%) drop-shadow(0 0 0.5em #FF0000);
+}
+
+.important {
+  opacity: 0.8;
+  filter: brightness(70%) drop-shadow(0 0 0.5em #FFFFFF);
 }
