@@ -8,15 +8,19 @@ import Box from './Box';
  * @param {number} [props.w]
  * @param {number} [props.h]
  * @param {string} [props.title]
- * @param {boolean} [props.shadow]
+ * @param {'in'|'out'|'one'|'none'} [props.shadow]
  * @param {object} [props.containerProps]
  * @param {import('react').ReactNode} props.children
  */
-export default function OutlinedBox({ x = 0, y = 0, w = 1, h = 1, title = "", containerProps = {}, shadow=true, children }) {
+export default function OutlinedBox({ x = 0, y = 0, w = 1, h = 1, title = "", containerProps = {}, shadow='out', children }) {
   const { className = '', ...props } = containerProps;
   return (
     <Box x={x} y={y} w={w} h={h} containerProps={{
-        className: `${className} ${styles.container} ${styles.subgrid} ${styles.itembox} ${shadow ? styles.outsetShadow : styles.noShadow}`,
+        className: `${className} ${styles.container} ${styles.subgrid} ${styles.itembox} ${
+          shadow === 'out' ? styles.outsetShadow
+            : shadow === 'in' ? styles.insetShadow
+            : shadow === 'one' ? styles.oneShadow
+            : styles.noShadow}`,
         ...props,
       }}>
       <fieldset className={`${styles.contained}`}>

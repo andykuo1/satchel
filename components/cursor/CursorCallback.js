@@ -132,7 +132,7 @@ export function containerMouseUpCallback(
  * @returns {number}
  */
 export function getClientCoordX(elementBoundingRect, clientX, unitSize) {
-  return Math.trunc((clientX - elementBoundingRect.x) / unitSize);
+  return Math.floor((clientX - elementBoundingRect.x) / unitSize);
 }
 
 /**
@@ -142,5 +142,5 @@ export function getClientCoordX(elementBoundingRect, clientX, unitSize) {
  * @returns {number}
  */
 export function getClientCoordY(elementBoundingRect, clientY, unitSize) {
-  return Math.trunc((clientY - elementBoundingRect.y) / unitSize);
+  return Math.floor((clientY - elementBoundingRect.y) / unitSize);
 }

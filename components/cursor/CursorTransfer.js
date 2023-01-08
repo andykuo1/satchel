@@ -2,12 +2,14 @@ import { dijkstra2d } from '../../lib/util/dijkstra2d';
 import { getItemByItemId } from '../inv/InvItems';
 import { getSlotCoordsByIndex, getSlotIndexByItemId, isSlotIndexEmpty } from '../inv/InvSlots';
 import { copyItem } from '../inv/Item';
-import { CursorStore } from '../store';
-import { addItemToInv, clearItemsInInv, getInv, getItemAtSlotCoords, getItemAtSlotIndex, getItemIdAtSlotCoords, removeItemFromInv } from '../store/InvTransfer';
+import { createGridInvViewInStore, createGroundInvViewInStore, CursorStore } from '../store';
+import { addItemToInv, clearItemsInInv, getInv, getItemAtSlotCoords, getItemAtSlotIndex, getItemIdAtSlotCoords, getView, removeItemFromInv } from '../store/InvTransfer';
 
 /**
  * @typedef {import('../store').Store} Store
  * @typedef {import('../inv/Item').Item} Item
+ * @typedef {import('../inv/Item').ItemId} ItemId
+ * @typedef {import('../inv/Inv').InvId} InvId
  * @typedef {import('./CursorState').CursorState} CursorState
  */
 
@@ -156,13 +158,27 @@ export function putDownInGround(cursorState, store, clientX = 0, clientY = 0) {
     cursorState.ignoreFirstPutDown = false;
     return true;
   }
-  clearHeldItem(store, cursorState);
+  clearHeldItem(cursorState, store);
+
+  // TODO: ???
+  let posX = clientX;
+  let posY = clientY;
+  let viewId = createGroundInvViewInStore(store,
+    undefined, undefined,
+    heldItem.width, heldItem.height,
+    Math.floor(posX / cursorState.gridUnit),
+    Math.floor(posY / cursorState.gridUnit),
+    ['workspace']);
+  let view = getView(store, viewId);
+  let invId = view.invId;
+  addItemToInv(store, invId, heldItem, 0, 0);
+
   // dropFallingItem(heldItem, clientX, clientY);
   return true;
 }
 
 /**
- * @param {CursorState} cursor
+ * @param {CursorState} cursorState
  * @param {Store} store
  * @param {InvId} toInvId
  * @param {number} coordX

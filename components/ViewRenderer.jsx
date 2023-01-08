@@ -26,11 +26,15 @@ export default function ViewRenderer({ store, view, inv, containerProps, itemCon
       );
     case 'grid':
       return (
-        <GridViewRenderer store={store} view={view} inv={inv} containerProps={containerProps} itemContainerPropsCallback={itemContainerPropsCallback} />
+        <GridViewRenderer store={store} view={view} inv={inv} shadow="out" containerProps={containerProps} itemContainerPropsCallback={itemContainerPropsCallback} />
+      );
+    case 'ground':
+      return (
+        <GridViewRenderer store={store} view={view} inv={inv} shadow="none" containerProps={containerProps} itemContainerPropsCallback={itemContainerPropsCallback} />
       );
     case 'socket':
       return (
-        <GridViewRenderer store={store} view={view} inv={inv} containerProps={containerProps} itemContainerPropsCallback={itemContainerPropsCallback} />
+        <GridViewRenderer store={store} view={view} inv={inv} shadow="none" containerProps={containerProps} itemContainerPropsCallback={itemContainerPropsCallback} />
       );
   }
 }
@@ -40,10 +44,11 @@ export default function ViewRenderer({ store, view, inv, containerProps, itemCon
  * @param {Store} props.store
  * @param {View} props.view
  * @param {Inv} props.inv
+ * @param {'in'|'out'|'one'|'none'} props.shadow
  * @param {object} props.containerProps
  * @param {(store: Store, view: View, item: Item) => object} props.itemContainerPropsCallback
  */
-function GridViewRenderer({ store, view, inv, containerProps, itemContainerPropsCallback }) {
+function GridViewRenderer({ store, view, inv, shadow, containerProps, itemContainerPropsCallback }) {
   let elements = [];
   let keys = [];
   for (let i = 0; i < inv.length; ++i) {
@@ -65,6 +70,7 @@ function GridViewRenderer({ store, view, inv, containerProps, itemContainerProps
       x={view.coordX} y={view.coordY}
       w={inv.width} h={inv.height}
       title={inv.displayName}
+      shadow={shadow}
       containerProps={containerProps}>
       {elements}
     </OutlinedBox>
@@ -92,7 +98,7 @@ function CursorViewRenderer({ store, view, inv }) {
     }
   }
   return (
-    <OutlinedBox x={view.coordX} y={view.coordY} w={maxWidth} h={maxHeight} shadow={false}>
+    <OutlinedBox x={view.coordX} y={view.coordY} w={maxWidth} h={maxHeight} shadow="none">
       {elements}
     </OutlinedBox>
   );

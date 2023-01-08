@@ -7,6 +7,7 @@ import { cloneItem } from '../inv/Item';
  * @typedef {import('../inv/Inv').InvId} InvId
  * @typedef {import('../inv/Inv').Inv} Inv
  * @typedef {import('../inv/Item').Item} Item
+ * @typedef {import('../inv/Item').ItemId} ItemId
  * @typedef {import('../inv/View').ViewId} ViewId
  * @typedef {import('../inv/View').View} View
  */

@@ -8,6 +8,7 @@
     var(--subgrid-background), var(--item-bg, var(--subgrid-background)));
   border: 0.1em solid var(--item-bg, var(--subgrid-background));
   border-radius: 1em;
+  user-select: none;
 }
 
 .item:hover {

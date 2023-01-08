@@ -48,6 +48,18 @@ fieldset.contained legend {
   --subgrid-offset-y: -1px;
 }
 
+.oneShadow {
+  margin-top: -1px;
+  margin-left: -1px;
+  --grid-offset-w: 0px;
+  --grid-offset-h: 0px;
+  --subgrid-offset-x: -1px;
+  --subgrid-offset-y: -1px;
+  border: 1px solid var(--subgrid-shadow);
+  border-bottom: 1px solid var(--subgrid-shadow);
+  border-right: 1px solid var(--subgrid-shadow);
+}
+
 .insetShadow {
   margin-top: -1px;
   margin-left: -1px;

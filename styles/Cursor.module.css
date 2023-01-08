@@ -13,8 +13,8 @@
   width: 100%;
   height: 100%;
   --grid-unit: 50px;
-  --grid-offset-x: -1px;
-  --grid-offset-y: -1px;
+  --grid-offset-x: 0px;
+  --grid-offset-y: 0px;
   --grid-offset-w: 0px;
   --grid-offset-h: 0px;
   --grid-outline: transparent;
@@ -29,4 +29,15 @@
 .important {
   opacity: 0.8;
   filter: brightness(70%) drop-shadow(0 0 0.5em #FFFFFF);
+}
+
+.landing {
+  position: absolute;
+  top: var(--cursor-y);
+  left: var(--cursor-x);
+  width: 1em;
+  height: 1em;
+  background: red;
+  z-index: 100;
+  pointer-events: none;
 }
