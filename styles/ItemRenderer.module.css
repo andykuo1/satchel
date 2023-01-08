@@ -4,6 +4,10 @@
   top: calc(1px + var(--subgrid-offset-y) + var(--item-y) * var(--grid-unit));
   width: calc(var(--item-w) * var(--grid-unit));
   height: calc(var(--item-h) * var(--grid-unit));
+  background: linear-gradient(to bottom right,
+    var(--subgrid-background), var(--item-bg, var(--subgrid-background)));
+  border: 0.1em solid var(--item-bg, var(--subgrid-background));
+  border-radius: 1em;
 }
 
 .item:hover {
@@ -13,7 +17,6 @@
 
 .item>img {
   object-fit: contain;
-  padding: 10%;
 }
 
 .item>.stackSize {

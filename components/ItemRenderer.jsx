@@ -23,6 +23,7 @@ export default function ItemRenderer({ store, item, x, y, containerProps = {} })
         '--item-y': y,
         '--item-w': item.width,
         '--item-h': item.height,
+        '--item-bg': item.background,
       }}
       title={item.displayName}
       {...containerProps}>

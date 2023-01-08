@@ -60,7 +60,7 @@ export class CursorState {
     this.heldOffsetX = Math.min(0, offsetX);
     this.heldOffsetY = Math.min(0, offsetY);
     if (this.forceUpdate) {
-      this.forceUpdate();
+      setTimeout(this.forceUpdate);
     }
     // playSound('pickup');
   }
@@ -69,7 +69,7 @@ export class CursorState {
     this.visible = false;
     this.ignoreFirstPutDown = false;
     if (this.forceUpdate) {
-      this.forceUpdate();
+      setTimeout(this.forceUpdate);
     }
   }
 }

@@ -12,19 +12,23 @@
     linear-gradient(to right, var(--subgrid-outline), transparent 1px),
     linear-gradient(to bottom, var(--subgrid-outline), transparent 1px);
   background-color: var(--subgrid-background);
-  border-radius: 0.6em;
+  border-radius: 1em;
 }
 
 .itembox {
-  --subgrid-offset-x: -4px;
-  --subgrid-offset-y: -4px;
+  --subgrid-offset-x: -1px;
+  --subgrid-offset-y: -1px;
   --subgrid-outline: var(--grid-outline);
   --subgrid-shadow: #AAAAAA;
-  --subgrid-background: var(--grid-background);
+  --subgrid-background: #222222;
   --subgrid-text: var(--grid-outline);
 }
 
-.itembox > legend {
+.itembox fieldset {
+  border: none;
+}
+
+.itembox legend {
   position: absolute;
   top: 0;
   right: 0;

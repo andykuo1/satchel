@@ -15,8 +15,8 @@
   --grid-unit: 50px;
   --grid-offset-x: -1px;
   --grid-offset-y: -1px;
-  --grid-outline: #333333;
-  --grid-background: #111111;
+  --grid-outline: transparent;
+  --grid-background: transparent;
 }
 
 .danger {

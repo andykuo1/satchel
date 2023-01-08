@@ -19,20 +19,20 @@ import { getItemAtSlotIndex } from './store/InvTransfer';
  * @param {(store: Store, view: View, item: Item) => object} props.itemContainerPropsCallback
  */
 export default function ViewRenderer({ store, view, inv, containerProps, itemContainerPropsCallback }) {
-    switch (view.type) {
-        case 'cursor':
-            return (
-                <CursorViewRenderer store={store} view={view} inv={inv} />
-            );
-        case 'grid':
-            return (
-                <GridViewRenderer store={store} view={view} inv={inv} containerProps={containerProps} itemContainerPropsCallback={itemContainerPropsCallback} />
-            );
-        case 'socket':
-            return (
-                <GridViewRenderer store={store} view={view} inv={inv} containerProps={containerProps} itemContainerPropsCallback={itemContainerPropsCallback} />
-            );
-    }
+  switch (view.type) {
+    case 'cursor':
+      return (
+        <CursorViewRenderer store={store} view={view} inv={inv} />
+      );
+    case 'grid':
+      return (
+        <GridViewRenderer store={store} view={view} inv={inv} containerProps={containerProps} itemContainerPropsCallback={itemContainerPropsCallback} />
+      );
+    case 'socket':
+      return (
+        <GridViewRenderer store={store} view={view} inv={inv} containerProps={containerProps} itemContainerPropsCallback={itemContainerPropsCallback} />
+      );
+  }
 }
 
 /**
@@ -44,52 +44,56 @@ export default function ViewRenderer({ store, view, inv, containerProps, itemCon
  * @param {(store: Store, view: View, item: Item) => object} props.itemContainerPropsCallback
  */
 function GridViewRenderer({ store, view, inv, containerProps, itemContainerPropsCallback }) {
-    let elements = [];
-    let keys = [];
-    for (let i = 0; i < inv.length; ++i) {
-        let item = getItemAtSlotIndex(store, inv.invId, i);
-        if (item) {
-            if (keys.includes(item.itemId)) {
-                // Don't render more than once!
-                continue;
-            }
-            let [x, y] = getSlotCoordsByIndex(inv, i);
-            keys.push(item.itemId);
-            elements.push(<ItemRenderer key={`${i}:${item.itemId}`}
-                store={store} item={item} x={x} y={y}
-                containerProps={itemContainerPropsCallback(store, view, item)} />);
-        }
+  let elements = [];
+  let keys = [];
+  for (let i = 0; i < inv.length; ++i) {
+    let item = getItemAtSlotIndex(store, inv.invId, i);
+    if (item) {
+      if (keys.includes(item.itemId)) {
+        // Don't render more than once!
+        continue;
+      }
+      let [x, y] = getSlotCoordsByIndex(inv, i);
+      keys.push(item.itemId);
+      elements.push(<ItemRenderer key={`${i}:${item.itemId}`}
+        store={store} item={item} x={x} y={y}
+        containerProps={itemContainerPropsCallback(store, view, item)} />);
     }
-    return (
-        <OutlinedBox x={view.coordX} y={view.coordY} w={inv.width} h={inv.height} title={inv.displayName} containerProps={containerProps}>
-            {elements}
-        </OutlinedBox>
-    );
+  }
+  return (
+    <OutlinedBox
+      x={view.coordX} y={view.coordY}
+      w={inv.width} h={inv.height}
+      title={inv.displayName}
+      containerProps={containerProps}>
+      {elements}
+    </OutlinedBox>
+  );
 }
 
 function CursorViewRenderer({ store, view, inv }) {
-    let maxWidth = inv.width;
-    let maxHeight = inv.height;
-    let elements = [];
-    let keys = [];
-    for (let i = 0; i < inv.length; ++i) {
-        let item = getItemAtSlotIndex(store, inv.invId, i);
-        if (item) {
-            if (keys.includes(item.itemId)) {
-                // Don't render more than once!
-                continue;
-            }
-            let [x, y] = getSlotCoordsByIndex(inv, i);
-            keys.push(item.itemId);
-            elements.push(<ItemRenderer key={`${i}:${item.itemId}`}
-                store={store} item={item} x={x} y={y} />);
-            maxWidth = Math.max(item.width, maxWidth);
-            maxHeight = Math.max(item.height, maxHeight);
-        }
+  let maxWidth = inv.width;
+  let maxHeight = inv.height;
+  let elements = [];
+  let keys = [];
+  for (let i = 0; i < inv.length; ++i) {
+    let item = getItemAtSlotIndex(store, inv.invId, i);
+    if (item) {
+      if (keys.includes(item.itemId)) {
+        // Don't render more than once!
+        continue;
+      }
+      let [x, y] = getSlotCoordsByIndex(inv, i);
+      keys.push(item.itemId);
+      elements.push(<ItemRenderer key={`${i}:${item.itemId}`}
+        store={store} item={item} x={x} y={y} />);
+      maxWidth = Math.max(item.width, maxWidth);
+      maxHeight = Math.max(item.height, maxHeight);
     }
-    return (
-        <OutlinedBox x={view.coordX} y={view.coordY} w={maxWidth} h={maxHeight} shadow={false}>
-            {elements}
-        </OutlinedBox>
-    );
+  }
+  return (
+    <OutlinedBox x={view.coordX} y={view.coordY} w={maxWidth} h={maxHeight} shadow={false}>
+      {elements}
+    </OutlinedBox>
+  );
 }
