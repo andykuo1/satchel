@@ -42,19 +42,19 @@ fieldset.contained legend {
 }
 
 .noShadow {
-  --grid-offset-w: 0px;
-  --grid-offset-h: 0px;
   --subgrid-offset-x: -1px;
   --subgrid-offset-y: -1px;
+  --subgrid-offset-w: 0px;
+  --subgrid-offset-h: 0px;
 }
 
 .oneShadow {
   margin-top: -1px;
   margin-left: -1px;
-  --grid-offset-w: 0px;
-  --grid-offset-h: 0px;
   --subgrid-offset-x: -1px;
   --subgrid-offset-y: -1px;
+  --subgrid-offset-w: 0px;
+  --subgrid-offset-h: 0px;
   border: 1px solid var(--subgrid-shadow);
   border-bottom: 1px solid var(--subgrid-shadow);
   border-right: 1px solid var(--subgrid-shadow);
@@ -63,10 +63,10 @@ fieldset.contained legend {
 .insetShadow {
   margin-top: -1px;
   margin-left: -1px;
-  --grid-offset-w: 0px;
-  --grid-offset-h: 0px;
   --subgrid-offset-x: -1px;
   --subgrid-offset-y: -1px;
+  --subgrid-offset-w: 0px;
+  --subgrid-offset-h: 0px;
   border: 8px solid var(--subgrid-shadow);
   border-bottom: 1px solid var(--subgrid-shadow);
   border-right: 1px solid var(--subgrid-shadow);
@@ -76,10 +76,10 @@ fieldset.contained legend {
 .outsetShadow {
   margin-top: -9px;
   margin-left: -9px;
-  --grid-offset-w: 9px;
-  --grid-offset-h: 9px;
   --subgrid-offset-x: -1px;
   --subgrid-offset-y: -1px;
+  --subgrid-offset-w: 9px;
+  --subgrid-offset-h: 9px;
   border: 8px solid var(--subgrid-shadow);
   border-top: 1px solid var(--subgrid-shadow);
   border-left: 1px solid var(--subgrid-shadow);

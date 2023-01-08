@@ -5,6 +5,7 @@ import { createItem } from './inv/Item';
 import { useStore, createGridInvViewInStore } from './store';
 import { addItemToInv, getInv, getView } from './store/InvTransfer';
 import Workspace from './Workspace';
+import { useViewOrganizer } from './ViewOrganizer';
 
 export default function App() {
     const store = useStore();
@@ -26,6 +27,8 @@ export default function App() {
       let coordY = Math.floor(Math.random() * inv.height - 1);
       addItemToInv(store, invId, item, coordX, coordY);
     }, []);
+    useViewOrganizer();
+
     return (
         <>
         <Workspace />

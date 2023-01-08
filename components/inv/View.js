@@ -8,12 +8,14 @@ import { uuid } from '../../lib/util/uuid';
  *
  * @typedef View
  * @property {ViewId} viewId
+ * @property {ViewType} type
+ * @property {ViewUsage} usage
  * @property {InvId} invId
  * @property {number} coordX
  * @property {number} coordY
+ * @property {number} width
+ * @property {number} height
  * @property {Array<string>} topics
- * @property {ViewUsage} usage
- * @property {ViewType} type
  */
 
 /**
@@ -26,17 +28,21 @@ import { uuid } from '../../lib/util/uuid';
  * @param {Array<string>} topics
  * @param {ViewUsage} usage
  * @param {ViewType} type
+ * @param {number} width
+ * @param {number} height
  * @returns {View}
  */
-export function createView(viewId, invId, coordX, coordY, topics, usage, type) {
+export function createView(viewId, invId, coordX, coordY, topics, usage, type, width, height) {
   let view = {
     viewId,
+    type,
+    usage,
     invId,
     coordX,
     coordY,
+    width,
+    height,
     topics,
-    usage,
-    type,
   };
   return view;
 }
@@ -62,22 +68,26 @@ export function copyView(other, dst = undefined) {
  */
 export function cloneView(other, dst = undefined, opts = {}) {
   const viewId = other.viewId || uuid();
-  const invId = other.invId || '';
-  const coordX = Number(other.coordX) || 1;
-  const coordY = Number(other.coordY) || 1;
-  const topics = [...other.topics] || [];
-  const usage = other.usage || 'all';
   const type = other.type || 'grid';
+  const usage = other.usage || 'all';
+  const invId = other.invId || '';
+  const coordX = Number(other.coordX) || 0;
+  const coordY = Number(other.coordY) || 0;
+  const width = Number(other.width) || 1;
+  const height = Number(other.height) || 1;
+  const topics = [...other.topics] || [];
   if (!dst) {
-    dst = createView(viewId, invId, coordX, coordY, topics, usage, type);
+    dst = createView(viewId, invId, coordX, coordY, topics, usage, type, width, height);
   } else {
     dst.viewId = viewId;
+    dst.type = type;
+    dst.usage = usage;
     dst.invId = invId;
     dst.coordX = coordX;
     dst.coordY = coordY;
+    dst.width = width;
+    dst.height = height;
     dst.topics = topics;
-    dst.usage = usage;
-    dst.type = type;
   }
   return dst;
 }

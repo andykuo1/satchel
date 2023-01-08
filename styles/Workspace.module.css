@@ -7,8 +7,6 @@
   --grid-unit: 50px;
   --grid-offset-x: -1px;
   --grid-offset-y: -1px;
-  --grid-offset-w: 0px;
-  --grid-offset-h: 0px;
   --grid-outline: #333333;
   --grid-background: #111111;
   box-shadow: 0 0 4em 2em inset var(--grid-background);
