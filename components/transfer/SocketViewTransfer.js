@@ -5,7 +5,6 @@ import { getClientCoordX, getClientCoordY, getDeltaCoords, tryDropPartialItem, t
 import { addItemToInv, getInv, getItemAtSlotIndex, removeItemFromInv } from '../store/InvTransfer';
 import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/InvSlots';
 import { getItemByItemId } from '../inv/InvItems';
-import { ViewTransferable } from './ViewTransferable';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -16,7 +15,10 @@ import { ViewTransferable } from './ViewTransferable';
  * @typedef {import('../cursor/CursorState').CursorState} CursorState
  */
 
-export const SocketViewTransfer = new ViewTransferable(itemMouseDownCallback, containerMouseUpCallback);
+export const SocketViewTransfer = {
+    itemMouseDownCallback,
+    containerMouseUpCallback,
+};
 
 /**
  * Perform pickup logic for item elements.

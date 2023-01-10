@@ -47,13 +47,13 @@ export function getHeldItem(store) {
 }
 
 /**
- * @param {CursorState} cursorState The cursor state
+ * @param {CursorState} cursor The cursor state
  * @param {Store} store The store
  * @param {Item} item The item to hold
  * @param {number} offsetX The held offset from root item slot (can only be non-positive)
  * @param {number} offsetY The held offset from root item slot (can only be non-positive)
  */
-export function setHeldItem(cursorState, store, item, offsetX = 0, offsetY = 0) {
+export function setHeldItem(cursor, store, item, offsetX = 0, offsetY = 0) {
   if (!item) {
     throw new Error('Cannot set held item to null - use clearHeldItem() instead.');
   }
@@ -61,14 +61,14 @@ export function setHeldItem(cursorState, store, item, offsetX = 0, offsetY = 0) 
     throw new Error('Cannot set held item - already holding another item.');
   }
   addItemToInv(store, getCursorInvId(store), item, 0, 0);
-  cursorState.setFull(offsetX, offsetY);
+  cursor.setFull(offsetX, offsetY);
 }
 
 /**
- * @param {CursorState} cursorState The cursor state
+ * @param {CursorState} cursor The cursor state
  * @param {Store} store The store
  */
-export function clearHeldItem(cursorState, store) {
+export function clearHeldItem(cursor, store) {
   clearItemsInInv(store, getCursorInvId(store));
-  cursorState.setEmpty();
+  cursor.setEmpty();
 }
