@@ -1,6 +1,6 @@
 import GridViewRenderer from './renderer/GridViewRenderer';
 import SocketViewRenderer from './renderer/SocketViewRenderer';
-import StackViewRenderer from './renderer/StackViewRenderer';
+import CursorViewRenderer from './renderer/CursorViewRenderer';
 
 /**
  * @typedef {import('./store').Store} Store
@@ -25,7 +25,7 @@ export default function ViewRenderer({ store, view, inv, containerProps, itemPro
   switch (view.type) {
     case 'cursor':
       return (
-        <StackViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} />
+        <CursorViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} />
       );
     case 'grid':
       return (
