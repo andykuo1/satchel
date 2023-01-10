@@ -1,4 +1,4 @@
-import styles from '../../styles/Box.module.css';
+import styles from './Box.module.css';
 
 /**
  * @param {object} props

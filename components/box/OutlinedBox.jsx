@@ -1,4 +1,4 @@
-import styles from '../../styles/OutlinedBox.module.css';
+import styles from './OutlinedBox.module.css';
 import Box from './Box';
 
 /**
