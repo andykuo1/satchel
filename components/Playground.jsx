@@ -4,7 +4,7 @@ import { containerMouseUpCallback, itemMouseDownCallback } from './cursor/Cursor
 import { getCursor } from './cursor/CursorTransfer';
 import { InvStore, useStore, ViewStore } from './store';
 import { getView, isInvEmpty } from './store/InvTransfer';
-import ViewRenderer from './ViewRenderer';
+import ViewRenderer from './renderer/ViewRenderer';
 
 export default function Playground({ className = '', pannable = true, topic='', backgroundProps = {} }) {
   const [pos, setPos] = useState([0, 0]);

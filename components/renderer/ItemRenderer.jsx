@@ -2,8 +2,8 @@ import Image from 'next/image';
 import styles from './ItemRenderer.module.css';
 
 /**
- * @typedef {import('./store').Store} Store
- * @typedef {import('./inv/Item').Item} Item
+ * @typedef {import('../store').Store} Store
+ * @typedef {import('../inv/Item').Item} Item
  */
 
 /**

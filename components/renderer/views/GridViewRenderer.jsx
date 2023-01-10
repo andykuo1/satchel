@@ -1,14 +1,14 @@
-import OutlinedBox from '../box/OutlinedBox';
-import { computeSlottedArea, getSlotCoordsByIndex } from '../inv/Slots';
+import OutlinedBox from '../../box/OutlinedBox';
+import { computeSlottedArea, getSlotCoordsByIndex } from '../../inv/Slots';
 import ItemRenderer from '../ItemRenderer';
-import { getItemAtSlotIndex } from '../store/InvTransfer';
-import { renderItems } from './ItemsRenderer';
+import { getItemAtSlotIndex } from '../../store/InvTransfer';
+import { renderItems } from '../ItemsRenderer';
 
 /**
- * @typedef {import('../store').Store} Store
- * @typedef {import('../inv/View').View} View
- * @typedef {import('../inv/Inv').Inv} Inv
- * @typedef {import('../inv/Item').Item} Item
+ * @typedef {import('../../store').Store} Store
+ * @typedef {import('../../inv/View').View} View
+ * @typedef {import('../../inv/Inv').Inv} Inv
+ * @typedef {import('../../inv/Item').Item} Item
  */
 
 /**

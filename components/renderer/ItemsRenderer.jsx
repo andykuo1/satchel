@@ -1,4 +1,4 @@
-import ItemRenderer from '../ItemRenderer';
+import ItemRenderer from './ItemRenderer';
 import { getItemAtSlotIndex } from '../store/InvTransfer';
 
 /**

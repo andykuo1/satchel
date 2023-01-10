@@ -1,8 +1,8 @@
 import { getItemByItemId } from '../inv/InvItems';
-import { getClosestItemForElement, getItemIdForElement } from '../ItemRenderer';
+import { getClosestItemForElement, getItemIdForElement } from '../renderer/ItemRenderer';
 import { getInv } from '../store/InvTransfer';
 import { GridViewTransfer } from '../transfer/GridViewTransfer';
-import { getClosestViewForElement } from '../ViewRenderer';
+import { getClosestViewForElement } from '../renderer/ViewRenderer';
 
 /**
  * @typedef {import('../store').Store} Store

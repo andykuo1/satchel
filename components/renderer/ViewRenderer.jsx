@@ -1,12 +1,12 @@
-import GridViewRenderer from './renderer/GridViewRenderer';
-import SocketViewRenderer from './renderer/SocketViewRenderer';
-import CursorViewRenderer from './renderer/CursorViewRenderer';
+import GridViewRenderer from './views/GridViewRenderer';
+import SocketViewRenderer from './views/SocketViewRenderer';
+import CursorViewRenderer from './views/CursorViewRenderer';
 
 /**
- * @typedef {import('./store').Store} Store
- * @typedef {import('./inv/View').View} View
- * @typedef {import('./inv/Inv').Inv} Inv
- * @typedef {import('./inv/Item').Item} Item
+ * @typedef {import('../store').Store} Store
+ * @typedef {import('../inv/View').View} View
+ * @typedef {import('../inv/Inv').Inv} Inv
+ * @typedef {import('../inv/Item').Item} Item
  */
 
 /**

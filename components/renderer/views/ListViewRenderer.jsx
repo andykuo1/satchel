@@ -1,12 +1,12 @@
 import styles from './ListViewRenderer.module.css';
-import OutlinedBox from '../box/OutlinedBox';
-import { getItemAtSlotIndex } from '../store/InvTransfer';
+import OutlinedBox from '../../box/OutlinedBox';
+import { getItemAtSlotIndex } from '../../store/InvTransfer';
 
 /**
- * @typedef {import('../store').Store} Store
- * @typedef {import('../inv/View').View} View
- * @typedef {import('../inv/Inv').Inv} Inv
- * @typedef {import('../inv/Item').Item} Item
+ * @typedef {import('../../store').Store} Store
+ * @typedef {import('../../inv/View').View} View
+ * @typedef {import('../../inv/Inv').Inv} Inv
+ * @typedef {import('../../inv/Item').Item} Item
  */
 
 /**
