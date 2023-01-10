@@ -111,8 +111,8 @@ function putDownToGridInventory(
   const heldItem = getHeldItem(store);
   const invWidth = toInventory.width;
   const invHeight = toInventory.height;
-  const itemWidth = heldItem.width;
-  const itemHeight = heldItem.height;
+  const itemWidth = toInventory.type === 'single' ? 1 : heldItem.width;
+  const itemHeight = toInventory.type === 'single' ? 1 : heldItem.height;
   const maxCoordX = invWidth - itemWidth;
   const maxCoordY = invHeight - itemHeight;
   if (maxCoordX < 0 || maxCoordY < 0) {

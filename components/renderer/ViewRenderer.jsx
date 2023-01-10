@@ -1,6 +1,7 @@
 import GridViewRenderer from './views/GridViewRenderer';
 import SocketViewRenderer from './views/SocketViewRenderer';
 import CursorViewRenderer from './views/CursorViewRenderer';
+import ListViewRenderer from './views/ListViewRenderer';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -38,6 +39,10 @@ export default function ViewRenderer({ store, view, inv, containerProps, itemPro
     case 'socket':
       return (
         <SocketViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} />
+      );
+    case 'list':
+      return (
+        <ListViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} />
       );
   }
 }

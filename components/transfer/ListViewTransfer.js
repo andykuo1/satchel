@@ -3,8 +3,9 @@ import { isInputDisabled, isOutputDisabled } from '../inv/View';
 import { getCursor } from '../cursor/CursorTransfer';
 import { getClientCoordX, getClientCoordY, tryDropPartialItem, tryMergeItems, tryPickUp } from './ViewTransfer';
 import { addItemToInv, getInv, getItemAtSlotIndex, removeItemFromInv } from '../store/InvTransfer';
-import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/InvSlots';
+import { getSlotCoordsByIndex, getSlotIndexByItemId, isSlotIndexEmpty } from '../inv/Slots';
 import { getItemByItemId } from '../inv/InvItems';
+import { getItemIdForElement } from '../renderer/ItemRenderer';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -53,15 +54,17 @@ function containerMouseUpCallback(e, store, view, inv, element) {
     if (isInputDisabled(view)) {
         return false;
     }
+    // Find nearest empty slot.
+    let nextIndex = 0;
+    for(let i = 0; i < inv.length; ++i) {
+        if (isSlotIndexEmpty(inv, i)) {
+            nextIndex = i;
+        }
+    }
     const cursor = getCursor(store);
     const invId = view.invId;
     const shiftKey = e.shiftKey;
-    const boundingRect = element.getBoundingClientRect();
-    const clientCoordX = getClientCoordX(boundingRect, e.clientX, cursor.gridUnit);
-    const clientCoordY = getClientCoordY(boundingRect, e.clientY, cursor.gridUnit);
-
-    const swappable = !isOutputDisabled(view);
-    const mergable = !isInputDisabled(view);
+    const [clientCoordX, clientCoordY] = getSlotCoordsByIndex(inv, nextIndex);
 
     let result = false;
 
@@ -73,9 +76,10 @@ function containerMouseUpCallback(e, store, view, inv, element) {
             result = true;
         } else {
             // playSound('putdown');
+            // TODO: It's not mergable :(
             result = putDownToSocketInventory(
                 cursor, store, getCursorInvId(store), invId,
-                clientCoordX, clientCoordY, swappable, mergable, shiftKey);
+                clientCoordX, clientCoordY, false, false, shiftKey);
         }
     }
     return result;

@@ -28,6 +28,12 @@ export function createGroundInvViewInStore(store, viewId = uuid(), invId = uuid(
     return viewId;
 }
 
+export function createListInvViewInStore(store, viewId = uuid(), invId = uuid(), width = 1, height = 1, coordX = 0, coordY = 0, topics = []) {
+    createInvInStore(store, invId, 'single', width * height, width, height);
+    createViewInStore(store, viewId, invId, coordX, coordY, topics, 'all', 'list', width, height);
+    return viewId;
+}
+
 export function createSocketInvViewInStore(store, viewId = uuid(), invId = uuid(), coordX = 0, coordY = 0, topics = []) {
     createInvInStore(store, invId, 'single', 1, 1, 1);
     createViewInStore(store, viewId, invId, coordX, coordY, topics, 'all', 'socket', 1, 1);

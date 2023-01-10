@@ -30,7 +30,7 @@ export default function SocketViewRenderer({ store, view, inv, containerProps = 
     return (
         <OutlinedBox x={view.coordX} y={view.coordY}
             w={maxWidth} h={maxHeight}
-            shadow="none"
+            shadow="one"
             containerProps={containerProps}>
             {elements}
         </OutlinedBox>

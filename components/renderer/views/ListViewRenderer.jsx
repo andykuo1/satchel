@@ -15,9 +15,9 @@ import { getItemAtSlotIndex } from '../../store/InvTransfer';
  * @param {View} props.view
  * @param {Inv} props.inv
  * @param {object} props.containerProps
- * @param {(store: Store, view: View, item: Item) => object} props.itemContainerPropsCallback
+ * @param {object} props.itemProps
  */
-export default function ListViewRenderer({ store, view, inv, containerProps, itemContainerPropsCallback }) {
+export default function ListViewRenderer({ store, view, inv, containerProps, itemProps }) {
     let elements = [];
     let keys = [];
     for (let i = 0; i < inv.length; ++i) {
@@ -30,7 +30,7 @@ export default function ListViewRenderer({ store, view, inv, containerProps, ite
             keys.push(item.itemId);
             elements.push(<ListViewItem key={`${i}:${item.itemId}`}
                 store={store} item={item}
-                containerProps={itemContainerPropsCallback(store, view, item)}/>);
+                containerProps={itemProps}/>);
         }
     }
     return (
@@ -47,9 +47,14 @@ export default function ListViewRenderer({ store, view, inv, containerProps, ite
 }
 
 function ListViewItem({ store, item, containerProps }) {
+    const containerPropsWithItemId = {
+        'data-item-id': item.itemId,
+        ...containerProps,
+      };
     return (
-        <li {...containerProps}>
+        <li {...containerPropsWithItemId}>
             {item.displayName || 'Item'}
+            {item.stackSize > 0 && <label className={styles.stackSize}>×{item.stackSize}</label>}
         </li>
     );
 }
