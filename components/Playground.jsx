@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import styles from '../styles/Playground.module.css';
 import { containerMouseUpCallback, itemMouseDownCallback } from './cursor/CursorCallback';
 import { getCursor } from './cursor/CursorTransfer';
+import { getItemByItemId } from './inv/InvItems';
+import { getClosestItemForElement, getItemIdForElement } from './ItemRenderer';
 import { InvStore, useStore, ViewStore } from './store';
 import { getView, isInvEmpty } from './store/InvTransfer';
-import ViewRenderer from './ViewRenderer';
+import ViewRenderer, { getClosestViewForElement } from './ViewRenderer';
 
 export default function Playground({ className = '', pannable = true, topic='', backgroundProps = {} }) {
   const [pos, setPos] = useState([0, 0]);
@@ -62,7 +64,6 @@ function Views({ topic = '' }) {
 function View({ store, viewId }) {
   const view = ViewStore.useValue(store, viewId);
   const inv = InvStore.useValue(store, view ? view.invId : '');
-  const containerRef = useRef(null);
   useEffect(() => {
     if (!view || !inv) {
       return;
@@ -82,15 +83,19 @@ function View({ store, viewId }) {
       view={view}
       inv={inv}
       containerProps={{
-        ref: containerRef,
         onMouseUp(e) {
-          return containerMouseUpCallback(e, store, view, containerRef.current);
+          let containerElement = getClosestViewForElement(e.target);
+          return containerMouseUpCallback(e, store, view, containerElement);
         }
       }}
-      itemContainerPropsCallback={(store, view, item) => ({
+      itemProps={{
         onMouseDown(e) {
-          return itemMouseDownCallback(e, store, item, view, containerRef.current);
+          let itemElement = getClosestItemForElement(e.target);
+          let itemId = getItemIdForElement(itemElement);
+          let item = getItemByItemId(inv, itemId);
+          let containerElement = getClosestViewForElement(e.target);
+          return itemMouseDownCallback(e, store, item, view, containerElement);
         }
-      })}/>
+      }}/>
   );
 }

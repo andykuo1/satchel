@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from '../styles/ItemRenderer.module.css';
+import styles from './ItemRenderer.module.css';
 
 /**
  * @typedef {import('./store').Store} Store
@@ -15,6 +15,10 @@ import styles from '../styles/ItemRenderer.module.css';
  * @param {object} [props.containerProps]
  */
 export default function ItemRenderer({ store, item, x, y, containerProps = {} }) {
+  const containerPropsWithItemId = {
+    'data-item-id': item.itemId,
+    ...containerProps,
+  };
   return (
     <div className={styles.item}
       style={{
@@ -26,9 +30,28 @@ export default function ItemRenderer({ store, item, x, y, containerProps = {} })
         '--item-bg': item.background,
       }}
       title={item.displayName}
-      {...containerProps}>
+      {...containerPropsWithItemId}>
       <Image src={item.imgSrc} alt={item.displayName} fill={true} />
       {item.stackSize > 0 && <label className={styles.stackSize}>×{item.stackSize}</label>}
     </div>
   );
+}
+
+/**
+ * @param {HTMLElement} element 
+ */
+export function getItemIdForElement(element) {
+  if (element.hasAttribute('data-item-id')) {
+    return element.getAttribute('data-item-id');
+  } else {
+    throw new Error('Cannot get item id for non-item element.');
+  }
+}
+
+/**
+ * @param {HTMLElement} element 
+ * @returns {HTMLElement}
+ */
+export function getClosestItemForElement(element) {
+  return element.closest('[data-item-id]');
 }

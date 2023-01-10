@@ -13,7 +13,7 @@ import Box from './Box';
  * @param {import('react').ReactNode} props.children
  */
 export default function OutlinedBox({ x = 0, y = 0, w = 1, h = 1, title = "", containerProps = {}, shadow='out', children }) {
-  const { className = '', ...props } = containerProps;
+  const { className = '', ...propsContainer } = containerProps;
   return (
     <Box x={x} y={y} w={w} h={h} containerProps={{
         className: `${className} ${styles.container} ${styles.subgrid} ${styles.itembox} ${
@@ -21,7 +21,7 @@ export default function OutlinedBox({ x = 0, y = 0, w = 1, h = 1, title = "", co
             : shadow === 'in' ? styles.insetShadow
             : shadow === 'one' ? styles.oneShadow
             : styles.noShadow}`,
-        ...props,
+        ...propsContainer,
       }}>
       <fieldset className={`${styles.contained}`}>
         <legend title={title}>{title}</legend>

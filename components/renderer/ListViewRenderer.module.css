@@ -1,0 +1,10 @@
+.container li {
+    padding: 0.5em;
+    border-bottom: 4px solid var(--subgrid-outline);
+    background-color: var(--subgrid-background);
+}
+
+.container li:hover {
+    cursor: pointer;
+    background-color: var(--subgrid-outline);
+}
