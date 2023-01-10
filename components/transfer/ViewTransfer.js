@@ -1,5 +1,5 @@
 import { clearHeldItem, hasHeldItem, setHeldItem } from '../cursor/CursorTransfer';
-import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/InvSlots';
+import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/Slots';
 import { copyItem } from '../inv/Item';
 import { isOutputCopied, isOutputDisabled } from '../inv/View';
 import { InvStore } from '../store';
@@ -39,21 +39,24 @@ export function tryPickUp(e, cursor, store, view, inv, item, deltaCoordX = 0, de
     const itemId = item.itemId;
     const invId = view.invId;
     
+    const maxDeltaCoordX = -1 * Math.min(item.width, -1 * deltaCoordX);
+    const maxDeltaCoordY = -1 * Math.min(item.height, -1 * deltaCoordY);
+    
     if (isOutputCopied(view)) {
         let newItem = copyItem(item);
         // Try splitting the stack.
         if (e.shiftKey && item.stackSize > 1) {
             newItem.stackSize = Math.floor(item.stackSize / 2);
         }
-        setHeldItem(cursor, store, newItem, deltaCoordX, deltaCoordY);
+        setHeldItem(cursor, store, newItem, maxDeltaCoordX, maxDeltaCoordY);
     } else {
         // Try splitting the stack.
         let newItem = null;
         if (e.shiftKey && (newItem = trySplitStack(store, invId, item))) {
-            setHeldItem(cursor, store, newItem, deltaCoordX, deltaCoordY);
+            setHeldItem(cursor, store, newItem, maxDeltaCoordX, maxDeltaCoordY);
         } else {
             removeItemFromInv(store, invId, itemId);
-            setHeldItem(cursor, store, item, deltaCoordX, deltaCoordY);
+            setHeldItem(cursor, store, item, maxDeltaCoordX, maxDeltaCoordY);
         }
     }
     return true;

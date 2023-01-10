@@ -5,7 +5,7 @@ import { getClientCoordX, getClientCoordY, getDeltaCoords, tryDropPartialItem, t
 import { addItemToInv, getInv, getItemAtSlotCoords, getItemIdAtSlotCoords, removeItemFromInv } from '../store/InvTransfer';
 import { dijkstra2d } from '../../lib/util/dijkstra2d';
 import { getItemByItemId } from '../inv/InvItems';
-import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/InvSlots';
+import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/Slots';
 
 /**
  * @typedef {import('../store').Store} Store

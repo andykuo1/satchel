@@ -1,4 +1,4 @@
-import { isSlotIndexEmpty } from '../inv/InvSlots';
+import { isSlotIndexEmpty } from '../inv/Slots';
 import { CursorStore } from '../store';
 import { addItemToInv, clearItemsInInv, getInv, getItemAtSlotIndex } from '../store/InvTransfer';
 

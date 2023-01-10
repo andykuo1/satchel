@@ -1,12 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../styles/Playground.module.css';
 import { containerMouseUpCallback, itemMouseDownCallback } from './cursor/CursorCallback';
 import { getCursor } from './cursor/CursorTransfer';
-import { getItemByItemId } from './inv/InvItems';
-import { getClosestItemForElement, getItemIdForElement } from './ItemRenderer';
 import { InvStore, useStore, ViewStore } from './store';
 import { getView, isInvEmpty } from './store/InvTransfer';
-import ViewRenderer, { getClosestViewForElement } from './ViewRenderer';
+import ViewRenderer from './ViewRenderer';
 
 export default function Playground({ className = '', pannable = true, topic='', backgroundProps = {} }) {
   const [pos, setPos] = useState([0, 0]);
@@ -84,17 +82,12 @@ function View({ store, viewId }) {
       inv={inv}
       containerProps={{
         onMouseUp(e) {
-          let containerElement = getClosestViewForElement(e.target);
-          return containerMouseUpCallback(e, store, view, containerElement);
+          return containerMouseUpCallback(e, store, view);
         }
       }}
       itemProps={{
         onMouseDown(e) {
-          let itemElement = getClosestItemForElement(e.target);
-          let itemId = getItemIdForElement(itemElement);
-          let item = getItemByItemId(inv, itemId);
-          let containerElement = getClosestViewForElement(e.target);
-          return itemMouseDownCallback(e, store, item, view, containerElement);
+          return itemMouseDownCallback(e, store, view);
         }
       }}/>
   );

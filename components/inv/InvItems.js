@@ -1,4 +1,4 @@
-import { clearSlots, getSlotCoordsByIndex, getSlotIndexByCoords, getSlotIndexByItemId, setSlots } from './InvSlots';
+import { clearSlots, getSlotCoordsByIndex, getSlotIndexByCoords, getSlotIndexByItemId, setSlots } from './Slots';
 
 /**
  * @typedef {import('./Inv').Inv} Inv
@@ -38,7 +38,11 @@ export function putItem(inv, item, coordX, coordY) {
     throw new Error(`Cannot put item '${itemId}' that already exists in inventory '${inv.invId}'.`);
   }
   inv.items[itemId] = item;
-  setSlots(inv, coordX, coordY, coordX + item.width - 1, coordY + item.height - 1, itemId);
+  if (inv.type === 'single') {
+    setSlots(inv, coordX, coordY, coordX, coordY, itemId);
+  } else {
+    setSlots(inv, coordX, coordY, coordX + item.width - 1, coordY + item.height - 1, itemId);
+  }
 }
 
 /**
@@ -58,9 +62,13 @@ export function removeItem(inv, itemId) {
   }
   let item = getItemByItemId(inv, itemId);
   let [fromX, fromY] = getSlotCoordsByIndex(inv, slotIndex);
-  let toX = fromX + item.width - 1;
-  let toY = fromY + item.height - 1;
-  clearSlots(inv, fromX, fromY, toX, toY);
+  if (inv.type === 'single') {
+    clearSlots(inv, fromX, fromY, fromX, fromY, itemId);
+  } else {
+    let toX = fromX + item.width - 1;
+    let toY = fromY + item.height - 1;
+    clearSlots(inv, fromX, fromY, toX, toY, itemId);
+  }
   delete inv.items[itemId];
   return true;
 }

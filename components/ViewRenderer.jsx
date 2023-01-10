@@ -1,9 +1,6 @@
-import OutlinedBox from './box/OutlinedBox';
-import { getSlotCoordsByIndex } from './inv/InvSlots';
-import ItemRenderer from './ItemRenderer';
-import { getItemAtSlotIndex } from './store/InvTransfer';
 import GridViewRenderer from './renderer/GridViewRenderer';
-import ListViewRenderer from './renderer/ListViewRenderer';
+import SocketViewRenderer from './renderer/SocketViewRenderer';
+import StackViewRenderer from './renderer/StackViewRenderer';
 
 /**
  * @typedef {import('./store').Store} Store
@@ -28,7 +25,7 @@ export default function ViewRenderer({ store, view, inv, containerProps, itemPro
   switch (view.type) {
     case 'cursor':
       return (
-        <CursorViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} />
+        <StackViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} />
       );
     case 'grid':
       return (
@@ -40,13 +37,13 @@ export default function ViewRenderer({ store, view, inv, containerProps, itemPro
       );
     case 'socket':
       return (
-        <GridViewRenderer store={store} view={view} inv={inv} shadow="none" containerProps={containerPropsWithViewId} itemProps={itemProps} />
+        <SocketViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} />
       );
   }
 }
 
 /**
- * @param {HTMLElement} element 
+ * @param {Element} element 
  */
 export function getViewIdForElement(element) {
   if (element.hasAttribute('data-view-id')) {
@@ -57,36 +54,9 @@ export function getViewIdForElement(element) {
 }
 
 /**
- * @param {HTMLElement} element
+ * @param {Element} element
  * @returns {HTMLElement}
  */
 export function getClosestViewForElement(element) {
   return element.closest('[data-view-id]');
-}
-
-function CursorViewRenderer({ store, view, inv, containerProps, itemProps }) {
-  let maxWidth = inv.width;
-  let maxHeight = inv.height;
-  let elements = [];
-  let keys = [];
-  for (let i = 0; i < inv.length; ++i) {
-    let item = getItemAtSlotIndex(store, inv.invId, i);
-    if (item) {
-      if (keys.includes(item.itemId)) {
-        // Don't render more than once!
-        continue;
-      }
-      let [x, y] = getSlotCoordsByIndex(inv, i);
-      keys.push(item.itemId);
-      elements.push(<ItemRenderer key={`${i}:${item.itemId}`}
-        store={store} item={item} x={x} y={y} containerProps={itemProps}/>);
-      maxWidth = Math.max(item.width, maxWidth);
-      maxHeight = Math.max(item.height, maxHeight);
-    }
-  }
-  return (
-    <OutlinedBox x={view.coordX} y={view.coordY} w={maxWidth} h={maxHeight} shadow="none" containerProps={containerProps}>
-      {elements}
-    </OutlinedBox>
-  );
 }

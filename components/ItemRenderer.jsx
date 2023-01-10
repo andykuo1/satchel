@@ -12,9 +12,11 @@ import styles from './ItemRenderer.module.css';
  * @param {Item} props.item
  * @param {number} props.x
  * @param {number} props.y
+ * @param {number} props.w
+ * @param {number} props.h
  * @param {object} [props.containerProps]
  */
-export default function ItemRenderer({ store, item, x, y, containerProps = {} }) {
+export default function ItemRenderer({ store, item, x, y, w, h, containerProps = {} }) {
   const containerPropsWithItemId = {
     'data-item-id': item.itemId,
     ...containerProps,
@@ -25,8 +27,8 @@ export default function ItemRenderer({ store, item, x, y, containerProps = {} })
         // @ts-ignore
         '--item-x': x,
         '--item-y': y,
-        '--item-w': item.width,
-        '--item-h': item.height,
+        '--item-w': w,
+        '--item-h': h,
         '--item-bg': item.background,
       }}
       title={item.displayName}

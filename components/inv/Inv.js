@@ -8,7 +8,7 @@ import { cloneItem, copyItem } from './Item';
 
 /**
  * @typedef {string} InvId
- * @typedef {'grid'|'socket'} InvType
+ * @typedef {'connected'|'single'} InvType
  *
  * @typedef Inv
  * @property {InvId} invId
@@ -26,13 +26,16 @@ import { cloneItem, copyItem } from './Item';
  * Create an inventory.
  *
  * @param {InvId} invId
- * @param {InvType} invType
+ * @param {InvType} invType The type for which all items:
+ * - "connected": can take up multiple slots.
+ * - "single": can only take up 1x1 slots.
  * @param {number} slotCount
  * @param {number} maxCoordX
  * @param {number} maxCoordY
  * @returns {Inv}
  */
 export function createInv(invId, invType, slotCount, maxCoordX, maxCoordY) {
+  // TODO: width, height = Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY
   let inv = {
     invId,
     type: invType,
@@ -45,29 +48,6 @@ export function createInv(invId, invType, slotCount, maxCoordX, maxCoordY) {
     metadata: {}, // TODO: Not used yet.
   };
   return inv;
-}
-
-/**
- * Create a grid inventory of given size.
- *
- * @param {InvId} invId
- * @param {number} width
- * @param {number} height
- * @returns {Inv}
- */
-export function createInvGrid(invId, width, height) {
-  return createInv(invId, 'grid', width * height, width, height);
-}
-
-/**
- * Create a socket inventory.
- *
- * @param {InvId} invId
- * @returns {Inv}
- */
-export function createInvSocket(invId) {
-  // TODO: width, height = Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY
-  return createInv(invId, 'socket', 1, 1, 1);
 }
 
 /**
@@ -101,7 +81,7 @@ export function copyInv(other, dst = undefined) {
 export function cloneInv(other, dst = undefined, opts = {}) {
   const { preserveItemId = true } = opts;
   const invId = other.invId || uuid();
-  const type = other.type || 'grid';
+  const type = other.type || 'connected';
   const width = Number(other.width) || 1;
   const height = Number(other.height) || 1;
   const length = Number(other.length) || 1;

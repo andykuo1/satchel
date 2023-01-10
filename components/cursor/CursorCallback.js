@@ -1,5 +1,8 @@
+import { getItemByItemId } from '../inv/InvItems';
+import { getClosestItemForElement, getItemIdForElement } from '../ItemRenderer';
 import { getInv } from '../store/InvTransfer';
 import { GridViewTransfer } from '../transfer/GridViewTransfer';
+import { getClosestViewForElement } from '../ViewRenderer';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -12,14 +15,17 @@ import { GridViewTransfer } from '../transfer/GridViewTransfer';
  *
  * @param {MouseEvent} mouseEvent The triggering mouse event.
  * @param {Store} store
- * @param {Item} item
  * @param {View} view
- * @param {HTMLElement} containerElement
  * @returns {boolean} Whether to allow the event to propagate.
  */
-export function itemMouseDownCallback(mouseEvent, store, item, view, containerElement) {
+export function itemMouseDownCallback(mouseEvent, store, view) {
   const invId = view.invId;
   const inv = getInv(store, invId);
+  const element = /** @type {HTMLElement} */ (mouseEvent.target);
+  const itemElement = getClosestItemForElement(element);
+  const itemId = getItemIdForElement(itemElement);
+  const item = getItemByItemId(inv, itemId);
+  const containerElement = getClosestViewForElement(element);
 
   let result = GridViewTransfer.itemMouseDownCallback(mouseEvent, store, view, inv, item, containerElement);
   if (result) {
@@ -40,17 +46,16 @@ export function itemMouseDownCallback(mouseEvent, store, item, view, containerEl
  * @param {MouseEvent} mouseEvent The triggering mouse event.
  * @param {Store} store
  * @param {View} view
- * @param {HTMLElement} containerElement
  * @returns {boolean} Whether to allow the event to propagate.
  */
 export function containerMouseUpCallback(
   mouseEvent,
   store,
   view,
-  containerElement
 ) {
   const invId = view.invId;
   const inv = getInv(store, invId);
+  const containerElement = getClosestViewForElement(/** @type {HTMLElement} */ (mouseEvent.target));
 
   let result = GridViewTransfer.containerMouseUpCallback(mouseEvent, store, view, inv, containerElement);
   if (result) {

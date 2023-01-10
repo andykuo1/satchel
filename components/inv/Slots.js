@@ -54,15 +54,18 @@ export function setSlots(inv, fromX, fromY, toX, toY, itemId) {
  * @param {number} fromY
  * @param {number} toX
  * @param {number} toY
+ * @param {ItemId} [itemId]
  */
-export function clearSlots(inv, fromX, fromY, toX, toY) {
+export function clearSlots(inv, fromX, fromY, toX, toY, itemId = undefined) {
   for (let x = fromX; x <= toX; ++x) {
     for (let y = fromY; y <= toY; ++y) {
       let slotIndex = getSlotIndexByCoords(inv, x, y);
       if (slotIndex < 0) {
         continue;
       }
-      inv.slots[slotIndex] = null;
+      if (!itemId || itemId === inv.slots[slotIndex]) {
+        inv.slots[slotIndex] = null;
+      }
     }
   }
 }
@@ -77,19 +80,12 @@ export function getSlotIndexByCoords(inv, coordX, coordY) {
   if (coordX < 0 || coordY < 0) {
     return -1;
   }
-  switch (inv.type) {
-    case 'socket':
-    case 'grid': {
-      const width = inv.width;
-      const height = inv.height;
-      if (coordX >= width || coordY >= height) {
-        return -1;
-      }
-      return Math.floor(coordX) + Math.floor(coordY) * width;
-    }
-    default:
-      throw new Error('Unsupported inventory type for slot coords.');
+  const width = inv.width;
+  const height = inv.height;
+  if (coordX >= width || coordY >= height) {
+    return -1;
   }
+  return Math.floor(coordX) + Math.floor(coordY) * width;
 }
 
 /**
@@ -101,15 +97,8 @@ export function getSlotCoordsByIndex(inv, slotIndex) {
   if (slotIndex < 0) {
     return [-1, -1];
   }
-  switch (inv.type) {
-    case 'socket':
-    case 'grid': {
-      const width = inv.width;
-      return [slotIndex % width, Math.floor(slotIndex / width)];
-    }
-    default:
-      throw new Error('Unsupported inventory type for slot coords.');
-  }
+  const width = inv.width;
+  return [slotIndex % width, Math.floor(slotIndex / width)];
 }
 
 /**
@@ -126,4 +115,38 @@ export function getSlotIndexByItemId(inv, itemId, startIndex = 0) {
     }
   }
   return -1;
+}
+
+/**
+ * @param {Inv} inv 
+ * @param {number} fromX 
+ * @param {number} fromY 
+ * @param {number} toX 
+ * @param {number} toY 
+ * @param {ItemId} [itemId]
+ */
+export function computeSlottedArea(inv, fromX, fromY, toX, toY, itemId = undefined) {
+  let minX = Number.POSITIVE_INFINITY;
+  let minY = Number.POSITIVE_INFINITY;
+  let maxX = 0;
+  let maxY = 0;
+  for (let x = fromX; x <= toX; ++x) {
+    for (let y = fromY; y <= toY; ++y) {
+      let slotIndex = getSlotIndexByCoords(inv, x, y);
+      if (slotIndex < 0) {
+        continue;
+      }
+      if (!itemId || itemId === inv.slots[slotIndex]) {
+        minX = Math.min(x, minX);
+        minY = Math.min(y, minY);
+        maxX = Math.max(x, maxX);
+        maxY = Math.max(y, maxY);
+      }
+    }
+  }
+  if (Number.isFinite(minX) && Number.isFinite(minY)) {
+    return [maxX - minX + 1, maxY - minY + 1];
+  } else {
+    return [0, 0];
+  }
 }
