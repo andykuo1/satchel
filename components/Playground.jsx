@@ -1,3 +1,5 @@
+import styles from './Playground.module.css';
+
 import { useEffect, useState } from 'react';
 import { containerMouseUpCallback, itemMouseDownCallback } from './cursor/CursorCallback';
 import { getCursor } from './cursor/CursorTransfer';
@@ -6,7 +8,7 @@ import { getView, isInvEmpty } from './store/InvTransfer';
 import ViewRenderer from './renderer/ViewRenderer';
 import Viewport from './Viewport';
 
-export default function Playground({ className = '', topic='', backgroundProps = {} }) {
+export default function Playground({ className = '', topic = '', backgroundProps = {} }) {
   const [pos, setPos] = useState([0, 0]);
   const store = useStore();
   function onWheel(e) {
@@ -15,10 +17,9 @@ export default function Playground({ className = '', topic='', backgroundProps =
     setPos([cursor.screenPos[0], cursor.screenPos[1]]);
   }
   return (
-    <Viewport gridOffsetX={pos[0]} gridOffsetY={pos[1]}
-      containerProps={{ className }}
-      backgroundProps={{ onWheel, ...backgroundProps }}>
-      <Views topic={topic}/>
+    <Viewport gridOffsetX={pos[0]} gridOffsetY={pos[1]} containerProps={{ className }}>
+      <div className={styles.background} onWheel={onWheel} {...backgroundProps}></div>
+      <Views topic={topic} />
     </Viewport>
   );
 }
@@ -31,7 +32,7 @@ function Views({ topic = '' }) {
   }
   return (
     <>
-    {viewIds.map(viewId => <View key={viewId} store={store} viewId={viewId}/>)}
+      {viewIds.map(viewId => <View key={viewId} store={store} viewId={viewId} />)}
     </>
   );
 }
@@ -66,6 +67,6 @@ function View({ store, viewId }) {
         onMouseDown(e) {
           return itemMouseDownCallback(e, store, view);
         }
-      }}/>
+      }} />
   );
 }

@@ -1,9 +1,10 @@
+import styles from '../styles/Cursor.module.css';
+
 import { useEffect } from 'react';
 import { useAnimationFrame } from '../lib/hooks/UseAnimationFrame';
 import { useEventListener } from '../lib/hooks/UseEventListener';
 import { useForceUpdate } from '../lib/hooks/UseForceUpdate';
 import { uuid } from '../lib/util/uuid';
-import styles from '../styles/Cursor.module.css';
 import { getCursor, getCursorInvId, getCursorViewId, setHeldItem } from './cursor/CursorTransfer';
 import { createItem } from './inv/Item';
 import CursorViewRenderer from './renderer/views/CursorViewRenderer';
