@@ -1,13 +1,20 @@
 import { uuid } from '../../lib/util/uuid';
 import { createView } from '../inv/View';
 import { createInv } from '../inv/Inv';
-import { InvStore, ViewStore } from './StoreContext';
+import { InvStore } from './InvStore';
+import { ViewStore } from './ViewStore';
+import { CursorStore } from './CursorStore';
 
 /**
  * @typedef {import('./StoreContext').Store} Store
  */
 
-export * from './StoreContext';
+export { StoreContext, StoreProvider, useStore } from './StoreContext';
+export {
+    InvStore,
+    ViewStore,
+    CursorStore,
+};
 
 export function createGridInvViewInStore(store, viewId = uuid(), invId = uuid(), width = 1, height = 1, coordX = 0, coordY = 0, topics = []) {
     createInvInStore(store, invId, 'grid', width * height, width, height);
