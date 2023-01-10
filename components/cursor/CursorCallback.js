@@ -3,6 +3,7 @@ import { getClosestItemForElement, getItemIdForElement } from '../renderer/ItemR
 import { getInv } from '../store/InvTransfer';
 import { GridViewTransfer } from '../transfer/GridViewTransfer';
 import { getClosestViewForElement } from '../renderer/ViewRenderer';
+import { ListViewTransfer } from '../transfer/ListViewTransfer';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -27,7 +28,13 @@ export function itemMouseDownCallback(mouseEvent, store, view) {
   const item = getItemByItemId(inv, itemId);
   const containerElement = getClosestViewForElement(element);
 
-  let result = GridViewTransfer.itemMouseDownCallback(mouseEvent, store, view, inv, item, containerElement);
+  let result;
+  if (view.type === 'list') {
+    result = ListViewTransfer.itemMouseDownCallback(mouseEvent, store, view, inv, item, containerElement);
+  } else {
+    result = GridViewTransfer.itemMouseDownCallback(mouseEvent, store, view, inv, item, containerElement);
+  }
+
   if (result) {
     // HACK: This should really grab focus to the item.
     let activeElement = document.activeElement;
@@ -57,7 +64,12 @@ export function containerMouseUpCallback(
   const inv = getInv(store, invId);
   const containerElement = getClosestViewForElement(/** @type {HTMLElement} */ (mouseEvent.target));
 
-  let result = GridViewTransfer.containerMouseUpCallback(mouseEvent, store, view, inv, containerElement);
+  let result;
+  if (view.type === 'list') {
+    result = ListViewTransfer.containerMouseUpCallback(mouseEvent, store, view, inv, containerElement);
+  } else {
+    result = GridViewTransfer.containerMouseUpCallback(mouseEvent, store, view, inv, containerElement);
+  }
   if (result) {
     // HACK: This should really grab focus to the item.
     let activeElement = document.activeElement;

@@ -50,7 +50,7 @@ export default function App() {
       {
         let x = Math.floor(Math.random() * 10);
         let y = Math.floor(Math.random() * 10);
-        viewId = createListInvViewInStore(store, undefined, undefined, 3, 5, x, y, ['workspace']);
+        viewId = createListInvViewInStore(store, undefined, undefined, 3, 3, x, y, ['workspace']);
       }
     }, []);
     useViewOrganizer();

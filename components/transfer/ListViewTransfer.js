@@ -54,20 +54,11 @@ function containerMouseUpCallback(e, store, view, inv, element) {
     if (isInputDisabled(view)) {
         return false;
     }
-    // Find nearest empty slot.
-    let nextIndex = 0;
-    for(let i = 0; i < inv.length; ++i) {
-        if (isSlotIndexEmpty(inv, i)) {
-            nextIndex = i;
-        }
-    }
     const cursor = getCursor(store);
     const invId = view.invId;
     const shiftKey = e.shiftKey;
-    const [clientCoordX, clientCoordY] = getSlotCoordsByIndex(inv, nextIndex);
 
     let result = false;
-
     const heldItem = getHeldItem(store);
     if (heldItem) {
         if (cursor.ignoreFirstPutDown) {
@@ -77,12 +68,38 @@ function containerMouseUpCallback(e, store, view, inv, element) {
         } else {
             // playSound('putdown');
             // TODO: It's not mergable :(
-            result = putDownToSocketInventory(
-                cursor, store, getCursorInvId(store), invId,
-                clientCoordX, clientCoordY, false, false, shiftKey);
+            result = putDownToListInventory(cursor, store, invId, shiftKey);
         }
     }
     return result;
+}
+
+function putDownToListInventory(cursor, store, toInvId, shiftKey) {
+    let heldItem = getHeldItem(store);
+    let heldInvId = getCursorInvId(store);
+    let mergable = false;
+    let inv = getInv(store, toInvId);
+    
+    // Find nearest empty slot.
+    let nextIndex = -1;
+    for(let i = 0; i < inv.length; ++i) {
+        if (isSlotIndexEmpty(inv, i)) {
+            nextIndex = i;
+            break;
+        }
+    }
+    const [coordX, coordY] = getSlotCoordsByIndex(inv, nextIndex);
+    if (nextIndex < 0) {
+        return false;
+    } else if (tryDropPartialItem(store, heldInvId, toInvId, heldItem, mergable, shiftKey, coordX, coordY)) {
+        // No item in the way and we want to partially drop singles.
+        return true;
+    }
+
+    // Now there are no items in the way. Place it down!
+    clearHeldItem(cursor, store);
+    addItemToInv(store, toInvId, heldItem, coordX, coordY);
+    return true;
 }
 
 /**
