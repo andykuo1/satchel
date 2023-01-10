@@ -3,7 +3,7 @@ import { isInputDisabled, isOutputDisabled } from '../inv/View';
 import { getCursor } from '../cursor/CursorTransfer';
 import { getClientCoordX, getClientCoordY, getDeltaCoords, tryDropPartialItem, tryMergeItems, tryPickUp } from './ViewTransfer';
 import { addItemToInv, getInv, getItemAtSlotIndex, removeItemFromInv } from '../store/InvTransfer';
-import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/InvSlots';
+import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/Slots';
 import { getItemByItemId } from '../inv/InvItems';
 
 /**
@@ -80,16 +80,7 @@ function containerMouseUpCallback(e, store, view, inv, element) {
         }
     }
 
-    if (result) {
-        // HACK: This should really grab focus to the item.
-        let activeElement = document.activeElement;
-        if (activeElement instanceof HTMLElement) {
-            activeElement.blur();
-        }
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-    }
+    return result;
 }
 
 /**

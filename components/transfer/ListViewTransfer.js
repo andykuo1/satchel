@@ -1,11 +1,9 @@
-import { clearHeldItem, getCursorInvId, getHeldItem, setHeldItem } from '../cursor/CursorTransfer';
-import { isInputDisabled, isOutputDisabled } from '../inv/View';
+import { clearHeldItem, getCursorInvId, getHeldItem, hasHeldItem, setHeldItem } from '../cursor/CursorTransfer';
+import { isInputDisabled, isOutputCopied, isOutputDisabled } from '../inv/View';
 import { getCursor } from '../cursor/CursorTransfer';
-import { getClientCoordX, getClientCoordY, tryDropPartialItem, tryMergeItems, tryPickUp } from './ViewTransfer';
-import { addItemToInv, getInv, getItemAtSlotIndex, removeItemFromInv } from '../store/InvTransfer';
+import { tryDropPartialItem, tryMergeItems, tryPickUp } from './ViewTransfer';
+import { addItemToInv, getInv, removeItemFromInv } from '../store/InvTransfer';
 import { getSlotCoordsByIndex, getSlotIndexByItemId, isSlotIndexEmpty } from '../inv/Slots';
-import { getItemByItemId } from '../inv/InvItems';
-import { getItemIdForElement } from '../renderer/ItemRenderer';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -34,7 +32,56 @@ export const ListViewTransfer = {
  */
 function itemMouseDownCallback(e, store, view, inv, item, element) {
     const cursor = getCursor(store);
-    return tryPickUp(e, cursor, store, view, inv, item, 0, 0);
+    const swappable = true;
+    const mergable = true;
+    const shiftKey = e.shiftKey;
+
+    if (hasHeldItem(store)) {
+        if (!swappable) {
+            // Cannot swap. Exit early.
+            return false;
+        }
+        if (!item) {
+            return false;
+        }
+        if (isOutputDisabled(view)) {
+            // Cannot output from swap.
+            return false;
+        }
+        if (isInputDisabled(view)) {
+            // Cannot input from swap.
+            return false;
+        }
+        if (isOutputCopied(view)) {
+            // Cannot copy into already full cursor.
+            return false;
+        }
+        // Swap or merge it here!
+        const heldInvId = getCursorInvId(store);
+        const heldItem = getHeldItem(store);
+
+        // Has an item to swap. So pick up this one for later.
+        const toInvId = inv.invId;
+        const prevItem = item;
+        // If we can merge, do it now.
+        if (tryMergeItems(cursor, store, toInvId, prevItem, heldInvId, heldItem, mergable, shiftKey)) {
+            return true;
+        }
+        let slotIndex = getSlotIndexByItemId(inv, prevItem.itemId);
+        let [coordX, coordY] = getSlotCoordsByIndex(inv, slotIndex);
+        // ...otherwise we continue with the swap.
+        removeItemFromInv(store, toInvId, prevItem.itemId);
+        // Now there are no items in the way. Place it down!
+        clearHeldItem(cursor, store);
+        addItemToInv(store, toInvId, heldItem, coordX, coordY);
+        // ...finally put the remaining item back now that there is space.
+        if (prevItem) {
+            setHeldItem(cursor, store, prevItem, 0, 0);
+        }
+        return true;
+    } else {
+        return tryPickUp(e, cursor, store, view, inv, item, 0, 0);
+    }
 }
 
 /**
@@ -67,7 +114,6 @@ function containerMouseUpCallback(e, store, view, inv, element) {
             result = true;
         } else {
             // playSound('putdown');
-            // TODO: It's not mergable :(
             result = putDownToListInventory(cursor, store, invId, shiftKey);
         }
     }
@@ -96,70 +142,7 @@ function putDownToListInventory(cursor, store, toInvId, shiftKey) {
         return true;
     }
 
-    // Now there are no items in the way. Place it down!
     clearHeldItem(cursor, store);
     addItemToInv(store, toInvId, heldItem, coordX, coordY);
-    return true;
-}
-
-/**
- * @param {CursorState} cursorState
- * @param {Store} store
- * @param {InvId} toInvId
- * @param {number} coordX
- * @param {number} coordY
- * @param {boolean} swappable
- * @param {boolean} mergable
- * @param {boolean} shiftKey
- */
-function putDownToSocketInventory(
-    cursorState,
-    store,
-    heldInvId,
-    toInvId,
-    coordX,
-    coordY,
-    swappable,
-    mergable,
-    shiftKey
-) {
-    let heldItem = getHeldItem(store);
-    let prevItem = getItemAtSlotIndex(store, toInvId, 0);
-    let prevItemX = -1;
-    let prevItemY = -1;
-    if (prevItem) {
-        if (swappable) {
-            // Has an item to swap. So pick up this one for later.
-            let inv = getInv(store, toInvId);
-            let prevItemId = prevItem.itemId;
-            let slotIndex = getSlotIndexByItemId(inv, prevItemId);
-            let [x, y] = getSlotCoordsByIndex(inv, slotIndex);
-            prevItemX = x;
-            prevItemY = y;
-            prevItem = getItemByItemId(inv, prevItemId);
-            // If we can merge, do it now.
-            if (tryMergeItems(cursorState, store, toInvId, prevItem, heldInvId, heldItem, mergable, shiftKey)) {
-                return true;
-            }
-            // ...otherwise we continue with the swap.
-            removeItemFromInv(store, toInvId, prevItemId);
-        } else {
-            // Cannot swap. Exit early.
-            return false;
-        }
-    } else if (tryDropPartialItem(store, heldInvId, toInvId, heldItem, mergable, shiftKey, 0, 0)) {
-        // No item in the way and we want to partially drop singles.
-        return true;
-    }
-    // Now there are no items in the way. Place it down!
-    clearHeldItem(cursorState, store);
-    addItemToInv(store, toInvId, heldItem, 0, 0);
-    // ...finally put the remaining item back now that there is space.
-    if (prevItem) {
-        setHeldItem(
-            cursorState, store, prevItem,
-            Math.min(0, prevItemX - coordX),
-            Math.min(0, prevItemY - coordY));
-    }
     return true;
 }
