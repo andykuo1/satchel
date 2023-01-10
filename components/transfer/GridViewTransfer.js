@@ -111,6 +111,7 @@ function putDownToGridInventory(
   const heldItem = getHeldItem(store);
   const invWidth = toInventory.width;
   const invHeight = toInventory.height;
+  // TODO: Is there a better way to do this? And not rely on single check?
   const itemWidth = toInventory.type === 'single' ? 1 : heldItem.width;
   const itemHeight = toInventory.type === 'single' ? 1 : heldItem.height;
   const maxCoordX = invWidth - itemWidth;
