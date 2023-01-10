@@ -6,12 +6,15 @@ import { uuid } from '../lib/util/uuid';
 import styles from '../styles/Cursor.module.css';
 import { getCursor, getCursorInvId, getCursorViewId, setHeldItem } from './cursor/CursorTransfer';
 import { createItem } from './inv/Item';
-import Playground from './Playground';
-import { useStore, createCursorInvViewInStore } from './store';
+import CursorViewRenderer from './renderer/views/CursorViewRenderer';
+import { useStore, createCursorInvViewInStore, ViewStore, InvStore } from './store';
+import Viewport from './Viewport';
 
 export default function Cursor() {
   const store = useStore();
   const cursor = getCursor(store);
+  const view = ViewStore.useValue(store, getCursorViewId(store));
+  const inv = InvStore.useValue(store, getCursorInvId(store));
 
   useEffect(() => {
     createCursorInvViewInStore(store, getCursorViewId(store), getCursorInvId(store));
@@ -26,7 +29,9 @@ export default function Cursor() {
   
   return (
     <PositionalCursor cursor={cursor}>
-      <Playground className={styles.contained} topic="cursor" pannable={false} />
+      <Viewport gridOffsetX={0} gridOffsetY={0} containerProps={{ className: styles.contained }}>
+        <CursorViewRenderer store={store} view={view} inv={inv} />
+      </Viewport>
     </PositionalCursor>
   );
 }

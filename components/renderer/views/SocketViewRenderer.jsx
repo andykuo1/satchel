@@ -14,10 +14,10 @@ import { renderItems } from '../ItemsRenderer';
  * @param {Store} props.store
  * @param {View} props.view
  * @param {Inv} props.inv
- * @param {object} props.containerProps
- * @param {object} props.itemProps
+ * @param {object} [props.containerProps]
+ * @param {object} [props.itemProps]
  */
-export default function SocketViewRenderer({ store, view, inv, containerProps, itemProps }) {
+export default function SocketViewRenderer({ store, view, inv, containerProps = {}, itemProps = {} }) {
     let maxWidth = inv.width;
     let maxHeight = inv.height;
     let elements = renderItems(store, view, inv, (store, view, inv, item, i) => {
