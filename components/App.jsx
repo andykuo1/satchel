@@ -6,6 +6,7 @@ import { useStore, createGridInvViewInStore } from './store';
 import { addItemToInv, getInv, getView } from './store/InvTransfer';
 import Workspace from './Workspace';
 import { useViewOrganizer } from './ViewOrganizer';
+import { getCursor, setHeldItem } from './cursor/CursorTransfer';
 
 export default function App() {
     const store = useStore();
@@ -18,14 +19,24 @@ export default function App() {
       let view = getView(store, viewId);
       let invId = view.invId;
       let inv = getInv(store, invId);
-      let item = createItem(uuid());
-      item.imgSrc = '/images/potion.png';
-      item.background = '#FF0000';
-      item.displayName = 'Potion';
-      item.stackSize = 10;
-      let coordX = Math.floor(Math.random() * inv.width - 1);
-      let coordY = Math.floor(Math.random() * inv.height - 1);
-      addItemToInv(store, invId, item, coordX, coordY);
+      {
+        let item = createItem(uuid());
+        item.imgSrc = '/images/potion.png';
+        item.background = '#FF0000';
+        item.displayName = 'Potion';
+        item.stackSize = 10;
+        let coordX = Math.floor(Math.random() * inv.width - 1);
+        let coordY = Math.floor(Math.random() * inv.height - 1);
+        addItemToInv(store, invId, item, coordX, coordY);
+      }
+      {
+        let cursor = getCursor(store);
+        let item = createItem(uuid());
+        item.width = 2;
+        item.height = 2;
+        item.imgSrc = '/images/potion.png';
+        setHeldItem(cursor, store, item, 0, 0);
+      }
     }, []);
     useViewOrganizer();
 

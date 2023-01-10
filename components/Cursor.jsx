@@ -4,9 +4,7 @@ import { useEffect } from 'react';
 import { useAnimationFrame } from '../lib/hooks/UseAnimationFrame';
 import { useEventListener } from '../lib/hooks/UseEventListener';
 import { useForceUpdate } from '../lib/hooks/UseForceUpdate';
-import { uuid } from '../lib/util/uuid';
-import { getCursor, getCursorInvId, getCursorViewId, setHeldItem } from './cursor/CursorTransfer';
-import { createItem } from './inv/Item';
+import { getCursor, getCursorInvId, getCursorViewId } from './cursor/CursorTransfer';
 import CursorViewRenderer from './renderer/views/CursorViewRenderer';
 import { useStore, createCursorInvViewInStore, ViewStore, InvStore } from './store';
 import Viewport from './Viewport';
@@ -19,11 +17,6 @@ export default function Cursor() {
 
   useEffect(() => {
     createCursorInvViewInStore(store, getCursorViewId(store), getCursorInvId(store));
-    let item = createItem(uuid());
-    item.width = 2;
-    item.height = 2;
-    item.imgSrc = '/images/potion.png';
-    setHeldItem(cursor, store, item, 0, 0);
   }, []);
 
   useEventListener(() => window.document, 'mousemove', cursor.onMouseMove, undefined, []);
@@ -31,7 +24,7 @@ export default function Cursor() {
   return (
     <PositionalCursor cursor={cursor}>
       <Viewport gridOffsetX={0} gridOffsetY={0} containerProps={{ className: styles.contained }}>
-        <CursorViewRenderer store={store} view={view} inv={inv} />
+        {view && inv && <CursorViewRenderer store={store} view={view} inv={inv} />}
       </Viewport>
     </PositionalCursor>
   );
