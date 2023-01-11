@@ -1,10 +1,40 @@
+.container {
+    height: calc(var(--box-h) * var(--grid-unit));
+    padding-bottom: 100%;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: 1em;
+}
+
 .container li {
-    padding: 0.5em;
     border-bottom: 4px solid var(--subgrid-outline);
     background-color: var(--subgrid-background);
+    scroll-snap-align: start;
+    display: flex;
+    overflow: hidden;
+    height: calc(var(--grid-unit) * 0.8);
+    padding: 0.5em;
 }
 
 .container li:hover {
     cursor: pointer;
     background-color: var(--subgrid-outline);
+}
+
+li .item {
+    position: relative;
+}
+
+li .name {
+    align-self: center;
+    flex: 1;
+    margin-left: var(--grid-unit);
+    padding-left: 0.5em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+li .stackSize {
+    align-self: center;
+    float: right;
 }

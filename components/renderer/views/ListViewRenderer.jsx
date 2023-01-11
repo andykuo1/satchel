@@ -1,6 +1,7 @@
 import styles from './ListViewRenderer.module.css';
 import OutlinedBox from '../../box/OutlinedBox';
 import { getItemAtSlotIndex } from '../../store/InvTransfer';
+import ItemRenderer from '../ItemRenderer';
 
 /**
  * @typedef {import('../../store').Store} Store
@@ -30,7 +31,7 @@ export default function ListViewRenderer({ store, view, inv, containerProps, ite
             keys.push(item.itemId);
             elements.push(<ListViewItem key={`${i}:${item.itemId}`}
                 store={store} item={item}
-                containerProps={itemProps}/>);
+                containerProps={itemProps} />);
         }
     }
     return (
@@ -50,10 +51,15 @@ function ListViewItem({ store, item, containerProps }) {
     const containerPropsWithItemId = {
         'data-item-id': item.itemId,
         ...containerProps,
-      };
+    };
     return (
         <li {...containerPropsWithItemId}>
-            {item.displayName || 'Item'}
+            <span className={styles.item}>
+                <ItemRenderer store={store} item={item} x={0} y={0} w={1} h={1}/>
+            </span>
+            <span className={styles.name}>
+                {item.displayName || 'Item'}
+            </span>
             {item.stackSize > 0 && <label className={styles.stackSize}>×{item.stackSize}</label>}
         </li>
     );

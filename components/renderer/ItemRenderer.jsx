@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import styles from './ItemRenderer.module.css';
+import Image from 'next/image';
 
 /**
  * @typedef {import('../store').Store} Store
