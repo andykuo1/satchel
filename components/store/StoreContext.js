@@ -21,6 +21,6 @@ export const { StoreContext, StoreProvider, useStore } = createStoreContext({
         /** @type {Record<InvId, Array<Function>>} */
         invs: {},
         /** @type {Record<ViewId, Array<Function>} */
-        views: {}
+        views: {},
     },
 });

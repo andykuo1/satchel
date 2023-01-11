@@ -16,8 +16,9 @@ import { renderItems } from '../ItemsRenderer';
  * @param {Inv} props.inv
  * @param {object} [props.containerProps]
  * @param {object} [props.itemProps]
+ * @param {import('react').ReactNode} props.children
  */
-export default function SocketViewRenderer({ store, view, inv, containerProps = {}, itemProps = {} }) {
+export default function SocketViewRenderer({ store, view, inv, containerProps = {}, itemProps = {}, children }) {
     let maxWidth = inv.width;
     let maxHeight = inv.height;
     let elements = renderItems(store, view, inv, (store, view, inv, item, i) => {
@@ -33,6 +34,7 @@ export default function SocketViewRenderer({ store, view, inv, containerProps = 
             shadow="one"
             containerProps={containerProps}>
             {elements}
+            {children}
         </OutlinedBox>
     );
 }

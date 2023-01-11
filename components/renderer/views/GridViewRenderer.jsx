@@ -1,7 +1,5 @@
 import OutlinedBox from '../../box/OutlinedBox';
 import { computeSlottedArea, getSlotCoordsByIndex } from '../../inv/Slots';
-import ItemRenderer from '../ItemRenderer';
-import { getItemAtSlotIndex } from '../../store/InvTransfer';
 import { renderItems } from '../ItemsRenderer';
 
 /**
@@ -19,8 +17,9 @@ import { renderItems } from '../ItemsRenderer';
  * @param {'in'|'out'|'one'|'none'} props.shadow
  * @param {object} [props.containerProps]
  * @param {object} [props.itemProps]
+ * @param {import('react').ReactNode} [props.children]
  */
-export default function GridViewRenderer({ store, view, inv, shadow, containerProps = {}, itemProps = {} }) {
+export default function GridViewRenderer({ store, view, inv, shadow, containerProps = {}, itemProps = {}, children }) {
     let elements = renderItems(store, view, inv, (store, view, inv, item, i) => {
         let [x, y] = getSlotCoordsByIndex(inv, i);
         let [w, h] = computeSlottedArea(inv, x, y, x + item.width, y + item.height, item.itemId);
@@ -34,6 +33,7 @@ export default function GridViewRenderer({ store, view, inv, shadow, containerPr
             shadow={shadow}
             containerProps={containerProps}>
             {elements}
+            {children}
         </OutlinedBox>
     );
 }

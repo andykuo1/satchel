@@ -17,8 +17,9 @@ import ListViewRenderer from './views/ListViewRenderer';
  * @param {Inv} props.inv
  * @param {object} props.containerProps
  * @param {object} props.itemProps
+ * @param {import('react').ReactNode} props.children
  */
-export default function ViewRenderer({ store, view, inv, containerProps, itemProps }) {
+export default function ViewRenderer({ store, view, inv, containerProps, itemProps, children }) {
   const containerPropsWithViewId = {
     'data-view-id': view.viewId,
     ...containerProps,
@@ -26,23 +27,33 @@ export default function ViewRenderer({ store, view, inv, containerProps, itemPro
   switch (view.type) {
     case 'cursor':
       return (
-        <CursorViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} />
+        <CursorViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps}>
+          {children}
+        </CursorViewRenderer>
       );
     case 'grid':
       return (
-        <GridViewRenderer store={store} view={view} inv={inv} shadow="out" containerProps={containerPropsWithViewId} itemProps={itemProps} />
+        <GridViewRenderer store={store} view={view} inv={inv} shadow="out" containerProps={containerPropsWithViewId} itemProps={itemProps}>
+          {children}
+        </GridViewRenderer>
       );
     case 'ground':
       return (
-        <GridViewRenderer store={store} view={view} inv={inv} shadow="one" containerProps={containerPropsWithViewId} itemProps={itemProps} />
+        <GridViewRenderer store={store} view={view} inv={inv} shadow="one" containerProps={containerPropsWithViewId} itemProps={itemProps}>
+          {children}
+        </GridViewRenderer>
       );
     case 'socket':
       return (
-        <SocketViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} />
+        <SocketViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps}>
+          {children}
+        </SocketViewRenderer>
       );
     case 'list':
       return (
-        <ListViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} />
+        <ListViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps}>
+          {children}
+        </ListViewRenderer>
       );
   }
 }

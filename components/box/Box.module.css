@@ -5,6 +5,6 @@
   width: calc(var(--subgrid-offset-w) + var(--box-w) * var(--grid-unit));
   height: calc(var(--subgrid-offset-h) + var(--box-h) * var(--grid-unit));
   transform: translate(var(--grid-offset-x), var(--grid-offset-y));
-  overflow: auto;
   transition: left ease 0.3s, top ease 0.3s;
+  overflow: auto;
 }

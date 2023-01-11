@@ -23,6 +23,7 @@ export default function App() {
         let view = getView(store, viewId);
         let invId = view.invId;
         let inv = getInv(store, invId);
+        inv.displayName = 'Funny';
         let item = createItem(uuid());
         item.imgSrc = '/images/potion.png';
         item.background = '#FF0000';
@@ -50,7 +51,7 @@ export default function App() {
       {
         let x = Math.floor(Math.random() * 10);
         let y = Math.floor(Math.random() * 10);
-        viewId = createListInvViewInStore(store, undefined, undefined, 3, 3, x, y, ['workspace']);
+        viewId = createListInvViewInStore(store, undefined, undefined, Math.floor(Math.random() * 3) + 2, 3, x, y, ['workspace']);
       }
     }, []);
     useViewOrganizer();

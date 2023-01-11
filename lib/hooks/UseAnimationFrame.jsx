@@ -2,11 +2,11 @@ import { useCallback, useEffect, useRef } from 'react';
 
 export function useAnimationFrame(callback, deps = undefined) {
     const handle = useRef(null);
-    const handler = useCallback(function handler() {
+    const handler = useCallback(function handler(now) {
         if (!handle.current) {
             return;
         }
-        callback();
+        callback(now);
         handle.current = requestAnimationFrame(handler);
     }, deps);
     useEffect(() => {
