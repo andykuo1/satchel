@@ -35,7 +35,7 @@ export default function SocketBox({ store, view }) {
         let [w, h] = computeSlottedArea(inv, x, y, x + item.width, y + item.height, item.itemId);
         maxWidth = Math.max(w, maxWidth);
         maxHeight = Math.max(h, maxHeight);
-        return { x, y, w, h, onMoueDown: onItemMouseDown };
+        return { x, y, w, h, onMouseDown: onItemMouseDown };
     });
     return (
         <ContainerBox x={view.coordX} y={view.coordY}
