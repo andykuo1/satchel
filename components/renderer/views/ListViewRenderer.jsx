@@ -47,6 +47,7 @@ export default function ListViewRenderer({ store, view, inv, containerProps, ite
             handleProps={handleProps}>
             <ul className={styles.container}>
                 {elements}
+                {elements.length < inv.length && <div className={styles.anchor}></div>}
             </ul>
             {children}
         </OutlinedBox>

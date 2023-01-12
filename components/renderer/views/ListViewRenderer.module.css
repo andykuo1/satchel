@@ -1,6 +1,5 @@
 .container {
     height: calc(var(--box-h) * var(--grid-unit));
-    padding-bottom: 100%;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     scroll-padding-top: 1em;
@@ -37,4 +36,8 @@ li .name {
 li .stackSize {
     align-self: center;
     float: right;
+}
+
+.anchor {
+    height: 100%;
 }

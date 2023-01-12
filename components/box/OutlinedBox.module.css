@@ -51,7 +51,7 @@
   --subgrid-offset-w: 0.5em;
 }
 .right .container {
-  width: calc(100% - 0.5em);
+  width: calc(100% - 0.5em - 1px);
 }
 
 .left.right {
@@ -59,7 +59,7 @@
   --subgrid-offset-w: 1em;
 }
 .left.right .container {
-  width: calc(100% - 1em);
+  width: calc(100% - 1em - 1px);
 }
 
 .top {
@@ -75,7 +75,7 @@
   --subgrid-offset-h: 0.5em;
 }
 .bottom .container {
-  height: calc(100% - 0.5em);
+  height: calc(100% - 0.5em - 1px);
 }
 
 .top.bottom {
@@ -83,7 +83,7 @@
   --subgrid-offset-h: 1em;
 }
 .top.bottom .container {
-  height: calc(100% - 1em);
+  height: calc(100% - 1em - 1px);
 }
 
 fieldset.container {
@@ -116,26 +116,26 @@ fieldset.container {
   top: 0;
   left: 0;
   right: 0;
-  height: 8px;
+  height: 0.5em;
 }
 
 .leftbar {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 8px;
+  width: 0.5em;
 }
 
 .rightbar {
   right: 0;
   top: 0;
   bottom: 0;
-  width: 8px;
+  width: 0.5em;
 }
 
 .bottombar {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 8px;
+  height: 0.5em;
 }
