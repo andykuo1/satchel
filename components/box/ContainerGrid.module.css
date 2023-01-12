@@ -1,0 +1,31 @@
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.subgrid {
+    background-size: var(--grid-unit) var(--grid-unit);
+    background-image:
+        linear-gradient(to right, var(--subgrid-outline), transparent 1px),
+        linear-gradient(to bottom, var(--subgrid-outline), transparent 1px);
+    background-color: var(--subgrid-background);
+}
+
+fieldset.container {
+    border: none;
+}
+
+.container>legend {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--subgrid-shadow);
+    border-top-right-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+    padding: 0 0.5em;
+    color: var(--subgrid-text);
+    max-width: 60%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

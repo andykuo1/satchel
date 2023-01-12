@@ -1,10 +1,10 @@
 import styles from './TimerBox.module.css';
 
 import { useRef, useState } from 'react';
-import OutlinedBox from '../box/ContainerBox';
 import { useAnimationFrame } from '../../lib/hooks/UseAnimationFrame';
+import ContainerBox from '../box/ContainerBox';
 
-export default function TimerBox() {
+export default function TimerBox({ store, view }) {
     const prevFrameTime = useRef(0);
     const [time, setTime] = useState(0);
     const [counting, setCounting] = useState(false);
@@ -32,7 +32,7 @@ export default function TimerBox() {
     useAnimationFrame(onAnimationFrame, [counting]);
 
     return (
-        <OutlinedBox w={3} h={2} containerProps={{ className: styles.container }}>
+        <ContainerBox w={3} h={2} containerProps={{ className: styles.container }}>
             <div className={styles.time}>
                 <label className={styles.hours}>{formatTimeDigits(millisToHours(time))}</label>
                 <span>:</span>
@@ -41,7 +41,7 @@ export default function TimerBox() {
                 <label className={styles.seconds}>{formatTimeDigits(millisToSeconds(time))}</label>
             </div>
             <button className={styles.action} onClick={onClick}>O</button>
-        </OutlinedBox>
+        </ContainerBox>
     );
 }
 

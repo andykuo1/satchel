@@ -9,6 +9,8 @@ import InvBox from './boxes/InvBox';
 import GroundBox from './boxes/GroundBox';
 import ListBox from './boxes/ListBox';
 import SocketBox from './boxes/SocketBox';
+import TimerBox from './boxes/TimerBox';
+import FoundryBox from './boxes/FoundryBox';
 
 export default function Playground({ className = '', topic = '', backgroundProps = {} }) {
   const [pos, setPos] = useState([0, 0]);
@@ -53,6 +55,10 @@ function View({ store, viewId }) {
       return (<ListBox store={store} view={view}/>);
     case 'socket':
       return (<SocketBox store={store} view={view}/>);
+    case 'foundry':
+      return (<FoundryBox store={store} view={view}/>);
+    case 'timer':
+      return (<TimerBox store={store} view={view}/>);
     default:
       return null;
   }

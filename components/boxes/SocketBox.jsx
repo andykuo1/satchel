@@ -6,6 +6,7 @@ import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallbac
 import { renderItems } from '../renderer/ItemsRenderer';
 import { computeSlottedArea, getSlotCoordsByIndex } from '../inv/Slots';
 import ContainerBox from '../box/ContainerBox';
+import ContainerGrid from '../box/ContainerGrid';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -40,14 +41,12 @@ export default function SocketBox({ store, view }) {
     return (
         <ContainerBox x={view.coordX} y={view.coordY}
             w={maxWidth} h={maxHeight}
-            containerProps={{
-                'data-view-id': view.viewId,
-                onMouseUp: onContainerMouseUp,
-            }}
             handleProps={{
                 onMouseDown: onHandleMouseDown,
             }}>
-            {elements}
+            <ContainerGrid containerProps={{ 'data-view-id': view.viewId, onMouseUp: onContainerMouseUp }}>
+                {elements}
+            </ContainerGrid>
         </ContainerBox>
     );
 }

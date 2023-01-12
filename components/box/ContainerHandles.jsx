@@ -1,6 +1,14 @@
 import styles from './ContainerHandles.module.css';
 
-export default function ContainerHandles({ left = false, right = false, top = false, bottom = false, handleProps = {} }) {
+/**
+ * @param {object} props
+ * @param {boolean} [props.left]
+ * @param {boolean} [props.right]
+ * @param {boolean} [props.top]
+ * @param {boolean} [props.bottom]
+ * @param {object} [props.handleProps]
+ */
+export default function ContainerHandles({ left = false, right = true, top = false, bottom = true, handleProps = {} }) {
     const { className: classNameHandle = '', ...propsHandle } = handleProps;
     return (
         <>

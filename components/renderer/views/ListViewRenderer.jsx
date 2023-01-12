@@ -40,9 +40,8 @@ export default function ListViewRenderer({ store, view, inv, containerProps, ite
             x={view.coordX} y={view.coordY}
             w={inv.width} h={inv.height}
             title={inv.displayName}
-            containerProps={containerProps}
             handleProps={handleProps}>
-            <ul className={styles.container}>
+            <ul className={styles.container} {...containerProps}>
                 {elements}
                 {elements.length < inv.length && <div className={styles.anchor}></div>}
             </ul>

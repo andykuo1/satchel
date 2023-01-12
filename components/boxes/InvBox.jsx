@@ -6,6 +6,8 @@ import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallbac
 import { renderItems } from '../renderer/ItemsRenderer';
 import { computeSlottedArea, getSlotCoordsByIndex } from '../inv/Slots';
 import ContainerBox from '../box/ContainerBox';
+import ContainerGrid from '../box/ContainerGrid';
+import ContainerHandles from '../box/ContainerHandles';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -39,14 +41,10 @@ export default function InvBox({ store, view }) {
             x={view.coordX} y={view.coordY}
             w={inv.width} h={inv.height}
             title={inv.displayName}
-            containerProps={{
-                'data-view-id': view.viewId,
-                onMouseUp: onContainerMouseUp,
-            }}
-            handleProps={{
-                onMouseDown: onHandleMouseDown,
-            }}>
-            {elements}
+            handleProps={{ onMouseDown: onHandleMouseDown }}>
+            <ContainerGrid containerProps={{ 'data-view-id': view.viewId, onMouseUp: onContainerMouseUp }}>
+                {elements}
+            </ContainerGrid>
         </ContainerBox>
     );
 }
