@@ -1,7 +1,7 @@
 import styles from './Playground.module.css';
 
 import { useEffect, useState } from 'react';
-import { containerMouseUpCallback, itemMouseDownCallback } from './cursor/CursorCallback';
+import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from './cursor/CursorCallback';
 import { getCursor } from './cursor/CursorTransfer';
 import { InvStore, useStore, ViewStore } from './store';
 import { getView, isInvEmpty } from './store/InvTransfer';
@@ -67,6 +67,12 @@ function View({ store, viewId }) {
         onMouseDown(e) {
           return itemMouseDownCallback(e, store, view);
         }
-      }} />
+      }}
+      handleProps={{
+        onMouseDown(e) {
+          return handleMouseDownCallback(e, store, view);
+        }
+      }}>
+    </ViewRenderer>
   );
 }

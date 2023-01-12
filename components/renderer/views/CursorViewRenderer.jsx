@@ -30,7 +30,6 @@ export default function CursorViewRenderer({ store, view, inv, containerProps = 
     return (
         <OutlinedBox x={view.coordX} y={view.coordY}
             w={maxWidth} h={maxHeight}
-            shadow="none"
             containerProps={containerProps}>
             {elements}
             {children}

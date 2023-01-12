@@ -17,9 +17,10 @@ import ItemRenderer from '../ItemRenderer';
  * @param {Inv} props.inv
  * @param {object} props.containerProps
  * @param {object} props.itemProps
+ * @param {object} props.handleProps
  * @param {import('react').ReactNode} props.children
  */
-export default function ListViewRenderer({ store, view, inv, containerProps, itemProps, children }) {
+export default function ListViewRenderer({ store, view, inv, containerProps, itemProps, handleProps, children }) {
     let elements = [];
     let keys = [];
     for (let i = 0; i < inv.length; ++i) {
@@ -39,8 +40,11 @@ export default function ListViewRenderer({ store, view, inv, containerProps, ite
         <OutlinedBox
             x={view.coordX} y={view.coordY}
             w={inv.width} h={inv.height}
+            right={true}
+            bottom={true}
             title={inv.displayName}
-            containerProps={containerProps}>
+            containerProps={containerProps}
+            handleProps={handleProps}>
             <ul className={styles.container}>
                 {elements}
             </ul>

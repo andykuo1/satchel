@@ -4,6 +4,9 @@ import { getInv } from '../store/InvTransfer';
 import { GridViewTransfer } from '../transfer/GridViewTransfer';
 import { getClosestViewForElement } from '../renderer/ViewRenderer';
 import { ListViewTransfer } from '../transfer/ListViewTransfer';
+import { getCursor } from './CursorTransfer';
+import { ViewStore } from '../store';
+import { findValidPosition } from '../ViewOrganizer';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -80,4 +83,44 @@ export function containerMouseUpCallback(
     mouseEvent.stopPropagation();
     return false;
   }
+}
+
+/**
+ * @param {MouseEvent} e 
+ * @param {Store} store 
+ * @param {View} view 
+ */
+export function handleMouseDownCallback(e, store, view) {
+  const cursor = getCursor(store);
+  let offsetX = view.coordX - Math.round(cursor.getCursorWorldX() / cursor.gridUnit);
+  let offsetY = view.coordY - Math.round(cursor.getCursorWorldY() / cursor.gridUnit);
+
+  let handle = null;
+  function onAnimationFrame() {
+    if (!handle) {
+      return;
+    }
+
+    const cursor = getCursor(store);
+    let nextX = Math.round(cursor.getCursorWorldX() / cursor.gridUnit) + offsetX;
+    let nextY = Math.round(cursor.getCursorWorldY() / cursor.gridUnit) + offsetY;
+    let out = findValidPosition([0, 0], store, view, nextX, nextY);
+    view.coordX = out[0];
+    view.coordY = out[1];
+    ViewStore.dispatch(store, view.viewId);
+
+    handle = requestAnimationFrame(onAnimationFrame);
+  }
+  handle = requestAnimationFrame(onAnimationFrame);
+
+  function onMouseUp(e) {
+    cancelAnimationFrame(handle);
+    handle = null;
+
+    document.removeEventListener('mouseup', onMouseUp, true);
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }
+  document.addEventListener('mouseup', onMouseUp, true);
 }

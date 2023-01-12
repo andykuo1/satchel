@@ -18,12 +18,12 @@ export function useViewOrganizer() {
                     continue;
                 }
                 let other = getView(store, otherId);
-                let arx = view.width / 2;
-                let ary = view.height / 2;
+                let arx = view.width / 2 - 0.1;
+                let ary = view.height / 2 - 0.1;
                 let ax = view.coordX + arx;
                 let ay = view.coordY + ary;
-                let brx = other.width / 2;
-                let bry = other.height / 2;
+                let brx = other.width / 2 - 0.1;
+                let bry = other.height / 2 - 0.1;
                 let bx = other.coordX + brx;
                 let by = other.coordY + bry;
                 let result = intersectAxisAlignedBoundingBox(
@@ -47,6 +47,35 @@ export function useViewOrganizer() {
             clearInterval(handleRef.current);
         };
     });
+}
+
+export function findValidPosition(out, store, view, x, y) {
+    const viewIds = ViewStore.keys(store);
+    out[0] = x;
+    out[1] = y;
+    let arx = view.width / 2 - 0.1;
+    let ary = view.height / 2 - 0.1;
+    let ax = out[0] + arx;
+    let ay = out[1] + ary;
+    for (let otherId of viewIds) {
+        if (view.viewId === otherId) {
+            continue;
+        }
+        let other = getView(store, otherId);
+        let brx = other.width / 2 - 0.1;
+        let bry = other.height / 2 - 0.1;
+        let bx = other.coordX + brx;
+        let by = other.coordY + bry;
+        let result = intersectAxisAlignedBoundingBox(
+            ax, ay, arx, ary,
+            bx, by, brx, bry);
+        if (result) {
+            out[0] = view.coordX;
+            out[1] = view.coordY;
+            return out;
+        }
+    }
+    return out;
 }
 
 /**

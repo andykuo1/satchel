@@ -1,32 +1,96 @@
-.container {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+.box {
+  --subgrid-offset-x: 0px;
+  --subgrid-offset-y: 0px;
+  --subgrid-offset-w: 0px;
+  --subgrid-offset-h: 0px;
+  --subgrid-shadow: #AAAAAA;
+  --subgrid-background: #222222;
+  --subgrid-text: var(--grid-outline);
+  --subgrid-outline: var(--grid-outline);
 }
 
 .subgrid {
   background-size: var(--grid-unit) var(--grid-unit);
-  background-position-x: var(--subgrid-offset-x);
-  background-position-y: var(--subgrid-offset-x);
   background-image:
     linear-gradient(to right, var(--subgrid-outline), transparent 1px),
     linear-gradient(to bottom, var(--subgrid-outline), transparent 1px);
   background-color: var(--subgrid-background);
+}
+
+.container {
+  border-radius: 1em;
+  overflow: hidden;
+}
+
+.foreground {
+  z-index: 1;
+}
+
+.background {
   border-radius: 1em;
 }
 
-.itembox {
-  --subgrid-outline: var(--grid-outline);
-  --subgrid-shadow: #AAAAAA;
-  --subgrid-background: #222222;
-  --subgrid-text: var(--grid-outline);
+.left .container, .right .container, .top .container, .bottom .container {
+  margin: 1px;
 }
 
-fieldset.contained {
+.left.background, .right.background, .top.background, .bottom.background {
+  border: 1em solid var(--subgrid-shadow);
+}
+
+.left {
+  margin-left: -0.5em;
+  --subgrid-offset-x: 0.5em;
+  --subgrid-offset-w: 0.5em;
+}
+.left .container {
+  margin-left: 0.5em;
+}
+
+.right {
+  --subgrid-offset-w: 0.5em;
+}
+.right .container {
+  width: calc(100% - 0.5em);
+}
+
+.left.right {
+  --subgrid-offset-x: 0.5em;
+  --subgrid-offset-w: 1em;
+}
+.left.right .container {
+  width: calc(100% - 1em);
+}
+
+.top {
+  margin-top: -0.5em;
+  --subgrid-offset-y: 0.5em;
+  --subgrid-offset-h: 0.5em;
+}
+.top .container {
+  margin-top: 0.5em;
+}
+
+.bottom {
+  --subgrid-offset-h: 0.5em;
+}
+.bottom .container {
+  height: calc(100% - 0.5em);
+}
+
+.top.bottom {
+  --subgrid-offset-y: 0.5em;
+  --subgrid-offset-h: 1em;
+}
+.top.bottom .container {
+  height: calc(100% - 1em);
+}
+
+fieldset.container {
   border: none;
 }
 
-fieldset.contained legend {
+.container>legend {
   position: absolute;
   top: 0;
   right: 0;
@@ -41,47 +105,37 @@ fieldset.contained legend {
   overflow: hidden;
 }
 
-.noShadow {
-  --subgrid-offset-x: -1px;
-  --subgrid-offset-y: -1px;
-  --subgrid-offset-w: 0px;
-  --subgrid-offset-h: 0px;
+.handlebar {
+  position: absolute;
+  cursor: move;
+  border: none;
+  background-color: transparent;
 }
 
-.oneShadow {
-  margin-top: -1px;
-  margin-left: -1px;
-  --subgrid-offset-x: -1px;
-  --subgrid-offset-y: -1px;
-  --subgrid-offset-w: 0px;
-  --subgrid-offset-h: 0px;
-  border: 1px solid var(--subgrid-shadow);
-  border-bottom: 1px solid var(--subgrid-shadow);
-  border-right: 1px solid var(--subgrid-shadow);
+.topbar {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
 }
 
-.insetShadow {
-  margin-top: -1px;
-  margin-left: -1px;
-  --subgrid-offset-x: -1px;
-  --subgrid-offset-y: -1px;
-  --subgrid-offset-w: 0px;
-  --subgrid-offset-h: 0px;
-  border: 8px solid var(--subgrid-shadow);
-  border-bottom: 1px solid var(--subgrid-shadow);
-  border-right: 1px solid var(--subgrid-shadow);
-  z-index: -1;
+.leftbar {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
 }
 
-.outsetShadow {
-  margin-top: -9px;
-  margin-left: -9px;
-  --subgrid-offset-x: -1px;
-  --subgrid-offset-y: -1px;
-  --subgrid-offset-w: 9px;
-  --subgrid-offset-h: 9px;
-  border: 8px solid var(--subgrid-shadow);
-  border-top: 1px solid var(--subgrid-shadow);
-  border-left: 1px solid var(--subgrid-shadow);
-  z-index: 1;
+.rightbar {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+}
+
+.bottombar {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
 }

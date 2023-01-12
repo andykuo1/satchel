@@ -17,9 +17,10 @@ import ListViewRenderer from './views/ListViewRenderer';
  * @param {Inv} props.inv
  * @param {object} props.containerProps
  * @param {object} props.itemProps
+ * @param {object} props.handleProps
  * @param {import('react').ReactNode} props.children
  */
-export default function ViewRenderer({ store, view, inv, containerProps, itemProps, children }) {
+export default function ViewRenderer({ store, view, inv, containerProps, itemProps, handleProps, children }) {
   const containerPropsWithViewId = {
     'data-view-id': view.viewId,
     ...containerProps,
@@ -33,25 +34,25 @@ export default function ViewRenderer({ store, view, inv, containerProps, itemPro
       );
     case 'grid':
       return (
-        <GridViewRenderer store={store} view={view} inv={inv} shadow="out" containerProps={containerPropsWithViewId} itemProps={itemProps}>
+        <GridViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} handleProps={handleProps}>
           {children}
         </GridViewRenderer>
       );
     case 'ground':
       return (
-        <GridViewRenderer store={store} view={view} inv={inv} shadow="one" containerProps={containerPropsWithViewId} itemProps={itemProps}>
+        <GridViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} handleProps={handleProps}>
           {children}
         </GridViewRenderer>
       );
     case 'socket':
       return (
-        <SocketViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps}>
+        <SocketViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} handleProps={handleProps}>
           {children}
         </SocketViewRenderer>
       );
     case 'list':
       return (
-        <ListViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps}>
+        <ListViewRenderer store={store} view={view} inv={inv} containerProps={containerPropsWithViewId} itemProps={itemProps} handleProps={handleProps}>
           {children}
         </ListViewRenderer>
       );

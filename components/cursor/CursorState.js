@@ -89,6 +89,8 @@ export class CursorState {
   setEmpty() {
     this.visible = false;
     this.ignoreFirstPutDown = false;
+    this.heldOffsetX = 0;
+    this.heldOffsetY = 0;
     if (this.forceUpdate) {
       this.forceUpdate();
     }
