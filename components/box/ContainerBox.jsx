@@ -1,5 +1,6 @@
-import styles from './OutlinedBox.module.css';
+import styles from './ContainerBox.module.css';
 import Box from './Box';
+import ContainerHandles from './ContainerHandles';
 
 /**
  * @param {object} props
@@ -13,10 +14,20 @@ import Box from './Box';
  * @param {boolean} [props.top]
  * @param {boolean} [props.bottom]
  * @param {object} [props.containerProps]
+ * @param {object} [props.backgroundProps]
  * @param {object} [props.handleProps]
  * @param {import('react').ReactNode} props.children
  */
-export default function OutlinedBox({ x = 0, y = 0, w = 1, h = 1, title = '', containerProps = {}, left = false, right = false, top = false, bottom = false, handleProps = {}, children }) {
+export default function ContainerBox({
+  x = 0, y = 0,
+  w = 1, h = 1,
+  title = '',
+  left = false, right = true,
+  top = false, bottom = true,
+  containerProps = {},
+  handleProps = {},
+  children
+}) {
   const { className: classNameContainer = '', ...propsContainer } = containerProps;
   const outlineSides = `${left && styles.left} ${right && styles.right} ${top && styles.top} ${bottom && styles.bottom}`;
   return (
@@ -27,10 +38,7 @@ export default function OutlinedBox({ x = 0, y = 0, w = 1, h = 1, title = '', co
         <legend title={title}>{title}</legend>
         {children}
       </fieldset>
-      {top && <button className={`${styles.handlebar} ${styles.topbar}`} {...handleProps}></button>}
-      {left && <button className={`${styles.handlebar} ${styles.leftbar}`} {...handleProps}></button>}
-      {right && <button className={`${styles.handlebar} ${styles.rightbar}`} {...handleProps}></button>}
-      {bottom && <button className={`${styles.handlebar} ${styles.bottombar}`} {...handleProps}></button>}
+      <ContainerHandles left={left} right={right} top={top} bottom={bottom} handleProps={handleProps}/>
     </Box>
     </>
   );

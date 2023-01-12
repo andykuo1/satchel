@@ -1,4 +1,4 @@
-import OutlinedBox from '../../box/OutlinedBox';
+import Box from '../../box/Box';
 import { renderItems } from '../ItemsRenderer';
 
 /**
@@ -13,11 +13,8 @@ import { renderItems } from '../ItemsRenderer';
  * @param {Store} props.store
  * @param {View} props.view
  * @param {Inv} props.inv
- * @param {object} [props.containerProps]
- * @param {object} [props.itemProps]
- * @param {import('react').ReactNode} [props.children]
  */
-export default function CursorViewRenderer({ store, view, inv, containerProps = {}, itemProps = {}, children }) {
+export default function CursorViewRenderer({ store, view, inv }) {
     let maxWidth = inv.width;
     let maxHeight = inv.height;
     let elements = renderItems(store, view, inv, (store, view, inv, item, i) => {
@@ -25,14 +22,11 @@ export default function CursorViewRenderer({ store, view, inv, containerProps = 
         let h = item.height;
         maxWidth = Math.max(w, maxWidth);
         maxHeight = Math.max(h, maxHeight);
-        return { x: 0, y: 0, w, h, ...itemProps };
+        return { x: 0, y: 0, w, h };
     });
     return (
-        <OutlinedBox x={view.coordX} y={view.coordY}
-            w={maxWidth} h={maxHeight}
-            containerProps={containerProps}>
+        <Box x={view.coordX} y={view.coordY} w={maxWidth} h={maxHeight}>
             {elements}
-            {children}
-        </OutlinedBox>
+        </Box>
     );
 }

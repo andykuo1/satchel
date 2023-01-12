@@ -3,6 +3,7 @@
   --subgrid-offset-y: 0px;
   --subgrid-offset-w: 0px;
   --subgrid-offset-h: 0px;
+  
   --subgrid-shadow: #AAAAAA;
   --subgrid-background: #222222;
   --subgrid-text: var(--grid-outline);
@@ -103,39 +104,4 @@ fieldset.container {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-}
-
-.handlebar {
-  position: absolute;
-  cursor: move;
-  border: none;
-  background-color: transparent;
-}
-
-.topbar {
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 0.5em;
-}
-
-.leftbar {
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 0.5em;
-}
-
-.rightbar {
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 0.5em;
-}
-
-.bottombar {
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 0.5em;
 }

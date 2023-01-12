@@ -1,12 +1,14 @@
 import styles from './Playground.module.css';
 
-import { useEffect, useState } from 'react';
-import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from './cursor/CursorCallback';
+import { useState } from 'react';
 import { getCursor } from './cursor/CursorTransfer';
-import { InvStore, useStore, ViewStore } from './store';
-import { getView, isInvEmpty } from './store/InvTransfer';
-import ViewRenderer from './renderer/ViewRenderer';
+import { useStore, ViewStore } from './store';
+import { getView } from './store/InvTransfer';
 import Viewport from './Viewport';
+import InvBox from './boxes/InvBox';
+import GroundBox from './boxes/GroundBox';
+import ListBox from './boxes/ListBox';
+import SocketBox from './boxes/SocketBox';
 
 export default function Playground({ className = '', topic = '', backgroundProps = {} }) {
   const [pos, setPos] = useState([0, 0]);
@@ -39,40 +41,19 @@ function Views({ topic = '' }) {
 
 function View({ store, viewId }) {
   const view = ViewStore.useValue(store, viewId);
-  const inv = InvStore.useValue(store, view ? view.invId : '');
-  useEffect(() => {
-    if (!view || !inv) {
-      return;
-    }
-    if (view.type === 'ground') {
-      if (isInvEmpty(store, inv.invId)) {
-        InvStore.delete(store, inv.invId);
-      }
-    }
-  });
-  if (!view || !inv) {
+  if (!view) {
     return null;
   }
-  return (
-    <ViewRenderer key={viewId}
-      store={store}
-      view={view}
-      inv={inv}
-      containerProps={{
-        onMouseUp(e) {
-          return containerMouseUpCallback(e, store, view);
-        }
-      }}
-      itemProps={{
-        onMouseDown(e) {
-          return itemMouseDownCallback(e, store, view);
-        }
-      }}
-      handleProps={{
-        onMouseDown(e) {
-          return handleMouseDownCallback(e, store, view);
-        }
-      }}>
-    </ViewRenderer>
-  );
+  switch(view.type) {
+    case 'grid':
+      return (<InvBox store={store} view={view}/>);
+    case 'ground':
+      return (<GroundBox store={store} view={view}/>);
+    case 'list':
+      return (<ListBox store={store} view={view}/>);
+    case 'socket':
+      return (<SocketBox store={store} view={view}/>);
+    default:
+      return null;
+  }
 }

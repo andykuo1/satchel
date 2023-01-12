@@ -7,6 +7,8 @@ import { CursorStore } from './CursorStore';
 
 /**
  * @typedef {import('./StoreContext').Store} Store
+ * @typedef {import('../inv/Inv').InvId} InvId
+ * @typedef {import('../inv/Inv').InvType} InvType
  */
 
 export { StoreContext, StoreProvider, useStore } from './StoreContext';
@@ -52,6 +54,14 @@ export function createViewInStore(store, viewId, invId, coordX, coordY, topics, 
     return view.viewId;
 }
 
+/**
+ * @param {Store} store 
+ * @param {InvId} invId 
+ * @param {InvType} invType 
+ * @param {number} slotCount 
+ * @param {number} width 
+ * @param {number} height 
+ */
 export function createInvInStore(store, invId, invType, slotCount, width, height) {
     let inv = createInv(invId, invType, slotCount, width, height);
     InvStore.put(store, inv.invId, inv);

@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.time {
+    flex: 1;
+    font-size: 2em;
+}
+
+.action {
+    width: 80%;
+}

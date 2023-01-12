@@ -1,5 +1,5 @@
 import styles from './ListViewRenderer.module.css';
-import OutlinedBox from '../../box/OutlinedBox';
+import OutlinedBox from '../../box/ContainerBox';
 import { getItemAtSlotIndex } from '../../store/InvTransfer';
 import ItemRenderer from '../ItemRenderer';
 
@@ -18,9 +18,8 @@ import ItemRenderer from '../ItemRenderer';
  * @param {object} props.containerProps
  * @param {object} props.itemProps
  * @param {object} props.handleProps
- * @param {import('react').ReactNode} props.children
  */
-export default function ListViewRenderer({ store, view, inv, containerProps, itemProps, handleProps, children }) {
+export default function ListViewRenderer({ store, view, inv, containerProps, itemProps, handleProps }) {
     let elements = [];
     let keys = [];
     for (let i = 0; i < inv.length; ++i) {
@@ -40,8 +39,6 @@ export default function ListViewRenderer({ store, view, inv, containerProps, ite
         <OutlinedBox
             x={view.coordX} y={view.coordY}
             w={inv.width} h={inv.height}
-            right={true}
-            bottom={true}
             title={inv.displayName}
             containerProps={containerProps}
             handleProps={handleProps}>
@@ -49,7 +46,6 @@ export default function ListViewRenderer({ store, view, inv, containerProps, ite
                 {elements}
                 {elements.length < inv.length && <div className={styles.anchor}></div>}
             </ul>
-            {children}
         </OutlinedBox>
     );
 }
