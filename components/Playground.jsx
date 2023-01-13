@@ -1,6 +1,6 @@
 import styles from './Playground.module.css';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getCursor } from './cursor/CursorTransfer';
 import { useStore, ViewStore } from './store';
 import { getView } from './store/InvTransfer';
@@ -18,11 +18,43 @@ import ConnectorBox from './boxes/ConnectorBox';
 export default function Playground({ className = '', topic = '', backgroundProps = {} }) {
   const [pos, setPos] = useState([0, 0]);
   const store = useStore();
+
   function onWheel(e) {
     const cursor = getCursor(store);
     cursor.onMouseWheel(e);
     setPos([cursor.screenPos[0], cursor.screenPos[1]]);
   }
+
+  // Keep it centered.
+  const resizeState = useRef(null);
+  function onResize(e) {
+    const { x, y, animationFrameHandle } = resizeState.current;
+    let dx = x - window.innerWidth;
+    let dy = y - window.innerHeight;
+    const cursor = getCursor(store);
+    cursor.screenPos[0] -= dx / 2;
+    cursor.screenPos[1] -= dy / 2;
+    cancelAnimationFrame(animationFrameHandle);
+    resizeState.current = {
+      x: window.innerWidth,
+      y: window.innerHeight,
+      animationFrameHandle: requestAnimationFrame(
+        () => setPos([cursor.screenPos[0], cursor.screenPos[1]])),
+    };
+  }
+
+  useEffect(() => {
+    resizeState.current = {
+      x: window.innerWidth,
+      y: window.innerHeight,
+      animationFrameHandle: null,
+    };
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
+
   return (
     <Viewport gridOffsetX={pos[0]} gridOffsetY={pos[1]} containerProps={{ className }}>
       <div className={styles.background} onWheel={onWheel} {...backgroundProps}></div>
