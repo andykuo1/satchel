@@ -11,6 +11,7 @@ import { createInvBoxInStore } from './boxes/InvBox';
 import { createSocketBoxInStore } from './boxes/SocketBox';
 import { createListBoxInStore } from './boxes/ListBox';
 import { createFoundryBoxInStore } from './boxes/FoundryBox';
+import { createConnectorBoxInStore } from './boxes/ConnectorBox';
 
 export default function App() {
     const store = useStore();
@@ -61,6 +62,11 @@ export default function App() {
         let x = Math.floor(Math.random() * 10);
         let y = Math.floor(Math.random() * 10);
         createFoundryBoxInStore(store, x, y);
+      }
+      {
+        let x = Math.floor(Math.random() * 10);
+        let y = Math.floor(Math.random() * 10);
+        createConnectorBoxInStore(store, x, y);
       }
     }, []);
     useViewOrganizer();

@@ -5,12 +5,15 @@ import { getCursor } from './cursor/CursorTransfer';
 import { useStore, ViewStore } from './store';
 import { getView } from './store/InvTransfer';
 import Viewport from './Viewport';
+import Wiring from './wiring/Wiring';
+
 import InvBox from './boxes/InvBox';
 import GroundBox from './boxes/GroundBox';
 import ListBox from './boxes/ListBox';
 import SocketBox from './boxes/SocketBox';
 import TimerBox from './boxes/TimerBox';
 import FoundryBox from './boxes/FoundryBox';
+import ConnectorBox from './boxes/ConnectorBox';
 
 export default function Playground({ className = '', topic = '', backgroundProps = {} }) {
   const [pos, setPos] = useState([0, 0]);
@@ -23,6 +26,7 @@ export default function Playground({ className = '', topic = '', backgroundProps
   return (
     <Viewport gridOffsetX={pos[0]} gridOffsetY={pos[1]} containerProps={{ className }}>
       <div className={styles.background} onWheel={onWheel} {...backgroundProps}></div>
+      <Wiring/>
       <Views topic={topic} />
     </Viewport>
   );
@@ -59,6 +63,10 @@ function View({ store, viewId }) {
       return (<FoundryBox store={store} view={view}/>);
     case 'timer':
       return (<TimerBox store={store} view={view}/>);
+    case 'connectorIn':
+      return (<ConnectorBox store={store} view={view}/>);
+    case 'connectorOut':
+      return (<ConnectorBox store={store} view={view}/>);
     default:
       return null;
   }

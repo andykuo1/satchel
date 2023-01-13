@@ -1,5 +1,6 @@
 import styles from './ItemRenderer.module.css';
 import Image from 'next/image';
+import { join } from 'path';
 import { prefix } from '../../lib/prefix';
 
 /**
@@ -24,7 +25,7 @@ export default function ItemRenderer({ store, item, x, y, w, h, containerProps =
   };
   let src = item.imgSrc;
   if (src.startsWith('/')) {
-    src = `${prefix}/${src}`;
+    src = join(prefix, src);
   }
   return (
     <div className={styles.item}
