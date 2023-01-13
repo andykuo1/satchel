@@ -2,11 +2,15 @@ import { useEffect } from 'react';
 import { uuid } from '../lib/util/uuid';
 import Cursor from './Cursor';
 import { createItem } from './inv/Item';
-import { useStore, createGridInvViewInStore, createSocketInvViewInStore, createListInvViewInStore } from './store';
+import { useStore } from './store';
 import { addItemToInv, getInv, getView } from './store/InvTransfer';
 import Workspace from './Workspace';
 import { useViewOrganizer } from './ViewOrganizer';
 import { getCursor, hasHeldItem, setHeldItem } from './cursor/CursorTransfer';
+import { createInvBoxInStore } from './boxes/InvBox';
+import { createSocketBoxInStore } from './boxes/SocketBox';
+import { createListBoxInStore } from './boxes/ListBox';
+import { createFoundryBoxInStore } from './boxes/FoundryBox';
 
 export default function App() {
     const store = useStore();
@@ -17,7 +21,7 @@ export default function App() {
         let h = 4;
         let x = Math.floor(Math.random() * 10);
         let y = Math.floor(Math.random() * 10);
-        viewId = createGridInvViewInStore(store, undefined, undefined, w, h, x, y, ['workspace']);
+        viewId = createInvBoxInStore(store, w, h, x, y);
       }
       {
         let view = getView(store, viewId);
@@ -46,12 +50,17 @@ export default function App() {
       {
         let x = Math.floor(Math.random() * 10);
         let y = Math.floor(Math.random() * 10);
-        viewId = createSocketInvViewInStore(store, undefined, undefined, x, y, ['workspace']);
+        createSocketBoxInStore(store, x, y);
       }
       {
         let x = Math.floor(Math.random() * 10);
         let y = Math.floor(Math.random() * 10);
-        viewId = createListInvViewInStore(store, undefined, undefined, Math.floor(Math.random() * 3) + 2, 3, x, y, ['workspace']);
+        createListBoxInStore(store, Math.floor(Math.random() * 3) + 2, 3, x, y);
+      }
+      {
+        let x = Math.floor(Math.random() * 10);
+        let y = Math.floor(Math.random() * 10);
+        createFoundryBoxInStore(store, x, y);
       }
     }, []);
     useViewOrganizer();

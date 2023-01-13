@@ -1,13 +1,14 @@
-import styles from '../styles/Cursor.module.css';
+import styles from './Cursor.module.css';
 
 import { useEffect } from 'react';
 import { useAnimationFrame } from '../lib/hooks/UseAnimationFrame';
 import { useEventListener } from '../lib/hooks/UseEventListener';
 import { useForceUpdate } from '../lib/hooks/UseForceUpdate';
 import { getCursor, getCursorInvId, getCursorViewId } from './cursor/CursorTransfer';
-import CursorViewRenderer from './renderer/views/CursorViewRenderer';
 import { useStore, createCursorInvViewInStore, ViewStore, InvStore } from './store';
 import Viewport from './Viewport';
+import { renderItems } from './renderer/ItemsRenderer';
+import Box from './box/Box';
 
 export default function Cursor() {
   const store = useStore();
@@ -20,13 +21,30 @@ export default function Cursor() {
   }, []);
 
   useEventListener(() => window.document, 'mousemove', cursor.onMouseMove, undefined, []);
-  
+
   return (
     <PositionalCursor cursor={cursor}>
       <Viewport gridOffsetX={0} gridOffsetY={0} containerProps={{ className: styles.contained }}>
-        {view && inv && <CursorViewRenderer store={store} view={view} inv={inv} />}
+        {view && inv && <CursorRenderer store={store} view={view} inv={inv} />}
       </Viewport>
     </PositionalCursor>
+  );
+}
+
+function CursorRenderer({ store, view, inv }) {
+  let maxWidth = inv.width;
+  let maxHeight = inv.height;
+  let elements = renderItems(store, view, inv, (store, view, inv, item, i) => {
+    let w = item.width;
+    let h = item.height;
+    maxWidth = Math.max(w, maxWidth);
+    maxHeight = Math.max(h, maxHeight);
+    return { x: 0, y: 0, w, h };
+  });
+  return (
+    <Box x={view.coordX} y={view.coordY} w={maxWidth} h={maxHeight}>
+      {elements}
+    </Box>
   );
 }
 
