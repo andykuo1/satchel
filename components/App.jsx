@@ -11,6 +11,7 @@ import { createInvBoxInStore } from './boxes/InvBox';
 import { createSocketBoxInStore } from './boxes/SocketBox';
 import { createListBoxInStore } from './boxes/ListBox';
 import { createFoundryBoxInStore } from './boxes/FoundryBox';
+import { prefix } from '../lib/prefix';
 
 export default function App() {
     const store = useStore();
@@ -29,7 +30,7 @@ export default function App() {
         let inv = getInv(store, invId);
         inv.displayName = 'Funny';
         let item = createItem(uuid());
-        item.imgSrc = '/images/potion.png';
+        item.imgSrc = `${prefix}/images/potion.png`;
         item.background = '#FF0000';
         item.displayName = 'Potion';
         item.stackSize = 10;

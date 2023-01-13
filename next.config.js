@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: '/andykuo1.github.io/satchel',
-  assetPrefix: '/andykuo1.github.io/satchel',
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH,
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH,
   reactStrictMode: true,
   images: { unoptimized: true },
 }
