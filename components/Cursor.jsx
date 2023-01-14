@@ -5,7 +5,7 @@ import { useAnimationFrame } from '../lib/hooks/UseAnimationFrame';
 import { useEventListener } from '../lib/hooks/UseEventListener';
 import { useForceUpdate } from '../lib/hooks/UseForceUpdate';
 import { getCursor, getCursorInvId, getCursorViewId } from './cursor/CursorTransfer';
-import { useStore, createCursorInvViewInStore, ViewStore, InvStore } from './store';
+import { useStore, ViewStore, InvStore, createInvInStore, createViewInStore } from './store';
 import Viewport from './Viewport';
 import { renderItems } from './renderer/ItemsRenderer';
 import Box from './box/Box';
@@ -29,6 +29,12 @@ export default function Cursor() {
       </Viewport>
     </PositionalCursor>
   );
+}
+
+function createCursorInvViewInStore(store, viewId, invId) {
+    createInvInStore(store, invId, 'single', 1, 1, 1);
+    createViewInStore(store, viewId, invId, 0, 0, ['cursor'], 'all', 'cursor', 1, 1);
+    return viewId;
 }
 
 function CursorRenderer({ store, view, inv }) {

@@ -18,6 +18,9 @@ export function useViewOrganizer() {
                     continue;
                 }
                 let other = getView(store, otherId);
+                if (!other.topics.includes('workspace')) {
+                    continue;
+                }
                 let arx = view.width / 2 - 0.1;
                 let ary = view.height / 2 - 0.1;
                 let ax = view.coordX + arx;
@@ -62,6 +65,9 @@ export function findValidPosition(out, store, view, x, y) {
             continue;
         }
         let other = getView(store, otherId);
+        if (!other.topics.includes('workspace')) {
+            continue;
+        }
         let brx = other.width / 2 - 0.1;
         let bry = other.height / 2 - 0.1;
         let bx = other.coordX + brx;

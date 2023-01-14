@@ -2,9 +2,7 @@ import styles from './FoundryBox.module.css';
 import { uuid } from '../../lib/util/uuid';
 import ContainerBox from '../box/ContainerBox';
 import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
-import { createInv } from '../inv/Inv';
-import { createView } from '../inv/View';
-import { InvStore, ViewStore } from '../store'
+import { createInvInStore, createViewInStore, InvStore } from '../store'
 import { renderItems } from '../renderer/ItemsRenderer';
 import { useRef } from 'react';
 import { updateItem } from '../store/InvTransfer';
@@ -109,9 +107,7 @@ export default function FoundryBox({ store, view }) {
 export function createFoundryBoxInStore(store, coordX, coordY) {
     let invId = uuid();
     let viewId = uuid();
-    let inv = createInv(invId, 'single', 1, 1, 1);
-    let view = createView(viewId, inv.invId, coordX, coordY, ['workspace'], 'all', 'foundry', 6, 8);
-    InvStore.put(store, inv.invId, inv);
-    ViewStore.put(store, view.viewId, view);
+    createInvInStore(store, invId, 'single', 1, 1, 1);
+    createViewInStore(store, viewId, invId, coordX, coordY, ['workspace'], 'all', 'foundry', 6, 8);
     return viewId;
 }

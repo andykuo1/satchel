@@ -1,6 +1,7 @@
 import { InvStore, ViewStore } from '.';
-import { clearItems, getItemByItemId, getItemIdBySlotCoords, getItemIdBySlotIndex, getItemIds, getItems, hasItem, putItem, removeItem } from '../inv/InvItems';
+import { clearItems, getItemByItemId, getItemIds, getItems, hasItem, putItem, removeItem } from '../inv/InvItems';
 import { cloneItem } from '../inv/Item';
+import { getItemIdBySlotCoords, getItemIdBySlotIndex, getSlottedItemIds } from '../inv/Slots';
 
 /**
  * @typedef {import('./StoreContext').Store} Store
@@ -116,7 +117,7 @@ export function getItemIdAtSlotCoords(store, invId, coordX, coordY) {
  */
 export function getItemIdsInSlots(store, invId) {
   let inv = getInv(store, invId);
-  return new Set(inv.slots.filter(itemId => typeof itemId === 'string'));
+  return new Set(getSlottedItemIds(inv));
 }
 
 /**
@@ -127,7 +128,7 @@ export function isInvEmpty(store, invId) {
   const inv = getInv(store, invId);
   const length = inv.length;
   for (let i = 0; i < length; ++i) {
-    let itemId = inv.slots[i];
+    let itemId = getItemIdBySlotIndex(inv, i);
     if (itemId) {
       return false;
     }

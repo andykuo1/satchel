@@ -1,6 +1,4 @@
-import { ViewStore, InvStore } from '../store';
-import { createInv } from '../inv/Inv';
-import { createView } from '../inv/View';
+import { ViewStore, InvStore, createInvInStore, createViewInStore } from '../store';
 import { uuid } from '../../lib/util/uuid';
 import { isInvEmpty } from '../store/InvTransfer';
 import { useEffect } from 'react';
@@ -37,9 +35,7 @@ export default function GroundBox({ store, view }) {
 export function createGroundBoxInStore(store, width, height, coordX, coordY, usage = 'all') {
     let invId = uuid();
     let viewId = uuid();
-    let inv = createInv(invId, 'connected', width * height, width, height);
-    let view = createView(viewId, invId, coordX, coordY, ['workspace'], usage, 'ground', inv.width, inv.height);
-    InvStore.put(store, inv.invId, inv);
-    ViewStore.put(store, view.viewId, view);
-    return view.viewId;
+    createInvInStore(store, invId, 'connected', width * height, width, height);
+    createViewInStore(store, viewId, invId, coordX, coordY, ['workspace'], usage, 'ground', width, height);
+    return viewId;
 }

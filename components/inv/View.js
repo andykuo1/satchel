@@ -23,25 +23,21 @@ import { uuid } from '../../lib/util/uuid';
  *
  * @param {ViewId} viewId
  * @param {InvId} invId
- * @param {number} coordX
- * @param {number} coordY
- * @param {Array<string>} topics
- * @param {ViewUsage} usage
  * @param {ViewType} type
- * @param {number} width
- * @param {number} height
+ * @param {ViewUsage} usage
+ * @param {Array<string>} topics
  * @returns {View}
  */
-export function createView(viewId, invId, coordX, coordY, topics, usage, type, width, height) {
+export function createView(viewId, invId, type, usage, topics) {
   let view = {
     viewId,
     type,
     usage,
     invId,
-    coordX,
-    coordY,
-    width,
-    height,
+    coordX: 0,
+    coordY: 0,
+    width: 1,
+    height: 1,
     topics,
   };
   return view;
@@ -77,7 +73,11 @@ export function cloneView(other, dst = undefined, opts = {}) {
   const height = Number(other.height) || 1;
   const topics = [...other.topics] || [];
   if (!dst) {
-    dst = createView(viewId, invId, coordX, coordY, topics, usage, type, width, height);
+    dst = createView(viewId, invId, type, usage, topics);
+    dst.coordX = coordX;
+    dst.coordY = coordY;
+    dst.width = width;
+    dst.height = height;
   } else {
     dst.viewId = viewId;
     dst.type = type;

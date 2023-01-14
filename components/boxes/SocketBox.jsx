@@ -1,6 +1,4 @@
-import { ViewStore, InvStore } from '../store';
-import { createInv } from '../inv/Inv';
-import { createView } from '../inv/View';
+import { InvStore, createInvInStore, createViewInStore } from '../store';
 import { uuid } from '../../lib/util/uuid';
 import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
 import { renderItems } from '../renderer/ItemsRenderer';
@@ -61,9 +59,7 @@ export default function SocketBox({ store, view }) {
 export function createSocketBoxInStore(store, coordX, coordY, usage = 'all') {
     let invId = uuid();
     let viewId = uuid();
-    let inv = createInv(invId, 'single', 1, 1, 1);
-    let view = createView(viewId, invId, coordX, coordY, ['workspace'], usage, 'socket', 1, 1);
-    InvStore.put(store, inv.invId, inv);
-    ViewStore.put(store, view.viewId, view);
-    return view.viewId;
+    createInvInStore(store, invId, 'single', 1, 1, 1);
+    createViewInStore(store, viewId, invId, coordX, coordY, ['workspace'], usage, 'socket', 1, 1);
+    return viewId;
 }

@@ -4,6 +4,35 @@
  */
 
 /**
+ * @param {Inv} inv 
+ * @param {number} slotIndex 
+ * @param {ItemId} itemId 
+ */
+export function UNSAFE_setItemIdBySlotIndex(inv, slotIndex, itemId) {
+  inv.slots[slotIndex] = itemId;
+}
+
+/**
+ * @param {Inv} inv 
+ * @param {number} slotIndex 
+ * @returns {ItemId}
+ */
+export function getItemIdBySlotIndex(inv, slotIndex) {
+  return inv.slots[slotIndex];
+}
+
+/**
+ * @param {Inv} inv 
+ * @param {number} coordX 
+ * @param {number} coordY 
+ * @returns {ItemId}
+ */
+export function getItemIdBySlotCoords(inv, coordX, coordY) {
+  let slotIndex = getSlotIndexByCoords(inv, coordX, coordY);
+  return getItemIdBySlotIndex(inv, slotIndex);
+}
+
+/**
  * @param {Inv} inv
  * @param {number} coordX
  * @param {number} coordY
@@ -20,7 +49,7 @@ export function isSlotCoordEmpty(inv, coordX, coordY) {
  * @returns {boolean}
  */
 export function isSlotIndexEmpty(inv, slotIndex) {
-  let itemId = inv.slots[slotIndex];
+  let itemId = getItemIdBySlotIndex(inv, slotIndex);
   if (itemId) {
     return false;
   } else {
@@ -43,7 +72,7 @@ export function setSlots(inv, fromX, fromY, toX, toY, itemId) {
       if (slotIndex < 0) {
         continue;
       }
-      inv.slots[slotIndex] = itemId;
+      UNSAFE_setItemIdBySlotIndex(inv, slotIndex, itemId);
     }
   }
 }
@@ -63,8 +92,8 @@ export function clearSlots(inv, fromX, fromY, toX, toY, itemId = undefined) {
       if (slotIndex < 0) {
         continue;
       }
-      if (!itemId || itemId === inv.slots[slotIndex]) {
-        inv.slots[slotIndex] = null;
+      if (!itemId || itemId === getItemIdBySlotIndex(inv, slotIndex)) {
+        UNSAFE_setItemIdBySlotIndex(inv, slotIndex, null);
       }
     }
   }
@@ -109,12 +138,19 @@ export function getSlotCoordsByIndex(inv, slotIndex) {
 export function getSlotIndexByItemId(inv, itemId, startIndex = 0) {
   const length = inv.length;
   for(let i = startIndex; i < length; ++i) {
-    let invItemId = inv.slots[i];
+    let invItemId = getItemIdBySlotIndex(inv, i);
     if (invItemId && invItemId === itemId) {
       return i;
     }
   }
   return -1;
+}
+
+/**
+ * @param {Inv} inv
+ */
+export function getSlottedItemIds(inv) {
+  return inv.slots.filter(itemId => typeof itemId === 'string');
 }
 
 /**
@@ -136,7 +172,7 @@ export function computeSlottedArea(inv, fromX, fromY, toX, toY, itemId = undefin
       if (slotIndex < 0) {
         continue;
       }
-      if (!itemId || itemId === inv.slots[slotIndex]) {
+      if (!itemId || itemId === getItemIdBySlotIndex(inv, slotIndex)) {
         minX = Math.min(x, minX);
         minY = Math.min(y, minY);
         maxX = Math.max(x, maxX);

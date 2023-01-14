@@ -1,11 +1,10 @@
 import ContainerBox from '../box/ContainerBox';
-import { createInv } from '../inv/Inv';
-import { createView } from '../inv/View';
 import { createItem } from '../inv/Item';
-import { InvStore, ViewStore } from '../store';
+import { createInvInStore, createViewInStore } from '../store';
 import { putItem } from '../inv/InvItems';
 import { handleMouseDownCallback } from '../cursor/CursorCallback';
 import { uuid } from '../../lib/util/uuid';
+import { getInv } from '../store/InvTransfer';
 
 export default function ConnectorBox({ store, view }) {
     function onHandleMouseDown(e) {
@@ -23,15 +22,13 @@ export function createConnectorBoxInStore(store, coordX, coordY) {
     let inViewId = uuid();
     let outViewId = uuid();
     let itemId = uuid();
-    let inv = createInv(invId, 'single', 1, 1, 1);
-    let inView = createView(inViewId, inv.invId, coordX, coordY, ['workspace'], 'all', 'connectorIn', 1, 1);
-    let outView = createView(outViewId, inv.invId, coordX + 1, coordY, ['workspace'], 'all', 'connectorOut', 1, 1);
+    createInvInStore(store, invId, 'single', 1, 1, 1);
+    createViewInStore(store, inViewId, invId, coordX, coordY, ['workspace'], 'all', 'connectorIn', 1, 1);
+    createViewInStore(store, outViewId, invId, coordX + 1, coordY, ['workspace'], 'all', 'connectorOut', 1, 1);
     let item = createItem(itemId);
-    item.metadata.inViewId = inView.viewId;
-    item.metadata.outViewId = outView.viewId;
+    item.metadata.inViewId = inViewId;
+    item.metadata.outViewId = outViewId;
+    let inv = getInv(store, invId);
     putItem(inv, item, 0, 0);
-    InvStore.put(store, inv.invId, inv);
-    ViewStore.put(store, inView.viewId, inView);
-    ViewStore.put(store, outView.viewId, outView);
-    return inView.viewId;
+    return inViewId;
 }

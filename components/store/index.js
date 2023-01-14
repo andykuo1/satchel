@@ -1,9 +1,8 @@
-import { uuid } from '../../lib/util/uuid';
 import { createView } from '../inv/View';
-import { createInv } from '../inv/Inv';
 import { InvStore } from './InvStore';
 import { ViewStore } from './ViewStore';
 import { CursorStore } from './CursorStore';
+import { createInv } from '../inv/Inv';
 
 /**
  * @typedef {import('./StoreContext').Store} Store
@@ -18,38 +17,12 @@ export {
     CursorStore,
 };
 
-export function createGridInvViewInStore(store, viewId = uuid(), invId = uuid(), width = 1, height = 1, coordX = 0, coordY = 0, topics = []) {
-    createInvInStore(store, invId, 'connected', width * height, width, height);
-    createViewInStore(store, viewId, invId, coordX, coordY, topics, 'all', 'grid', width, height);
-    return viewId;
-}
-
-export function createGroundInvViewInStore(store, viewId = uuid(), invId = uuid(), width = 1, height = 1, coordX = 0, coordY = 0, topics = []) {
-    createInvInStore(store, invId, 'connected', width * height, width, height);
-    createViewInStore(store, viewId, invId, coordX, coordY, topics, 'all', 'ground', width, height);
-    return viewId;
-}
-
-export function createListInvViewInStore(store, viewId = uuid(), invId = uuid(), width = 1, height = 1, coordX = 0, coordY = 0, topics = []) {
-    createInvInStore(store, invId, 'single', width * height, width, height);
-    createViewInStore(store, viewId, invId, coordX, coordY, topics, 'all', 'list', width, height);
-    return viewId;
-}
-
-export function createSocketInvViewInStore(store, viewId = uuid(), invId = uuid(), coordX = 0, coordY = 0, topics = []) {
-    createInvInStore(store, invId, 'single', 1, 1, 1);
-    createViewInStore(store, viewId, invId, coordX, coordY, topics, 'all', 'socket', 1, 1);
-    return viewId;
-}
-
-export function createCursorInvViewInStore(store, viewId, invId) {
-    createInvInStore(store, invId, 'single', 1, 1, 1);
-    createViewInStore(store, viewId, invId, 0, 0, ['cursor'], 'all', 'cursor', 1, 1);
-    return viewId;
-}
-
 export function createViewInStore(store, viewId, invId, coordX, coordY, topics, usage, type, width, height) {
-    let view = createView(viewId, invId, coordX, coordY, topics, usage, type, width, height);
+    let view = createView(viewId, invId, type, usage, topics);
+    view.coordX = coordX;
+    view.coordY = coordY;
+    view.width = width;
+    view.height = height;
     ViewStore.put(store, view.viewId, view);
     return view.viewId;
 }

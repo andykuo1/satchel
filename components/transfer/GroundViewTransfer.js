@@ -2,7 +2,7 @@ import { clearHeldItem, getHeldItem } from '../cursor/CursorTransfer';
 import { getCursor } from '../cursor/CursorTransfer';
 import { addItemToInv, getView } from '../store/InvTransfer';
 import { posToCoord } from '../cursor/CursorState';
-import { createGroundInvViewInStore } from '../store';
+import { createGroundBoxInStore } from '../boxes/GroundBox';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -70,12 +70,10 @@ function putDownInGround(cursor, store, clientX = 0, clientY = 0) {
     // TODO: ???
     let posX = clientX;
     let posY = clientY;
-    let viewId = createGroundInvViewInStore(store,
-        undefined, undefined,
-        heldItem.width, heldItem.height,
+    let viewId = createGroundBoxInStore(
+        store, heldItem.width, heldItem.height,
         Math.floor(posX / cursor.gridUnit),
-        Math.floor(posY / cursor.gridUnit),
-        ['workspace']);
+        Math.floor(posY / cursor.gridUnit));
     let view = getView(store, viewId);
     let invId = view.invId;
     addItemToInv(store, invId, heldItem, 0, 0);

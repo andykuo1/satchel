@@ -1,13 +1,10 @@
-import { ViewStore, InvStore } from '../store';
-import { createInv } from '../inv/Inv';
-import { createView } from '../inv/View';
+import { InvStore, createInvInStore, createViewInStore } from '../store';
 import { uuid } from '../../lib/util/uuid';
 import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
 import { renderItems } from '../renderer/ItemsRenderer';
 import { computeSlottedArea, getSlotCoordsByIndex } from '../inv/Slots';
 import ContainerBox from '../box/ContainerBox';
 import ContainerGrid from '../box/ContainerGrid';
-import ContainerHandles from '../box/ContainerHandles';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -61,9 +58,7 @@ export default function InvBox({ store, view }) {
 export function createInvBoxInStore(store, width, height, coordX, coordY, usage = 'all') {
     let invId = uuid();
     let viewId = uuid();
-    let inv = createInv(invId, 'connected', width * height, width, height);
-    let view = createView(viewId, invId, coordX, coordY, ['workspace'], usage, 'grid', inv.width, inv.height);
-    InvStore.put(store, inv.invId, inv);
-    ViewStore.put(store, view.viewId, view);
-    return view.viewId;
+    createInvInStore(store, invId, 'connected', width * height, width, height);
+    createViewInStore(store, viewId, invId, coordX, coordY, ['workspace'], usage, 'grid', width, height);
+    return viewId;
 }

@@ -1,7 +1,5 @@
 import styles from './ListBox.module.css';
-import { ViewStore, InvStore } from '../store';
-import { createInv } from '../inv/Inv';
-import { createView } from '../inv/View';
+import { InvStore, createInvInStore, createViewInStore } from '../store';
 import { uuid } from '../../lib/util/uuid';
 import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
 import { getItemAtSlotIndex } from '../store/InvTransfer';
@@ -49,11 +47,9 @@ export default function ListBox({ store, view }) {
 export function createListBoxInStore(store, width, height, coordX, coordY, usage = 'all') {
     let invId = uuid();
     let viewId = uuid();
-    let inv = createInv(invId, 'single', width * height, width, height);
-    let view = createView(viewId, invId, coordX, coordY, ['workspace'], usage, 'list', inv.width, inv.height);
-    InvStore.put(store, inv.invId, inv);
-    ViewStore.put(store, view.viewId, view);
-    return view.viewId;
+    createInvInStore(store, invId, 'single', width * height, width, height);
+    createViewInStore(store, viewId, invId, coordX, coordY, ['workspace'], usage, 'list', width, height);
+    return viewId;
 }
 
 function ListViewRenderer({ store, view, inv, containerProps, itemProps, handleProps }) {

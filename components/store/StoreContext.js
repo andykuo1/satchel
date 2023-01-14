@@ -20,7 +20,7 @@ export const { StoreContext, StoreProvider, useStore } = createStoreContext({
     listeners: {
         /** @type {Record<InvId, Array<Function>>} */
         invs: {},
-        /** @type {Record<ViewId, Array<Function>} */
+        /** @type {Record<ViewId, Array<Function>>} */
         views: {},
     },
 });
