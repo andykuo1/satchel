@@ -2,9 +2,9 @@
  * @typedef {import('./StoreContext').Store} Store
  */
 
-export const CursorStore = {
+export const YDocStore = {
     /** @param {Store} store */
     get(store) {
-        return store.cursor;
+        return store.ydoc;
     }
 };

@@ -32,9 +32,9 @@ export default function Cursor() {
 }
 
 function createCursorInvViewInStore(store, viewId, invId) {
-    createInvInStore(store, invId, 'single', 1, 1, 1);
-    createViewInStore(store, viewId, invId, 0, 0, ['cursor'], 'all', 'cursor', 1, 1);
-    return viewId;
+  createInvInStore(store, invId, 'single', 1, 1, 1);
+  createViewInStore(store, viewId, invId, 0, 0, ['cursor'], 'all', 'cursor', 1, 1);
+  return viewId;
 }
 
 function CursorRenderer({ store, view, inv }) {

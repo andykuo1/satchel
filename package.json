@@ -6,7 +6,6 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build && next export",
-    "deploy": "next build && touch out/.nojekyll && git add -f out/ && git commit -m \"Deploy\" && git subtree push --prefix out origin gh-pages",
     "lint": "next lint"
   },
   "dependencies": {
@@ -15,6 +14,8 @@
     "eslint-config-next": "13.1.1",
     "next": "13.1.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "y-webrtc": "^10.2.3",
+    "yjs": "^13.5.44"
   }
 }

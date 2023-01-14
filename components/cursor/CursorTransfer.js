@@ -1,3 +1,4 @@
+import { uuid } from '../../lib/util/uuid';
 import { isSlotIndexEmpty } from '../inv/Slots';
 import { CursorStore } from '../store';
 import { addItemToInv, clearItemsInInv, getInv, getItemAtSlotIndex } from '../store/InvTransfer';
@@ -10,6 +11,9 @@ import { addItemToInv, clearItemsInInv, getInv, getItemAtSlotIndex } from '../st
  * @typedef {import('./CursorState').CursorState} CursorState
  */
 
+const CURSOR_INV_ID = uuid();
+const CURSOR_VIEW_ID = uuid();
+
 /**
  * @param {Store} store
  */
@@ -21,14 +25,14 @@ export function getCursor(store) {
  * @param {Store} store
  */
 export function getCursorInvId(store) {
-  return 'cursor';
+  return CURSOR_INV_ID;
 }
 
 /**
  * @param {Store} store
  */
 export function getCursorViewId(store) {
-  return 'cursor';
+  return CURSOR_VIEW_ID;
 }
 
 /**
