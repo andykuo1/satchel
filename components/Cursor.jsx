@@ -17,6 +17,9 @@ export default function Cursor() {
   const inv = InvStore.useValue(store, getCursorInvId(store));
 
   useEffect(() => {
+    if (ViewStore.has(store, getCursorViewId(store))) {
+      return;
+    }
     createCursorInvViewInStore(store, getCursorViewId(store), getCursorInvId(store));
   }, []);
 

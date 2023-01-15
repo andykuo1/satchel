@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './Settings.module.css';
 
 export default function Settings({}) {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     return (
         <>
         <div className={styles.floating}>
