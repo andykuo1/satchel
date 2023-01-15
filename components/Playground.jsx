@@ -7,13 +7,13 @@ import { getView } from './store/InvTransfer';
 import Viewport from './Viewport';
 import Wiring from './wiring/Wiring';
 
-import InvBox from './boxes/InvBox';
-import GroundBox from './boxes/GroundBox';
-import ListBox from './boxes/ListBox';
-import SocketBox from './boxes/SocketBox';
-import TimerBox from './boxes/TimerBox';
-import FoundryBox from './boxes/FoundryBox';
-import ConnectorBox from './boxes/ConnectorBox';
+import InvBox from './containers/InvBox';
+import GroundBox from './containers/GroundBox';
+import ListBox from './containers/ListBox';
+import SocketBox from './containers/SocketBox';
+import TimerBox from './containers/TimerBox';
+import FoundryBox from './containers/FoundryBox';
+import ConnectorBox from './containers/ConnectorBox';
 
 export default function Playground({ className = '', topic = '', backgroundProps = {} }) {
   const [pos, setPos] = useState([0, 0]);

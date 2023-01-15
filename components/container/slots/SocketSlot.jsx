@@ -1,46 +1,13 @@
-import styles from './BaseSlots.module.css';
-import { containerMouseUpCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
-import { renderItem, renderItems } from '../renderer/ItemsRenderer';
-import { computeSlottedArea, getSlotCoordsByIndex } from '../inv/Slots';
-import { InvStore } from '../store';
-import ContainerGrid from '../box/ContainerGrid';
+import styles from './SocketSlot.module.css';
+import { containerMouseUpCallback, itemMouseDownCallback } from '../../cursor/CursorCallback';
+import { renderItem } from '../../renderer/ItemsRenderer';
+import { computeSlottedArea, getSlotCoordsByIndex } from '../../inv/Slots';
+import { InvStore } from '../../store';
 
 /**
- * @typedef {import('../store').Store} Store
- * @typedef {import('../inv/View').View} View
- * @typedef {import('../inv/Inv').Inv} Inv
- * @typedef {import('../inv/Item').Item} Item
+ * @typedef {import('../../store').Store} Store
+ * @typedef {import('../../inv/View').View} View
  */
-
-/**
- * @param {object} props
- * @param {Store} props.store
- * @param {View} props.view
- * @param {import('react').ReactNode} [props.children]
- */
-export function GridSlots({ store, view, children = undefined }) {
-    const inv = InvStore.useValue(store, view.invId);
-    function onContainerMouseUp(e) {
-        return containerMouseUpCallback(e, store, view);
-    }
-    function onItemMouseDown(e) {
-        return itemMouseDownCallback(e, store, view);
-    }
-    let elements = renderItems(store, view, inv, (store, view, inv, item, i) => {
-        let [x, y] = getSlotCoordsByIndex(inv, i);
-        let [w, h] = computeSlottedArea(inv, x, y, x + item.width, y + item.height, item.itemId);
-        return { x, y, w, h, onMouseDown: onItemMouseDown };
-    });
-    return (
-        <ContainerGrid containerProps={{
-            'data-view-id': view.viewId,
-            onMouseUp: onContainerMouseUp
-        }}>
-            {elements}
-            {children}
-        </ContainerGrid>
-    );
-}
 
 /**
  * @param {object} props
@@ -53,7 +20,7 @@ export function GridSlots({ store, view, children = undefined }) {
  * @param {string} [props.className]
  * @param {import('react').ReactNode} [props.children]
  */
-export function SocketSlot({ store, view, slotIndex, fullSize, maxWidth, maxHeight, className, children }) {
+export default function SocketSlot({ store, view, slotIndex, fullSize, maxWidth, maxHeight, className, children }) {
     const inv = InvStore.useValue(store, view.invId);
     function onContainerMouseUp(e) {
         return containerMouseUpCallback(e, store, view);

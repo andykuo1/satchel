@@ -1,10 +1,11 @@
+import { useRef } from 'react';
 import styles from './FoundryBox.module.css';
+
 import { uuid } from '../../lib/util/uuid';
 import { createInvInStore, createViewInStore, InvStore } from '../store'
-import { useRef } from 'react';
 import { getItemAtSlotIndex, updateItem } from '../store/InvTransfer';
-import BaseBox from './BaseBox';
-import { SocketSlot } from './BaseSlots';
+import SocketSlot from '../container/slots/SocketSlot';
+import ContainerBox from '../container/ContainerBox';
 
 export default function FoundryBox({ store, view }) {
     const currentItem = useRef(null);
@@ -47,7 +48,7 @@ export default function FoundryBox({ store, view }) {
     currentItem.current = item;
     let { width = '', height = '', stackSize = '', displayName = '', description = '' } = item || {};
     return (
-        <BaseBox store={store} view={view}>
+        <ContainerBox store={store} view={view}>
             <fieldset className={styles.container}>
                 <SocketSlot className={styles.socket}
                     store={store} view={view}
@@ -69,7 +70,7 @@ export default function FoundryBox({ store, view }) {
                     <button>Clone</button>
                 </div>
             </fieldset>
-        </BaseBox>
+        </ContainerBox>
     );
 }
 

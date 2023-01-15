@@ -1,18 +1,13 @@
-import ContainerBox from '../box/ContainerBox';
+import ContainerBox from '../container/ContainerBox';
 import { createItem } from '../inv/Item';
 import { createInvInStore, createViewInStore } from '../store';
 import { putItem } from '../inv/InvItems';
-import { handleMouseDownCallback } from '../cursor/CursorCallback';
 import { uuid } from '../../lib/util/uuid';
 import { getInv } from '../store/InvTransfer';
 
 export default function ConnectorBox({ store, view }) {
-    function onHandleMouseDown(e) {
-        return handleMouseDownCallback(e, store, view);
-    }
     return (
-        <ContainerBox x={view.coordX} y={view.coordY} w={view.width} h={view.height}
-            handleProps={{ onMouseDown: onHandleMouseDown }}>
+        <ContainerBox store={store} view={view}>
         </ContainerBox>
     );
 }

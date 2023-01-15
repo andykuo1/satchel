@@ -7,12 +7,12 @@ import { addItemToInv, getInv, getView } from './store/InvTransfer';
 import Workspace from './Workspace';
 import { useViewOrganizer } from './ViewOrganizer';
 import { getCursor, hasHeldItem, setHeldItem } from './cursor/CursorTransfer';
-import { createInvBoxInStore } from './boxes/InvBox';
+import { createInvBoxInStore } from './containers/InvBox';
 import { useYDoc } from './network/YDoc';
-import { createConnectorBoxInStore } from './boxes/ConnectorBox';
-import { createFoundryBoxInStore } from './boxes/FoundryBox';
-import { createListBoxInStore } from './boxes/ListBox';
-import { createSocketBoxInStore } from './boxes/SocketBox';
+import { createConnectorBoxInStore } from './containers/ConnectorBox';
+import { createFoundryBoxInStore } from './containers/FoundryBox';
+import { createListBoxInStore } from './containers/ListBox';
+import { createSocketBoxInStore } from './containers/SocketBox';
 import Settings from './Settings';
 
 export default function App() {

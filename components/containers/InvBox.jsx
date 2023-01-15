@@ -1,7 +1,7 @@
 import { createInvInStore, createViewInStore } from '../store';
 import { uuid } from '../../lib/util/uuid';
-import BaseBox from './BaseBox';
-import { GridSlots } from './BaseSlots';
+import ContainerBox from '../container/ContainerBox';
+import GridSlots from '../container/slots/GridSlots';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -11,9 +11,9 @@ import { GridSlots } from './BaseSlots';
 
 export default function InvBox({ store, view }) {
     return (
-        <BaseBox store={store} view={view}>
+        <ContainerBox store={store} view={view}>
             <GridSlots store={store} view={view}/>
-        </BaseBox>
+        </ContainerBox>
     );
 }
 

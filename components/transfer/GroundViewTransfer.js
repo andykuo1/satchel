@@ -2,7 +2,7 @@ import { clearHeldItem, getHeldItem } from '../cursor/CursorTransfer';
 import { getCursor } from '../cursor/CursorTransfer';
 import { addItemToInv, getView } from '../store/InvTransfer';
 import { posToCoord } from '../cursor/CursorState';
-import { createGroundBoxInStore } from '../boxes/GroundBox';
+import { createGroundBoxInStore } from '../containers/GroundBox';
 
 /**
  * @typedef {import('../store').Store} Store

@@ -2,7 +2,7 @@ import styles from './TimerBox.module.css';
 
 import { useRef, useState } from 'react';
 import { useAnimationFrame } from '../../lib/hooks/UseAnimationFrame';
-import ContainerBox from '../box/ContainerBox';
+import ContainerBox from '../container/ContainerBox';
 
 export default function TimerBox({ store, view }) {
     const prevFrameTime = useRef(0);

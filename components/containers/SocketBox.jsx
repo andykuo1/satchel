@@ -1,8 +1,8 @@
 import styles from './SocketBox.module.css';
 import { createInvInStore, createViewInStore } from '../store';
 import { uuid } from '../../lib/util/uuid';
-import BaseBox from './BaseBox';
-import { SocketSlot } from './BaseSlots';
+import ContainerBox from '../container/ContainerBox';
+import SocketSlot from '../container/slots/SocketSlot';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -12,9 +12,9 @@ import { SocketSlot } from './BaseSlots';
 
 export default function SocketBox({ store, view }) {
     return (
-        <BaseBox store={store} view={view}>
+        <ContainerBox store={store} view={view}>
             <SocketSlot className={styles.socket} store={store} view={view} slotIndex={0}/>
-        </BaseBox>
+        </ContainerBox>
     );
 }
 

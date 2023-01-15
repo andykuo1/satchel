@@ -3,8 +3,8 @@ import { InvStore, createInvInStore, createViewInStore } from '../store';
 import { uuid } from '../../lib/util/uuid';
 import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
 import { getItemAtSlotIndex } from '../store/InvTransfer';
-import ContainerBox from '../box/ContainerBox';
 import ItemRenderer from '../renderer/ItemRenderer';
+import ContainerBox from '../container/ContainerBox';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -71,11 +71,7 @@ function ListViewRenderer({ store, view, inv, containerProps, itemProps, handleP
         }
     }
     return (
-        <ContainerBox
-            x={view.coordX} y={view.coordY}
-            w={inv.width} h={inv.height}
-            title={inv.displayName}
-            handleProps={handleProps}>
+        <ContainerBox store={store} view={view}>
             <ul className={styles.container} {...containerProps}>
                 {elements}
                 {elements.length < inv.length && <div className={styles.anchor}></div>}
