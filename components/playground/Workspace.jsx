@@ -1,4 +1,4 @@
-import styles from '../styles/Workspace.module.css';
+import styles from './Workspace.module.css';
 import Playground from './Playground';
 import { useStore } from '../../stores';
 import { GroundViewTransfer } from '../../stores/transfer/GroundViewTransfer';
