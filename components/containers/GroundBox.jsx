@@ -1,14 +1,16 @@
-import { ViewStore, InvStore, createInvInStore, createViewInStore } from '../../stores';
-import { uuid } from '../../lib/util/uuid';
+import { ViewStore, InvStore, createInvViewInStore } from '../../stores';
 import { isInvEmpty } from '../../stores/transfer/InvTransfer';
 import { useEffect } from 'react';
 import InvBox from './InvBox';
+import { registerView } from '../ViewRegistry';
 
 /**
  * @typedef {import('../../stores').Store} Store
  * @typedef {import('../../stores/inv/View').ViewId} ViewId
  * @typedef {import('../../stores/inv/View').ViewUsage} ViewUsage
  */
+
+registerView('ground', GroundBox);
 
 export default function GroundBox({ store, view }) {
     const inv = InvStore.useValue(store, view.invId);
@@ -29,13 +31,12 @@ export default function GroundBox({ store, view }) {
  * @param {number} height 
  * @param {number} coordX
  * @param {number} coordY
- * @param {ViewUsage} [usage]
  * @returns {ViewId}
  */
-export function createGroundBoxInStore(store, width, height, coordX, coordY, usage = 'all') {
-    let invId = uuid();
-    let viewId = uuid();
-    createInvInStore(store, invId, 'connected', width * height, width, height);
-    createViewInStore(store, viewId, invId, coordX, coordY, ['workspace'], usage, 'ground', width, height);
-    return viewId;
+export function createGroundBoxInStore(store, width, height, coordX, coordY) {
+    return createInvViewInStore(
+        store, coordX, coordY, width, height,
+        'ground', 'connected',
+        width * height, width, height,
+        'all', ['workspace']);
 }

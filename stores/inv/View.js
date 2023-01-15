@@ -4,7 +4,7 @@ import { uuid } from '../../lib/util/uuid';
  * @typedef {string} ViewId
  * @typedef {string} InvId
  * @typedef {'all'|'readonly'|'inputonly'|'outputonly'|'copy'} ViewUsage
- * @typedef {'cursor'|'grid'|'socket'|'ground'|'list'|'foundry'|'timer'|'connectorIn'|'connectorOut'} ViewType
+ * @typedef {'cursor'|'grid'|'socket'|'ground'|'list'|'foundry'|'timer'|'connectorIn'|'connectorOut'|'crafting'} ViewType
  *
  * @typedef View
  * @property {ViewId} viewId

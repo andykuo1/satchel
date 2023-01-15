@@ -4,6 +4,10 @@ import { createInvInStore, createViewInStore } from '../../stores';
 import { putItem } from '../../stores/inv/InvItems';
 import { uuid } from '../../lib/util/uuid';
 import { getInv } from '../../stores/transfer/InvTransfer';
+import { registerView } from '../ViewRegistry';
+
+registerView('connectorIn', ConnectorBox);
+registerView('connectorOut', ConnectorBox);
 
 export default function ConnectorBox({ store, view }) {
     return (

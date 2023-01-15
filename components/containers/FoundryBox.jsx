@@ -1,11 +1,16 @@
 import { useRef } from 'react';
 import styles from './FoundryBox.module.css';
-
-import { uuid } from '../../lib/util/uuid';
-import { createInvInStore, createViewInStore, InvStore } from '../../stores'
+import { createInvViewInStore, InvStore } from '../../stores'
 import { getItemAtSlotIndex, updateItem } from '../../stores/transfer/InvTransfer';
 import SocketSlot from '../slots/SocketSlot';
 import ContainerBox from '../container/ContainerBox';
+import { registerView } from '../ViewRegistry';
+
+/**
+ * @typedef {import('../../stores').Store} Store
+ */
+
+registerView('foundry', FoundryBox);
 
 export default function FoundryBox({ store, view }) {
     const currentItem = useRef(null);
@@ -74,10 +79,15 @@ export default function FoundryBox({ store, view }) {
     );
 }
 
+/**
+ * @param {Store} store 
+ * @param {number} coordX 
+ * @param {number} coordY 
+ */
 export function createFoundryBoxInStore(store, coordX, coordY) {
-    let invId = uuid();
-    let viewId = uuid();
-    createInvInStore(store, invId, 'single', 1, 1, 1);
-    createViewInStore(store, viewId, invId, coordX, coordY, ['workspace'], 'all', 'foundry', 6, 8);
-    return viewId;
+    return createInvViewInStore(
+        store, coordX, coordY, 6, 8,
+        'foundry', 'single',
+        1, 1, 1,
+        'all', ['workspace']);
 }

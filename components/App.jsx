@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { uuid } from '../lib/util/uuid';
 import Cursor from './cursor/Cursor';
 import { createItem } from '../stores/inv/Item';
-import { StoreProvider, useStore } from '../stores';
+import { StoreProvider, useStore, ViewStore } from '../stores';
 import { addItemToInv, getInv, getView } from '../stores/transfer/InvTransfer';
 import Workspace from './playground/Workspace';
 import { useViewOrganizer } from './ViewOrganizer';
@@ -14,6 +14,7 @@ import { createFoundryBoxInStore } from './containers/FoundryBox';
 import { createListBoxInStore } from './containers/ListBox';
 import { createSocketBoxInStore } from './containers/SocketBox';
 import Settings from './Settings';
+import { createCraftingBoxInStore } from './containers/CraftingBox';
 
 export default function App() {
   return (
@@ -30,13 +31,14 @@ function Content() {
   useYDoc();
 
   useEffect(() => {
+    if (ViewStore.count(store) > 1) {
+      return;
+    }
     let viewId;
     {
       let w = 6;
       let h = 4;
-      let x = Math.floor(Math.random() * 10);
-      let y = Math.floor(Math.random() * 10);
-      viewId = createInvBoxInStore(store, w, h, x, y);
+      viewId = createInvBoxInStore(store, w, h, rand(), rand());
     }
     {
       let view = getView(store, viewId);
@@ -52,36 +54,19 @@ function Content() {
       let coordY = Math.floor(Math.random() * inv.height - 1);
       addItemToInv(store, invId, item, coordX, coordY);
     }
-    {
-      if (!hasHeldItem(store)) {
-        let cursor = getCursor(store);
-        let item = createItem(uuid());
-        item.width = 2;
-        item.height = 2;
-        item.imgSrc = '/images/potion.png';
-        setHeldItem(cursor, store, item, 0, 0);
-      }
+    if (!hasHeldItem(store)) {
+      let cursor = getCursor(store);
+      let item = createItem(uuid());
+      item.width = 2;
+      item.height = 2;
+      item.imgSrc = '/images/potion.png';
+      setHeldItem(cursor, store, item, 0, 0);
     }
-    {
-      let x = Math.floor(Math.random() * 10);
-      let y = Math.floor(Math.random() * 10);
-      createSocketBoxInStore(store, x, y);
-    }
-    {
-      let x = Math.floor(Math.random() * 10);
-      let y = Math.floor(Math.random() * 10);
-      createListBoxInStore(store, Math.floor(Math.random() * 3) + 2, 3, x, y);
-    }
-    {
-      let x = Math.floor(Math.random() * 10);
-      let y = Math.floor(Math.random() * 10);
-      createFoundryBoxInStore(store, x, y);
-    }
-    {
-      let x = Math.floor(Math.random() * 10);
-      let y = Math.floor(Math.random() * 10);
-      createConnectorBoxInStore(store, x, y);
-    }
+    createSocketBoxInStore(store, rand(), rand());
+    createListBoxInStore(store, rand(5, 3), 3, rand(), rand());
+    createFoundryBoxInStore(store, rand(), rand());
+    createConnectorBoxInStore(store, rand(), rand());
+    createCraftingBoxInStore(store, rand(), rand());
   }, []);
   useViewOrganizer();
 
@@ -93,3 +78,7 @@ function Content() {
   );
 }
 
+const MAX_RANGE = 20;
+function rand(max = MAX_RANGE, min = 0) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}

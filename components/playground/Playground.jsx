@@ -4,16 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import { getCursor } from '../../stores/transfer/CursorTransfer';
 import { useStore, ViewStore } from '../../stores';
 import { getView } from '../../stores/transfer/InvTransfer';
-import Viewport from './Viewport';
+import Viewport from '../viewport/Viewport';
 import Wiring from '../wiring/Wiring';
 
-import InvBox from '../containers/InvBox';
-import GroundBox from '../containers/GroundBox';
-import ListBox from '../containers/ListBox';
-import SocketBox from '../containers/SocketBox';
-import TimerBox from '../containers/TimerBox';
-import FoundryBox from '../containers/FoundryBox';
-import ConnectorBox from '../containers/ConnectorBox';
+import { getViewRenderer } from '../ViewRegistry';
 
 export default function Playground({ className = '', topic = '', backgroundProps = {} }) {
   const [pos, setPos] = useState([0, 0]);
@@ -82,24 +76,11 @@ function View({ store, viewId }) {
   if (!view) {
     return null;
   }
-  switch(view.type) {
-    case 'grid':
-      return (<InvBox store={store} view={view}/>);
-    case 'ground':
-      return (<GroundBox store={store} view={view}/>);
-    case 'list':
-      return (<ListBox store={store} view={view}/>);
-    case 'socket':
-      return (<SocketBox store={store} view={view}/>);
-    case 'foundry':
-      return (<FoundryBox store={store} view={view}/>);
-    case 'timer':
-      return (<TimerBox store={store} view={view}/>);
-    case 'connectorIn':
-      return (<ConnectorBox store={store} view={view}/>);
-    case 'connectorOut':
-      return (<ConnectorBox store={store} view={view}/>);
-    default:
-      return null;
+  let Renderer = getViewRenderer(view.type);
+  if (!Renderer) {
+    return null;
   }
+  return (
+    <Renderer store={store} view={view}/>
+  );
 }

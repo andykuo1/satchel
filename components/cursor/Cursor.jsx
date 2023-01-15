@@ -6,7 +6,7 @@ import { useEventListener } from '../../lib/hooks/UseEventListener';
 import { useForceUpdate } from '../../lib/hooks/UseForceUpdate';
 import { getCursor, getCursorInvId, getCursorViewId } from '../../stores/transfer/CursorTransfer';
 import { useStore, ViewStore, InvStore, createInvInStore, createViewInStore } from '../../stores';
-import Viewport from '../playground/Viewport';
+import Viewport from '../viewport/Viewport';
 import { renderItems } from '../renderer/ItemsRenderer';
 import Box from '../box/Box';
 

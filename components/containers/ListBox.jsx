@@ -1,16 +1,18 @@
 import styles from './ListBox.module.css';
-import { InvStore, createInvInStore, createViewInStore } from '../../stores';
-import { uuid } from '../../lib/util/uuid';
+import { InvStore, createInvViewInStore } from '../../stores';
 import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
 import { getItemAtSlotIndex } from '../../stores/transfer/InvTransfer';
 import ItemRenderer from '../renderer/ItemRenderer';
 import ContainerBox from '../container/ContainerBox';
+import { registerView } from '../ViewRegistry';
 
 /**
  * @typedef {import('../../stores').Store} Store
  * @typedef {import('../../stores/inv/View').ViewId} ViewId
  * @typedef {import('../../stores/inv/View').ViewUsage} ViewUsage
  */
+
+registerView('list', ListBox);
 
 export default function ListBox({ store, view }) {
     const inv = InvStore.useValue(store, view.invId);
@@ -41,15 +43,14 @@ export default function ListBox({ store, view }) {
  * @param {number} height 
  * @param {number} coordX
  * @param {number} coordY
- * @param {ViewUsage} [usage]
  * @returns {ViewId}
  */
-export function createListBoxInStore(store, width, height, coordX, coordY, usage = 'all') {
-    let invId = uuid();
-    let viewId = uuid();
-    createInvInStore(store, invId, 'single', width * height, width, height);
-    createViewInStore(store, viewId, invId, coordX, coordY, ['workspace'], usage, 'list', width, height);
-    return viewId;
+export function createListBoxInStore(store, width, height, coordX, coordY) {
+    return createInvViewInStore(
+        store, coordX, coordY, width, height,
+        'list', 'single',
+        width * height, width, height,
+        'all', ['workspace']);
 }
 
 function ListViewRenderer({ store, view, inv, containerProps, itemProps, handleProps }) {
@@ -95,11 +96,5 @@ function ListViewItem({ store, item, containerProps }) {
             </span>
             {item.stackSize > 0 && <label className={styles.stackSize}>×{item.stackSize}</label>}
         </li>
-    );
-}
-
-function EmptyListViewItem() {
-    return (
-        <li></li>
     );
 }
