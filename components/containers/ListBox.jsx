@@ -1,15 +1,15 @@
 import styles from './ListBox.module.css';
-import { InvStore, createInvInStore, createViewInStore } from '../store';
+import { InvStore, createInvInStore, createViewInStore } from '../../stores';
 import { uuid } from '../../lib/util/uuid';
-import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
-import { getItemAtSlotIndex } from '../store/InvTransfer';
+import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from '../CursorCallback';
+import { getItemAtSlotIndex } from '../../stores/transfer/InvTransfer';
 import ItemRenderer from '../renderer/ItemRenderer';
 import ContainerBox from '../container/ContainerBox';
 
 /**
- * @typedef {import('../store').Store} Store
- * @typedef {import('../inv/View').ViewId} ViewId
- * @typedef {import('../inv/View').ViewUsage} ViewUsage
+ * @typedef {import('../../stores').Store} Store
+ * @typedef {import('../../stores/inv/View').ViewId} ViewId
+ * @typedef {import('../../stores/inv/View').ViewUsage} ViewUsage
  */
 
 export default function ListBox({ store, view }) {

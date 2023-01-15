@@ -1,13 +1,13 @@
-import { ViewStore, InvStore, createInvInStore, createViewInStore } from '../store';
+import { ViewStore, InvStore, createInvInStore, createViewInStore } from '../../stores';
 import { uuid } from '../../lib/util/uuid';
-import { isInvEmpty } from '../store/InvTransfer';
+import { isInvEmpty } from '../../stores/transfer/InvTransfer';
 import { useEffect } from 'react';
 import InvBox from './InvBox';
 
 /**
- * @typedef {import('../store').Store} Store
- * @typedef {import('../inv/View').ViewId} ViewId
- * @typedef {import('../inv/View').ViewUsage} ViewUsage
+ * @typedef {import('../../stores').Store} Store
+ * @typedef {import('../../stores/inv/View').ViewId} ViewId
+ * @typedef {import('../../stores/inv/View').ViewUsage} ViewUsage
  */
 
 export default function GroundBox({ store, view }) {

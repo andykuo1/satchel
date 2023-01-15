@@ -1,5 +1,5 @@
 import { Array as YArray, Map as YMap } from 'yjs';
-import { uuid } from '../../../lib/util/uuid';
+import { uuid } from '../../lib/util/uuid';
 import { copyYItem } from './YItem';
 import { createProxyYArray, createProxyYMap } from './YProxy';
 
@@ -7,8 +7,8 @@ import { createProxyYArray, createProxyYMap } from './YProxy';
 
 /**
  * @param {import('yjs').Map} src 
- * @param {import('../Inv').InvId} invId 
- * @param {import('../Inv').InvType} invType 
+ * @param {import('../inv/Inv').InvId} invId 
+ * @param {import('../inv/Inv').InvType} invType 
  * @param {number} slotCount 
  * @param {number} maxCoordX 
  * @param {number} maxCoordY

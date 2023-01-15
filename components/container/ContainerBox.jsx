@@ -1,11 +1,11 @@
 import styles from './ContainerBox.module.css';
 import Box from '../box/Box';
 import ContainerHandles from './ContainerHandles';
-import { handleMouseDownCallback } from '../cursor/CursorCallback';
+import { handleMouseDownCallback } from '../CursorCallback';
 
 /**
- * @typedef {import('../store').Store} Store
- * @typedef {import('../inv/View').View} View
+ * @typedef {import('../../stores').Store} Store
+ * @typedef {import('../../stores/inv/View').View} View
  */
 
 /**

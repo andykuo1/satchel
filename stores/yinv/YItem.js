@@ -1,5 +1,5 @@
 import { Map as YMap } from 'yjs';
-import { uuid } from '../../../lib/util/uuid';
+import { uuid } from '../../lib/util/uuid';
 import { createProxyYMap } from './YProxy';
 
 /**
@@ -8,7 +8,7 @@ import { createProxyYMap } from './YProxy';
 
 /**
  * @param {import('yjs').Doc} yDoc 
- * @param {import('../Item').ItemId} itemId
+ * @param {import('../inv/Item').ItemId} itemId
  */
 export function createYItem(yDoc, itemId) {
     let src = yDoc.getMap();

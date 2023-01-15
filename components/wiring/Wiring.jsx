@@ -1,8 +1,8 @@
 import styles from './Wiring.module.css';
 import { useCallback, useRef } from 'react';
 import { useAnimationFrame } from '../../lib/hooks/UseAnimationFrame';
-import { useStore, ViewStore } from '../store';
-import { getItemAtSlotIndex } from '../store/InvTransfer';
+import { useStore, ViewStore } from '../../stores';
+import { getItemAtSlotIndex } from '../../stores/transfer/InvTransfer';
 
 let DELTATIME = 0;
 let VALUE = 0;

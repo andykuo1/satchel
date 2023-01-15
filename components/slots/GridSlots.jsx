@@ -1,12 +1,12 @@
 import styles from './GridSlots.module.css';
-import { containerMouseUpCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
+import { containerMouseUpCallback, itemMouseDownCallback } from '../CursorCallback';
 import { renderItems } from '../renderer/ItemsRenderer';
-import { computeSlottedArea, getSlotCoordsByIndex } from '../inv/Slots';
-import { InvStore } from '../store';
+import { computeSlottedArea, getSlotCoordsByIndex } from '../../stores/inv/Slots';
+import { InvStore } from '../../stores';
 
 /**
- * @typedef {import('../store').Store} Store
- * @typedef {import('../inv/View').View} View
+ * @typedef {import('../../stores').Store} Store
+ * @typedef {import('../../stores/inv/View').View} View
  */
 
 /**

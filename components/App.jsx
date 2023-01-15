@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { uuid } from '../lib/util/uuid';
 import Cursor from './Cursor';
-import { createItem } from './inv/Item';
-import { StoreProvider, useStore } from './store';
-import { addItemToInv, getInv, getView } from './store/InvTransfer';
+import { createItem } from '../stores/inv/Item';
+import { StoreProvider, useStore } from '../stores';
+import { addItemToInv, getInv, getView } from '../stores/transfer/InvTransfer';
 import Workspace from './Workspace';
 import { useViewOrganizer } from './ViewOrganizer';
-import { getCursor, hasHeldItem, setHeldItem } from './cursor/CursorTransfer';
+import { getCursor, hasHeldItem, setHeldItem } from '../stores/transfer/CursorTransfer';
 import { createInvBoxInStore } from './containers/InvBox';
 import { useYDoc } from './network/YDoc';
 import { createConnectorBoxInStore } from './containers/ConnectorBox';

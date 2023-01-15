@@ -1,14 +1,14 @@
 import { uuid } from '../../lib/util/uuid';
 import { isSlotIndexEmpty } from '../inv/Slots';
-import { CursorStore } from '../store';
-import { addItemToInv, clearItemsInInv, getInv, getItemAtSlotIndex } from '../store/InvTransfer';
+import { CursorStore } from '..';
+import { addItemToInv, clearItemsInInv, getInv, getItemAtSlotIndex } from './InvTransfer';
 
 /**
- * @typedef {import('../store').Store} Store
+ * @typedef {import('..').Store} Store
  * @typedef {import('../inv/Item').Item} Item
  * @typedef {import('../inv/Item').ItemId} ItemId
  * @typedef {import('../inv/Inv').InvId} InvId
- * @typedef {import('./CursorState').CursorState} CursorState
+ * @typedef {import('../data/CursorState').CursorState} CursorState
  */
 
 const CURSOR_INV_ID = uuid();

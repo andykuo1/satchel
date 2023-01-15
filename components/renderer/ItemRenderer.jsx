@@ -4,8 +4,8 @@ import { join } from 'path';
 import { prefix } from '../../lib/prefix';
 
 /**
- * @typedef {import('../store').Store} Store
- * @typedef {import('../inv/Item').Item} Item
+ * @typedef {import('../../stores').Store} Store
+ * @typedef {import('../../stores/inv/Item').Item} Item
  */
 
 /**

@@ -1,19 +1,19 @@
-import { clearHeldItem, getCursorInvId, getHeldItem, setHeldItem } from '../cursor/CursorTransfer';
+import { clearHeldItem, getCursorInvId, getHeldItem, setHeldItem } from './CursorTransfer';
 import { isInputDisabled, isOutputDisabled } from '../inv/View';
-import { getCursor } from '../cursor/CursorTransfer';
+import { getCursor } from './CursorTransfer';
 import { getClientCoordX, getClientCoordY, getDeltaCoords, tryDropPartialItem, tryMergeItems, tryPickUp } from './ViewTransfer';
-import { addItemToInv, getInv, getItemAtSlotCoords, getItemIdAtSlotCoords, removeItemFromInv } from '../store/InvTransfer';
+import { addItemToInv, getInv, getItemAtSlotCoords, getItemIdAtSlotCoords, removeItemFromInv } from './InvTransfer';
 import { dijkstra2d } from '../../lib/util/dijkstra2d';
 import { getItemByItemId } from '../inv/InvItems';
 import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/Slots';
 
 /**
- * @typedef {import('../store').Store} Store
+ * @typedef {import('..').Store} Store
  * @typedef {import('../inv/Item').Item} Item
  * @typedef {import('../inv/View').View} View
  * @typedef {import('../inv/Inv').Inv} Inv
  * @typedef {import('../inv/Inv').InvId} InvId
- * @typedef {import('../cursor/CursorState').CursorState} CursorState
+ * @typedef {import('../data/CursorState').CursorState} CursorState
  */
 
 export const GridViewTransfer = {

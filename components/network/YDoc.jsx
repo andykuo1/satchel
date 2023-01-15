@@ -1,8 +1,8 @@
-import { ViewStore, InvStore, useStore } from '../store';
+import { ViewStore, InvStore, useStore } from '../../stores';
 import { WebrtcProvider } from 'y-webrtc';
-import { toYInv } from '../inv/yinv/YInv';
-import { toYView } from '../inv/yinv/YView';
-import { YDocStore } from '../store/YDocStore';
+import { toYInv } from '../../stores/yinv/YInv';
+import { toYView } from '../../stores/yinv/YView';
+import { YDocStore } from '../../stores/YDocStore';
 import { useEffect, useRef } from 'react';
 
 const ROOM_NAME = 'satchel-test';

@@ -1,10 +1,10 @@
-import { InvStore, ViewStore } from '.';
+import { InvStore, ViewStore } from '..';
 import { clearItems, getItemByItemId, getItemIds, getItems, hasItem, putItem, removeItem } from '../inv/InvItems';
 import { cloneItem } from '../inv/Item';
 import { getItemIdBySlotCoords, getItemIdBySlotIndex, getSlottedItemIds } from '../inv/Slots';
 
 /**
- * @typedef {import('./StoreContext').Store} Store
+ * @typedef {import('../StoreContext').Store} Store
  * @typedef {import('../inv/Inv').InvId} InvId
  * @typedef {import('../inv/Inv').Inv} Inv
  * @typedef {import('../inv/Item').Item} Item

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { useStore, ViewStore } from './store';
-import { getView } from './store/InvTransfer'
+import { useStore, ViewStore } from '../stores';
+import { getView } from '../stores/transfer/InvTransfer'
 
 import { fisherYatesShuffle } from '../lib/util/shuf';
 

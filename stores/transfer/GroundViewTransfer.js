@@ -1,15 +1,15 @@
-import { clearHeldItem, getHeldItem } from '../cursor/CursorTransfer';
-import { getCursor } from '../cursor/CursorTransfer';
-import { addItemToInv, getView } from '../store/InvTransfer';
-import { posToCoord } from '../cursor/CursorState';
-import { createGroundBoxInStore } from '../containers/GroundBox';
+import { clearHeldItem, getHeldItem } from './CursorTransfer';
+import { getCursor } from './CursorTransfer';
+import { addItemToInv, getView } from './InvTransfer';
+import { posToCoord } from '../data/CursorState';
+import { createGroundBoxInStore } from '../../components/containers/GroundBox';
 
 /**
- * @typedef {import('../store').Store} Store
+ * @typedef {import('..').Store} Store
  * @typedef {import('../inv/Item').Item} Item
  * @typedef {import('../inv/View').View} View
  * @typedef {import('../inv/Inv').Inv} Inv
- * @typedef {import('../cursor/CursorState').CursorState} CursorState
+ * @typedef {import('../data/CursorState').CursorState} CursorState
  */
 
 export const GroundViewTransfer = {

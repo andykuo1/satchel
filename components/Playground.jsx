@@ -1,9 +1,9 @@
 import styles from './Playground.module.css';
 
 import { useEffect, useRef, useState } from 'react';
-import { getCursor } from './cursor/CursorTransfer';
-import { useStore, ViewStore } from './store';
-import { getView } from './store/InvTransfer';
+import { getCursor } from '../stores/transfer/CursorTransfer';
+import { useStore, ViewStore } from '../stores';
+import { getView } from '../stores/transfer/InvTransfer';
 import Viewport from './Viewport';
 import Wiring from './wiring/Wiring';
 

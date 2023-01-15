@@ -1,17 +1,17 @@
-import { getItemByItemId } from '../inv/InvItems';
-import { getClosestItemForElement, getItemIdForElement } from '../renderer/ItemRenderer';
-import { getInv } from '../store/InvTransfer';
-import { GridViewTransfer } from '../transfer/GridViewTransfer';
-import { getClosestViewForElement } from '../renderer/ViewRenderer';
-import { ListViewTransfer } from '../transfer/ListViewTransfer';
-import { getCursor } from './CursorTransfer';
-import { ViewStore } from '../store';
-import { findValidPosition } from '../ViewOrganizer';
+import { getItemByItemId } from '../stores/inv/InvItems';
+import { getClosestItemForElement, getItemIdForElement } from './renderer/ItemRenderer';
+import { getInv } from '../stores/transfer/InvTransfer';
+import { GridViewTransfer } from '../stores/transfer/GridViewTransfer';
+import { getClosestViewForElement } from './renderer/ViewRenderer';
+import { ListViewTransfer } from '../stores/transfer/ListViewTransfer';
+import { getCursor } from '../stores/transfer/CursorTransfer';
+import { ViewStore } from '../stores';
+import { findValidPosition } from './ViewOrganizer';
 
 /**
- * @typedef {import('../store').Store} Store
- * @typedef {import('../inv/Item').Item} Item
- * @typedef {import('../inv/View').View} View
+ * @typedef {import('../stores').Store} Store
+ * @typedef {import('../stores/inv/Item').Item} Item
+ * @typedef {import('../stores/inv/View').View} View
  */
 
 /**

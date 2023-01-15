@@ -1,9 +1,9 @@
 import ContainerBox from '../container/ContainerBox';
-import { createItem } from '../inv/Item';
-import { createInvInStore, createViewInStore } from '../store';
-import { putItem } from '../inv/InvItems';
+import { createItem } from '../../stores/inv/Item';
+import { createInvInStore, createViewInStore } from '../../stores';
+import { putItem } from '../../stores/inv/InvItems';
 import { uuid } from '../../lib/util/uuid';
-import { getInv } from '../store/InvTransfer';
+import { getInv } from '../../stores/transfer/InvTransfer';
 
 export default function ConnectorBox({ store, view }) {
     return (

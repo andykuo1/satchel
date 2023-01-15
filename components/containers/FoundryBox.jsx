@@ -2,8 +2,8 @@ import { useRef } from 'react';
 import styles from './FoundryBox.module.css';
 
 import { uuid } from '../../lib/util/uuid';
-import { createInvInStore, createViewInStore, InvStore } from '../store'
-import { getItemAtSlotIndex, updateItem } from '../store/InvTransfer';
+import { createInvInStore, createViewInStore, InvStore } from '../../stores'
+import { getItemAtSlotIndex, updateItem } from '../../stores/transfer/InvTransfer';
 import SocketSlot from '../slots/SocketSlot';
 import ContainerBox from '../container/ContainerBox';
 

@@ -2,14 +2,14 @@ import { InvStore } from './InvStore';
 import { ViewStore } from './ViewStore';
 import { CursorStore } from './CursorStore';
 import { Map } from 'yjs';
-import { createYInv } from '../inv/yinv/YInv';
-import { createYView } from '../inv/yinv/YView';
+import { createYInv } from './yinv/YInv';
+import { createYView } from './yinv/YView';
 import { YDocStore } from './YDocStore';
 
 /**
  * @typedef {import('./StoreContext').Store} Store
- * @typedef {import('../inv/Inv').InvId} InvId
- * @typedef {import('../inv/Inv').InvType} InvType
+ * @typedef {import('./inv/Inv').InvId} InvId
+ * @typedef {import('./inv/Inv').InvType} InvType
  */
 
 export { StoreContext, StoreProvider, useStore } from './StoreContext';

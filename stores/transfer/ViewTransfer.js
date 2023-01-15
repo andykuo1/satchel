@@ -1,13 +1,13 @@
-import { clearHeldItem, hasHeldItem, setHeldItem } from '../cursor/CursorTransfer';
+import { clearHeldItem, hasHeldItem, setHeldItem } from './CursorTransfer';
 import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/Slots';
 import { copyItem } from '../inv/Item';
 import { isOutputCopied, isOutputDisabled } from '../inv/View';
-import { InvStore } from '../store';
-import { addItemToInv, removeItemFromInv } from '../store/InvTransfer';
+import { InvStore } from '..';
+import { addItemToInv, removeItemFromInv } from './InvTransfer';
 
 /**
- * @typedef {import('../store').Store} Store
- * @typedef {import('../cursor/CursorState').CursorState} CursorState
+ * @typedef {import('..').Store} Store
+ * @typedef {import('../data/CursorState').CursorState} CursorState
  * @typedef {import('../inv/Inv').InvId} InvId
  * @typedef {import('../inv/Inv').Inv} Inv
  * @typedef {import('../inv/Item').ItemId} ItemId
