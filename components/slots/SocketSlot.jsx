@@ -1,5 +1,5 @@
 import styles from './SocketSlot.module.css';
-import { containerMouseUpCallback, itemMouseDownCallback } from '../CursorCallback';
+import { containerMouseUpCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
 import { renderItem } from '../renderer/ItemsRenderer';
 import { computeSlottedArea, getSlotCoordsByIndex } from '../../stores/inv/Slots';
 import { InvStore } from '../../stores';

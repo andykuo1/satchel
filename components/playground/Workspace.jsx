@@ -1,7 +1,7 @@
 import styles from '../styles/Workspace.module.css';
 import Playground from './Playground';
-import { useStore } from '../stores';
-import { GroundViewTransfer } from '../stores/transfer/GroundViewTransfer';
+import { useStore } from '../../stores';
+import { GroundViewTransfer } from '../../stores/transfer/GroundViewTransfer';
 
 export default function Workspace() {
   const store = useStore();

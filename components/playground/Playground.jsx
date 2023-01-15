@@ -1,19 +1,19 @@
 import styles from './Playground.module.css';
 
 import { useEffect, useRef, useState } from 'react';
-import { getCursor } from '../stores/transfer/CursorTransfer';
-import { useStore, ViewStore } from '../stores';
-import { getView } from '../stores/transfer/InvTransfer';
+import { getCursor } from '../../stores/transfer/CursorTransfer';
+import { useStore, ViewStore } from '../../stores';
+import { getView } from '../../stores/transfer/InvTransfer';
 import Viewport from './Viewport';
-import Wiring from './wiring/Wiring';
+import Wiring from '../wiring/Wiring';
 
-import InvBox from './containers/InvBox';
-import GroundBox from './containers/GroundBox';
-import ListBox from './containers/ListBox';
-import SocketBox from './containers/SocketBox';
-import TimerBox from './containers/TimerBox';
-import FoundryBox from './containers/FoundryBox';
-import ConnectorBox from './containers/ConnectorBox';
+import InvBox from '../containers/InvBox';
+import GroundBox from '../containers/GroundBox';
+import ListBox from '../containers/ListBox';
+import SocketBox from '../containers/SocketBox';
+import TimerBox from '../containers/TimerBox';
+import FoundryBox from '../containers/FoundryBox';
+import ConnectorBox from '../containers/ConnectorBox';
 
 export default function Playground({ className = '', topic = '', backgroundProps = {} }) {
   const [pos, setPos] = useState([0, 0]);

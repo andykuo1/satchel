@@ -1,14 +1,14 @@
 import styles from './Cursor.module.css';
 
 import { useEffect } from 'react';
-import { useAnimationFrame } from '../lib/hooks/UseAnimationFrame';
-import { useEventListener } from '../lib/hooks/UseEventListener';
-import { useForceUpdate } from '../lib/hooks/UseForceUpdate';
-import { getCursor, getCursorInvId, getCursorViewId } from '../stores/transfer/CursorTransfer';
-import { useStore, ViewStore, InvStore, createInvInStore, createViewInStore } from '../stores';
-import Viewport from './Viewport';
-import { renderItems } from './renderer/ItemsRenderer';
-import Box from './box/Box';
+import { useAnimationFrame } from '../../lib/hooks/UseAnimationFrame';
+import { useEventListener } from '../../lib/hooks/UseEventListener';
+import { useForceUpdate } from '../../lib/hooks/UseForceUpdate';
+import { getCursor, getCursorInvId, getCursorViewId } from '../../stores/transfer/CursorTransfer';
+import { useStore, ViewStore, InvStore, createInvInStore, createViewInStore } from '../../stores';
+import Viewport from '../playground/Viewport';
+import { renderItems } from '../renderer/ItemsRenderer';
+import Box from '../box/Box';
 
 export default function Cursor() {
   const store = useStore();

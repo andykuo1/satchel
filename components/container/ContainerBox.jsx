@@ -1,7 +1,7 @@
 import styles from './ContainerBox.module.css';
 import Box from '../box/Box';
 import ContainerHandles from './ContainerHandles';
-import { handleMouseDownCallback } from '../CursorCallback';
+import { handleMouseDownCallback } from '../cursor/CursorCallback';
 
 /**
  * @typedef {import('../../stores').Store} Store

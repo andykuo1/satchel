@@ -1,7 +1,7 @@
 import styles from './ListBox.module.css';
 import { InvStore, createInvInStore, createViewInStore } from '../../stores';
 import { uuid } from '../../lib/util/uuid';
-import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from '../CursorCallback';
+import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
 import { getItemAtSlotIndex } from '../../stores/transfer/InvTransfer';
 import ItemRenderer from '../renderer/ItemRenderer';
 import ContainerBox from '../container/ContainerBox';

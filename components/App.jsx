@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { uuid } from '../lib/util/uuid';
-import Cursor from './Cursor';
+import Cursor from './cursor/Cursor';
 import { createItem } from '../stores/inv/Item';
 import { StoreProvider, useStore } from '../stores';
 import { addItemToInv, getInv, getView } from '../stores/transfer/InvTransfer';
-import Workspace from './Workspace';
+import Workspace from './playground/Workspace';
 import { useViewOrganizer } from './ViewOrganizer';
 import { getCursor, hasHeldItem, setHeldItem } from '../stores/transfer/CursorTransfer';
 import { createInvBoxInStore } from './containers/InvBox';

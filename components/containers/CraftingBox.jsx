@@ -4,7 +4,7 @@ import styles from './FoundryBox.module.css';
 import { uuid } from '../../lib/util/uuid';
 import ContainerBox from '../container/ContainerBox';
 import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
-import { createInvInStore, createViewInStore } from '../store'
+import { createInvInStore, createViewInStore } from '../../stores'
 
 export default function FoundryBox({ store, view }) {
     const currentItem = useRef(null);
