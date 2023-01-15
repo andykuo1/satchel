@@ -7,30 +7,14 @@
     border: none;
 }
 
-.socket {
-    width: calc(var(--item-w, 1) * var(--grid-unit) + 4px);
-    height: calc(var(--item-h, 1) * var(--grid-unit) + 4px);
-    position: relative;
-    margin: 2em;
-    border-radius: 1em;
-    background-color: var(--subgrid-outline);
-    border: 1px solid var(--subgrid-shadow);
-    max-width: calc(3 * var(--grid-unit) + 4px);
-    max-height: calc(3 * var(--grid-unit) + 4px);
-}
-
-.socket input {
+.container input, .container textarea {
     background: none;
     border: none;
+    resize: none;
 }
 
-.item {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: auto;
+.socket {
+    margin: 2em;
 }
 
 .detail {
@@ -38,12 +22,6 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 2em;
-}
-
-.detail input, .detail textarea {
-    background: none;
-    border: none;
-    resize: none;
 }
 
 .header {

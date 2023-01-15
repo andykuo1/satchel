@@ -25,16 +25,36 @@ export function renderItems(store, view, inv, itemPropsCallback) {
                 continue;
             }
             keys.push(item.itemId);
-            let key = `${i}:${item.itemId}`;
-            let result = itemPropsCallback(store, view, inv, item, i);
+            let result = renderItem(store, view, inv, i, itemPropsCallback);
             if (!result) {
                 continue;
             }
-            const { x, y, w, h, ...itemProps } = result;
-            elements.push(<ItemRenderer key={key}
-                store={store} item={item} x={x} y={y} w={w} h={h}
-                containerProps={itemProps}/>);
+            elements.push(result);
         }
     }
     return elements;
+}
+
+
+/**
+ * @param {Store} store
+ * @param {View} view
+ * @param {Inv} inv
+ * @param {number} slotIndex
+ * @param {(store: Store, view: View, inv: Inv, item: Item, i: number) => object} itemPropsCallback
+ */
+export function renderItem(store, view, inv, slotIndex, itemPropsCallback) {
+    let item = getItemAtSlotIndex(store, inv.invId, slotIndex);
+    let result = itemPropsCallback(store, view, inv, item, slotIndex);
+    if (!result) {
+        return null;
+    }
+    const key = `${slotIndex}:${item.itemId}`;
+    const { x, y, w, h, ...itemProps } = result;
+    return (
+        <ItemRenderer key={key}
+            store={store} item={item}
+            x={x} y={y} w={w} h={h}
+            containerProps={itemProps}/>
+    );
 }

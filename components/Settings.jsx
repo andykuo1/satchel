@@ -3,6 +3,7 @@ import styles from './Settings.module.css';
 
 export default function Settings({}) {
     const [open, setOpen] = useState(false);
+    const [roomCode, setRoomCode] = useState('satchel-test');
     return (
         <>
         <div className={styles.floating}>
@@ -15,7 +16,7 @@ export default function Settings({}) {
                     <div className={styles.padding}></div>
                     <span className={styles.roomCode}>
                         <label>Room:</label>
-                        <input value="satchel-test"/>
+                        <input value={roomCode} onChange={e => setRoomCode(e.target.value)}/>
                     </span>
                     <button>Host Party</button>
                     <button>Join Party</button>

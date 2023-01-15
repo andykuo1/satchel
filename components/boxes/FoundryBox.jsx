@@ -1,26 +1,13 @@
 import styles from './FoundryBox.module.css';
 import { uuid } from '../../lib/util/uuid';
-import ContainerBox from '../box/ContainerBox';
-import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
 import { createInvInStore, createViewInStore, InvStore } from '../store'
-import { renderItems } from '../renderer/ItemsRenderer';
 import { useRef } from 'react';
-import { updateItem } from '../store/InvTransfer';
+import { getItemAtSlotIndex, updateItem } from '../store/InvTransfer';
+import BaseBox from './BaseBox';
+import { SocketSlot } from './BaseSlots';
 
 export default function FoundryBox({ store, view }) {
     const currentItem = useRef(null);
-
-    function onContainerMouseUp(e) {
-        return containerMouseUpCallback(e, store, view);
-    }
-
-    function onItemMouseDown(e) {
-        return itemMouseDownCallback(e, store, view);
-    }
-
-    function onHandleMouseDown(e) {
-        return handleMouseDownCallback(e, store, view);
-    }
 
     function onChange(e) {
         if (!currentItem.current) {
@@ -56,40 +43,23 @@ export default function FoundryBox({ store, view }) {
     }
 
     let inv = InvStore.useValue(store, view.invId);
-    let maxWidth = 1;
-    let maxHeight = 1;
-    currentItem.current = null;
-    let elements = renderItems(store, view, inv, (store, view, inv, item, i) => {
-        let w = item.width;
-        let h = item.height;
-        maxWidth = Math.max(w, maxWidth);
-        maxHeight = Math.max(h, maxHeight);
-        currentItem.current = item;
-        return { x: 0, y: 0, w, h, onMouseDown: onItemMouseDown };
-    });
-    let { width = '', height = '', stackSize = '', displayName = '', description = '' } = currentItem.current || {};
+    let item = getItemAtSlotIndex(store, inv.invId, 0);
+    currentItem.current = item;
+    let { width = '', height = '', stackSize = '', displayName = '', description = '' } = item || {};
     return (
-        <ContainerBox x={view.coordX} y={view.coordY} w={view.width} h={view.height}
-            handleProps={{ onMouseDown: onHandleMouseDown }}>
-            <fieldset className={styles.container}
-                style={{
-                    // @ts-ignore
-                    '--item-w': maxWidth,
-                    '--item-h': maxHeight,
-                }}>
-                <div className={styles.socket}
-                    data-view-id={view.viewId}
-                    onMouseUp={onContainerMouseUp}>
-                    <div className={styles.item}>
-                    {elements}
-                    </div>
+        <BaseBox store={store} view={view}>
+            <fieldset className={styles.container}>
+                <SocketSlot className={styles.socket}
+                    store={store} view={view}
+                    fullSize={true}
+                    slotIndex={0} maxWidth={3} maxHeight={3}>
                     <input type="number" name="width" className={styles.width} value={width} placeholder="--" onChange={onChange}/>
                     <input type="number" name="height" className={styles.height} value={height} placeholder="--" onChange={onChange}/>
                     <span className={styles.stackSizeContainer}>
                         <span className={styles.stackSizeMarker}>×</span>
                         <input type="number" name="stackSize" className={styles.stackSize} value={stackSize} placeholder="--" onChange={onChange}/>
                     </span>
-                </div>
+                </SocketSlot>
                 <div className={styles.detail}>
                     <div className={styles.header}>
                         <input type="text" name="displayName" className={styles.displayName} value={displayName} placeholder="--" onChange={onChange}/>
@@ -99,7 +69,7 @@ export default function FoundryBox({ store, view }) {
                     <button>Clone</button>
                 </div>
             </fieldset>
-        </ContainerBox>
+        </BaseBox>
     );
 }
 

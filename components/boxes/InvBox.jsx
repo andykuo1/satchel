@@ -1,10 +1,7 @@
-import { InvStore, createInvInStore, createViewInStore } from '../store';
+import { createInvInStore, createViewInStore } from '../store';
 import { uuid } from '../../lib/util/uuid';
-import { containerMouseUpCallback, handleMouseDownCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
-import { renderItems } from '../renderer/ItemsRenderer';
-import { computeSlottedArea, getSlotCoordsByIndex } from '../inv/Slots';
-import ContainerBox from '../box/ContainerBox';
-import ContainerGrid from '../box/ContainerGrid';
+import BaseBox from './BaseBox';
+import { GridSlots } from './BaseSlots';
 
 /**
  * @typedef {import('../store').Store} Store
@@ -13,36 +10,10 @@ import ContainerGrid from '../box/ContainerGrid';
  */
 
 export default function InvBox({ store, view }) {
-    const inv = InvStore.useValue(store, view.invId);
-
-    function onContainerMouseUp(e) {
-        return containerMouseUpCallback(e, store, view);
-    }
-
-    function onItemMouseDown(e) {
-        return itemMouseDownCallback(e, store, view);
-    }
-
-    function onHandleMouseDown(e) {
-        return handleMouseDownCallback(e, store, view);
-    }
-
-    let elements = renderItems(store, view, inv, (store, view, inv, item, i) => {
-        let [x, y] = getSlotCoordsByIndex(inv, i);
-        let [w, h] = computeSlottedArea(inv, x, y, x + item.width, y + item.height, item.itemId);
-        return { x, y, w, h, onMouseDown: onItemMouseDown };
-    });
-
     return (
-        <ContainerBox
-            x={view.coordX} y={view.coordY}
-            w={inv.width} h={inv.height}
-            title={inv.displayName}
-            handleProps={{ onMouseDown: onHandleMouseDown }}>
-            <ContainerGrid containerProps={{ 'data-view-id': view.viewId, onMouseUp: onContainerMouseUp }}>
-                {elements}
-            </ContainerGrid>
-        </ContainerBox>
+        <BaseBox store={store} view={view}>
+            <GridSlots store={store} view={view}/>
+        </BaseBox>
     );
 }
 
