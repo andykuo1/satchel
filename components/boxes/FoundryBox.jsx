@@ -97,7 +97,6 @@ export default function FoundryBox({ store, view }) {
                     <textarea name="description" className={styles.description} value={description} placeholder="Notes..." onChange={onChange}/>
                     <button>Reset</button>
                     <button>Clone</button>
-                    <button>Color</button>
                 </div>
             </fieldset>
         </ContainerBox>

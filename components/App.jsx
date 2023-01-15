@@ -13,11 +13,13 @@ import { createConnectorBoxInStore } from './boxes/ConnectorBox';
 import { createFoundryBoxInStore } from './boxes/FoundryBox';
 import { createListBoxInStore } from './boxes/ListBox';
 import { createSocketBoxInStore } from './boxes/SocketBox';
+import Settings from './Settings';
 
 export default function App() {
   return (
     <StoreProvider>
       <Content />
+      <Settings />
     </StoreProvider>
   );
 }
