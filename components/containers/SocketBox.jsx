@@ -2,7 +2,7 @@ import styles from './SocketBox.module.css';
 import { createInvInStore, createViewInStore } from '../store';
 import { uuid } from '../../lib/util/uuid';
 import ContainerBox from '../container/ContainerBox';
-import SocketSlot from '../container/slots/SocketSlot';
+import SocketSlot from '../slots/SocketSlot';
 
 /**
  * @typedef {import('../store').Store} Store

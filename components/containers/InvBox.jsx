@@ -1,7 +1,7 @@
 import { createInvInStore, createViewInStore } from '../store';
 import { uuid } from '../../lib/util/uuid';
 import ContainerBox from '../container/ContainerBox';
-import GridSlots from '../container/slots/GridSlots';
+import GridSlots from '../slots/GridSlots';
 
 /**
  * @typedef {import('../store').Store} Store

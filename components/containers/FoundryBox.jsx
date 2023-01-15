@@ -4,7 +4,7 @@ import styles from './FoundryBox.module.css';
 import { uuid } from '../../lib/util/uuid';
 import { createInvInStore, createViewInStore, InvStore } from '../store'
 import { getItemAtSlotIndex, updateItem } from '../store/InvTransfer';
-import SocketSlot from '../container/slots/SocketSlot';
+import SocketSlot from '../slots/SocketSlot';
 import ContainerBox from '../container/ContainerBox';
 
 export default function FoundryBox({ store, view }) {

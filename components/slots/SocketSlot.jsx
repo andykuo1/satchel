@@ -1,12 +1,12 @@
 import styles from './SocketSlot.module.css';
-import { containerMouseUpCallback, itemMouseDownCallback } from '../../cursor/CursorCallback';
-import { renderItem } from '../../renderer/ItemsRenderer';
-import { computeSlottedArea, getSlotCoordsByIndex } from '../../inv/Slots';
-import { InvStore } from '../../store';
+import { containerMouseUpCallback, itemMouseDownCallback } from '../cursor/CursorCallback';
+import { renderItem } from '../renderer/ItemsRenderer';
+import { computeSlottedArea, getSlotCoordsByIndex } from '../inv/Slots';
+import { InvStore } from '../store';
 
 /**
- * @typedef {import('../../store').Store} Store
- * @typedef {import('../../inv/View').View} View
+ * @typedef {import('../store').Store} Store
+ * @typedef {import('../inv/View').View} View
  */
 
 /**
