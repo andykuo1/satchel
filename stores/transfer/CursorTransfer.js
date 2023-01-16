@@ -1,6 +1,6 @@
 import { uuid } from '../../lib/util/uuid';
 import { isSlotIndexEmpty } from '../inv/Slots';
-import { CursorStore } from '..';
+import { CursorStore, InvStore } from '..';
 import { addItemToInv, clearItemsInInv, getInv, getItemAtSlotIndex } from './InvTransfer';
 
 /**
@@ -39,7 +39,11 @@ export function getCursorViewId(store) {
  * @param {Store} store
  */
 export function hasHeldItem(store) {
-  let inv = getInv(store, getCursorInvId(store));
+  let invId = getCursorInvId(store);
+  if (!InvStore.has(store, invId)) {
+    return false;
+  }
+  let inv = getInv(store, invId);
   return !isSlotIndexEmpty(inv, 0);
 }
 

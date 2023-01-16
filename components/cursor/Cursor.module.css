@@ -29,14 +29,3 @@
   opacity: 0.8;
   filter: brightness(70%) drop-shadow(0 0 0.5em #FFFFFF);
 }
-
-.landing {
-  position: absolute;
-  top: var(--cursor-y);
-  left: var(--cursor-x);
-  width: 1em;
-  height: 1em;
-  background: red;
-  z-index: 100;
-  pointer-events: none;
-}

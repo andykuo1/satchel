@@ -6,6 +6,7 @@ import { useStore, ViewStore } from '../../stores';
 import { getView } from '../../stores/transfer/InvTransfer';
 import Viewport from '../viewport/Viewport';
 import Wiring from '../wiring/Wiring';
+import CursorLanding from '../cursor/CursorLanding';
 
 import { getViewRenderer } from '../ViewRegistry';
 
@@ -50,8 +51,10 @@ export default function Playground({ className = '', topic = '', backgroundProps
   }, []);
 
   return (
-    <Viewport gridOffsetX={pos[0]} gridOffsetY={pos[1]} containerProps={{ className }}>
+    <Viewport gridOffsetX={pos[0]} gridOffsetY={pos[1]}
+      containerProps={{ className }}>
       <div className={styles.background} onWheel={onWheel} {...backgroundProps}></div>
+      <CursorLanding />
       <Wiring/>
       <Views topic={topic} />
     </Viewport>

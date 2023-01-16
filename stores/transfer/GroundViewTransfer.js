@@ -1,8 +1,8 @@
 import { clearHeldItem, getHeldItem } from './CursorTransfer';
 import { getCursor } from './CursorTransfer';
-import { addItemToInv, getView } from './InvTransfer';
 import { posToCoord } from '../data/CursorState';
-import { createGroundBoxInStore } from '../../components/containers/GroundBox';
+import { tryUnpackItem } from './Unpacker';
+import { getLanding } from '../../components/cursor/CursorLanding';
 
 /**
  * @typedef {import('..').Store} Store
@@ -65,19 +65,16 @@ function putDownInGround(cursor, store, clientX = 0, clientY = 0) {
         cursor.ignoreFirstPutDown = false;
         return true;
     }
-    clearHeldItem(cursor, store);
 
-    // TODO: ???
-    let posX = clientX;
-    let posY = clientY;
-    let viewId = createGroundBoxInStore(
-        store, heldItem.width, heldItem.height,
-        Math.floor(posX / cursor.gridUnit),
-        Math.floor(posY / cursor.gridUnit));
-    let view = getView(store, viewId);
-    let invId = view.invId;
-    addItemToInv(store, invId, heldItem, 0, 0);
+    let [valid, coordX, coordY, width, height] = getLanding(cursor, store);
+    if (!valid) {
+        return false;
+    }
+    if (tryUnpackItem(store, heldItem, coordX, coordY)) {
+        clearHeldItem(cursor, store);
+        return true;
+    }
 
-    // dropFallingItem(heldItem, clientX, clientY);
-    return true;
+    // drop falling item.
+    return false;
 }

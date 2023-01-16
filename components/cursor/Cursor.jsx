@@ -7,8 +7,13 @@ import { useForceUpdate } from '../../lib/hooks/UseForceUpdate';
 import { getCursor, getCursorInvId, getCursorViewId } from '../../stores/transfer/CursorTransfer';
 import { useStore, ViewStore, InvStore, createInvInStore, createViewInStore } from '../../stores';
 import Viewport from '../viewport/Viewport';
-import { renderItems } from '../renderer/ItemsRenderer';
+import { renderItem } from '../renderer/ItemsRenderer';
 import Box from '../box/Box';
+
+/**
+ * @typedef {import('../../stores/data/CursorState').CursorState} CursorState
+ * @typedef {import('../../stores').Store} Store
+ */
 
 export default function Cursor() {
   const store = useStore();
@@ -34,16 +39,13 @@ export default function Cursor() {
   );
 }
 
-function createCursorInvViewInStore(store, viewId, invId) {
-  createInvInStore(store, invId, 'single', 1, 1, 1);
-  createViewInStore(store, viewId, invId, 0, 0, ['cursor'], 'all', 'cursor', 1, 1);
-  return viewId;
-}
-
 function CursorRenderer({ store, view, inv }) {
   let maxWidth = inv.width;
   let maxHeight = inv.height;
-  let elements = renderItems(store, view, inv, (store, view, inv, item, i) => {
+  let element = renderItem(store, view, inv, 0, (store, view, inv, item, i) => {
+    if (!item) {
+        return null;
+    }
     let w = item.width;
     let h = item.height;
     maxWidth = Math.max(w, maxWidth);
@@ -51,13 +53,19 @@ function CursorRenderer({ store, view, inv }) {
     return { x: 0, y: 0, w, h };
   });
   return (
-    <Box x={view.coordX} y={view.coordY} w={maxWidth} h={maxHeight}>
-      {elements}
+    <Box x={0} y={0} w={maxWidth} h={maxHeight}>
+      {element}
     </Box>
   );
 }
 
-function PositionalCursor({ cursor, children }) {
+function createCursorInvViewInStore(store, viewId, invId) {
+  createInvInStore(store, invId, 'single', 1, 1, 1);
+  createViewInStore(store, viewId, invId, 0, 0, ['cursor'], 'all', 'cursor', 1, 1);
+  return viewId;
+}
+
+function PositionalCursor({ cursor, children = undefined }) {
   const forceUpdate = useForceUpdate();
   useEffect(() => {
     cursor.onComponentMount(forceUpdate);

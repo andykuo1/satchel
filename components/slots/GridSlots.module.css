@@ -5,6 +5,7 @@
 
 .subgrid {
     background-size: var(--grid-unit) var(--grid-unit);
+    background-position: -1px -1px;
     background-image:
         linear-gradient(to right, var(--subgrid-outline), transparent 1px),
         linear-gradient(to bottom, var(--subgrid-outline), transparent 1px);

@@ -13,6 +13,9 @@ export function useViewOrganizer() {
         fisherYatesShuffle(viewIds);
         for (let viewId of viewIds) {
             let view = getView(store, viewId);
+            if (!view.topics.includes('workspace')) {
+                continue;
+            }
             for (let otherId of viewIds) {
                 if (viewId === otherId) {
                     continue;
