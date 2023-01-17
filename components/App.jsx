@@ -1,20 +1,26 @@
 import { useEffect } from 'react';
+
 import { uuid } from '../lib/util/uuid';
-import Cursor from './cursor/Cursor';
+import { StoreProvider, ViewStore, useStore } from '../stores';
 import { createItem } from '../stores/inv/Item';
-import { StoreProvider, useStore, ViewStore } from '../stores';
+import {
+  getCursor,
+  hasHeldItem,
+  setHeldItem,
+} from '../stores/transfer/CursorTransfer';
 import { addItemToInv, getView } from '../stores/transfer/InvTransfer';
-import Workspace from './playground/Workspace';
+import Settings from './Settings';
 import { useViewOrganizer } from './ViewOrganizer';
-import { getCursor, hasHeldItem, setHeldItem } from '../stores/transfer/CursorTransfer';
-import { createInvBoxInStore } from './containers/InvBox';
-import { useYDoc } from './network/YDoc';
+import { createAlbumBoxInStore } from './containers/AlbumBox';
 import { createConnectorBoxInStore } from './containers/ConnectorBox';
+import { createCraftingBoxInStore } from './containers/CraftingBox';
 import { createFoundryBoxInStore } from './containers/FoundryBox';
+import { createInvBoxInStore } from './containers/InvBox';
 import { createListBoxInStore } from './containers/ListBox';
 import { createSocketBoxInStore } from './containers/SocketBox';
-import { createCraftingBoxInStore } from './containers/CraftingBox';
-import Settings from './Settings';
+import Cursor from './cursor/Cursor';
+import { useYDoc } from './network/YDoc';
+import Workspace from './playground/Workspace';
 
 export default function App() {
   return (
@@ -51,6 +57,25 @@ function Content() {
       item.stackSize = 99;
       addItemToInv(store, invId, item, 0, 0);
     }
+    {
+      let viewId = createSocketBoxInStore(store, rand(), rand());
+      let view = getView(store, viewId);
+      let invId = view.invId;
+      let item = createItem(uuid());
+      item.imgSrc = '/images/potion.png';
+      item.width = 2;
+      item.height = 2;
+      item.background = '#00FF00';
+      item.displayName = 'Bag';
+      item.metadata = {
+        packed: {
+          type: 'grid',
+          width: 4,
+          height: 3,
+        },
+      };
+      addItemToInv(store, invId, item, 0, 0);
+    }
     if (!hasHeldItem(store)) {
       let cursor = getCursor(store);
       let item = createItem(uuid());
@@ -63,12 +88,13 @@ function Content() {
     createFoundryBoxInStore(store, rand(), rand());
     createConnectorBoxInStore(store, rand(), rand());
     // createCraftingBoxInStore(store, rand(), rand());
+    createAlbumBoxInStore(store, rand(), rand());
   }, []);
 
   return (
     <>
-    <Workspace />
-    <Cursor />
+      <Workspace />
+      <Cursor />
     </>
   );
 }

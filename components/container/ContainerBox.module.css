@@ -3,8 +3,8 @@
   --subgrid-offset-y: 0px;
   --subgrid-offset-w: 0px;
   --subgrid-offset-h: 0px;
-  
-  --subgrid-shadow: #AAAAAA;
+
+  --subgrid-shadow: #aaaaaa;
   --subgrid-background: #222222;
   --subgrid-text: var(--grid-outline);
   --subgrid-outline: var(--grid-outline);
@@ -24,11 +24,17 @@
   border-radius: 1em;
 }
 
-.left .content, .right .content, .top .content, .bottom .content {
+.left .content,
+.right .content,
+.top .content,
+.bottom .content {
   margin: 1px;
 }
 
-.left.background, .right.background, .top.background, .bottom.background {
+.left.background,
+.right.background,
+.top.background,
+.bottom.background {
   border: 1em solid var(--subgrid-shadow);
 }
 

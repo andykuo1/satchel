@@ -1,5 +1,5 @@
 .container {
-  --subgrid-shadow: #AAAAAA;
+  --subgrid-shadow: #aaaaaa;
   --subgrid-background: #222222;
   --subgrid-text: var(--grid-outline);
   --subgrid-outline: var(--grid-outline);
@@ -7,7 +7,11 @@
   position: absolute;
   left: calc(var(--box-x, 0) * var(--grid-unit));
   top: calc(var(--box-y, 0) * var(--grid-unit));
-  width: calc(var(--subgrid-offset-w, 0px) + var(--box-w, 1) * var(--grid-unit));
-  height: calc(var(--subgrid-offset-h, 0px) + var(--box-h, 1) * var(--grid-unit));
+  width: calc(
+    var(--subgrid-offset-w, 0px) + var(--box-w, 1) * var(--grid-unit)
+  );
+  height: calc(
+    var(--subgrid-offset-h, 0px) + var(--box-h, 1) * var(--grid-unit)
+  );
   transform: translate(var(--grid-offset-x, 0px), var(--grid-offset-y, 0px));
 }

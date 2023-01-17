@@ -1,21 +1,22 @@
 .landing {
-    position: fixed;
-    left: var(--cursor-x);
-    top: var(--cursor-y);
-    width: calc(var(--cursor-w) * var(--cursor-unit));
-    height: calc(var(--cursor-h) * var(--cursor-unit));
-    pointer-events: none;
-    z-index: 0;
-    border-radius: 0.5em;
-    border: 0.5em dashed #444444;
-    background: repeating-linear-gradient(
-        45deg,
-        #444444,
-        #444444 1em,
-        transparent 1em,
-        transparent 2em);
+  position: fixed;
+  left: var(--cursor-x);
+  top: var(--cursor-y);
+  width: calc(var(--cursor-w) * var(--cursor-unit));
+  height: calc(var(--cursor-h) * var(--cursor-unit));
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 0.5em;
+  border: 0.5em dashed #444444;
+  background: repeating-linear-gradient(
+    45deg,
+    #444444,
+    #444444 1em,
+    transparent 1em,
+    transparent 2em
+  );
 }
 
 .valid {
-    border: 0.5em dashed #FFFFFF;
+  border: 0.5em dashed #ffffff;
 }

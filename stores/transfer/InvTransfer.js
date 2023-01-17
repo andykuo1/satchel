@@ -1,7 +1,19 @@
 import { InvStore, ViewStore } from '..';
-import { clearItems, getItemByItemId, getItemIds, getItems, hasItem, putItem, removeItem } from '../inv/InvItems';
+import {
+  clearItems,
+  getItemByItemId,
+  getItemIds,
+  getItems,
+  hasItem,
+  putItem,
+  removeItem,
+} from '../inv/InvItems';
 import { cloneItem } from '../inv/Item';
-import { getItemIdBySlotCoords, getItemIdBySlotIndex, getSlottedItemIds } from '../inv/Slots';
+import {
+  getItemIdBySlotCoords,
+  getItemIdBySlotIndex,
+  getSlottedItemIds,
+} from '../inv/Slots';
 
 /**
  * @typedef {import('../StoreContext').Store} Store
@@ -58,8 +70,8 @@ export function removeItemFromInv(store, invId, itemId) {
 }
 
 /**
- * @param {Store} store 
- * @param {InvId} invId 
+ * @param {Store} store
+ * @param {InvId} invId
  */
 export function clearItemsInInv(store, invId) {
   let inv = getInv(store, invId);
@@ -68,9 +80,9 @@ export function clearItemsInInv(store, invId) {
 }
 
 /**
- * @param {Store} store 
- * @param {InvId} invId 
- * @param {ItemId} itemId 
+ * @param {Store} store
+ * @param {InvId} invId
+ * @param {ItemId} itemId
  */
 export function hasItemInInventory(store, invId, itemId) {
   let inv = getInv(store, invId);
@@ -78,8 +90,8 @@ export function hasItemInInventory(store, invId, itemId) {
 }
 
 /**
- * @param {Store} store 
- * @param {InvId} invId 
+ * @param {Store} store
+ * @param {InvId} invId
  * @param {number} slotIndex
  */
 export function getItemAtSlotIndex(store, invId, slotIndex) {
@@ -89,9 +101,9 @@ export function getItemAtSlotIndex(store, invId, slotIndex) {
 }
 
 /**
- * @param {Store} store 
- * @param {InvId} invId 
- * @param {number} coordX 
+ * @param {Store} store
+ * @param {InvId} invId
+ * @param {number} coordX
  * @param {number} coordY
  */
 export function getItemAtSlotCoords(store, invId, coordX, coordY) {
@@ -101,9 +113,9 @@ export function getItemAtSlotCoords(store, invId, coordX, coordY) {
 }
 
 /**
- * @param {Store} store 
- * @param {InvId} invId 
- * @param {number} coordX 
+ * @param {Store} store
+ * @param {InvId} invId
+ * @param {number} coordX
  * @param {number} coordY
  */
 export function getItemIdAtSlotCoords(store, invId, coordX, coordY) {
@@ -112,8 +124,8 @@ export function getItemIdAtSlotCoords(store, invId, coordX, coordY) {
 }
 
 /**
- * @param {Store} store 
- * @param {InvId} invId 
+ * @param {Store} store
+ * @param {InvId} invId
  */
 export function getItemIdsInSlots(store, invId) {
   let inv = getInv(store, invId);
@@ -160,7 +172,7 @@ export function getInv(store, invId) {
  */
 export function getView(store, viewId) {
   if (ViewStore.has(store, viewId)) {
-    return ViewStore.get(store,  viewId);
+    return ViewStore.get(store, viewId);
   } else {
     throw new Error(`Cannot get non-existant view '${viewId}'.`);
   }

@@ -4,17 +4,17 @@
  */
 
 /**
- * @param {Inv} inv 
- * @param {number} slotIndex 
- * @param {ItemId} itemId 
+ * @param {Inv} inv
+ * @param {number} slotIndex
+ * @param {ItemId} itemId
  */
 export function UNSAFE_setItemIdBySlotIndex(inv, slotIndex, itemId) {
   inv.slots[slotIndex] = itemId;
 }
 
 /**
- * @param {Inv} inv 
- * @param {number} slotIndex 
+ * @param {Inv} inv
+ * @param {number} slotIndex
  * @returns {ItemId}
  */
 export function getItemIdBySlotIndex(inv, slotIndex) {
@@ -22,9 +22,9 @@ export function getItemIdBySlotIndex(inv, slotIndex) {
 }
 
 /**
- * @param {Inv} inv 
- * @param {number} coordX 
- * @param {number} coordY 
+ * @param {Inv} inv
+ * @param {number} coordX
+ * @param {number} coordY
  * @returns {ItemId}
  */
 export function getItemIdBySlotCoords(inv, coordX, coordY) {
@@ -131,13 +131,13 @@ export function getSlotCoordsByIndex(inv, slotIndex) {
 }
 
 /**
- * @param {Inv} inv 
- * @param {ItemId} itemId 
+ * @param {Inv} inv
+ * @param {ItemId} itemId
  * @param {number} startIndex
  */
 export function getSlotIndexByItemId(inv, itemId, startIndex = 0) {
   const length = inv.length;
-  for(let i = startIndex; i < length; ++i) {
+  for (let i = startIndex; i < length; ++i) {
     let invItemId = getItemIdBySlotIndex(inv, i);
     if (invItemId && invItemId === itemId) {
       return i;
@@ -150,18 +150,25 @@ export function getSlotIndexByItemId(inv, itemId, startIndex = 0) {
  * @param {Inv} inv
  */
 export function getSlottedItemIds(inv) {
-  return inv.slots.filter(itemId => typeof itemId === 'string');
+  return inv.slots.filter((itemId) => typeof itemId === 'string');
 }
 
 /**
- * @param {Inv} inv 
- * @param {number} fromX 
- * @param {number} fromY 
- * @param {number} toX 
- * @param {number} toY 
+ * @param {Inv} inv
+ * @param {number} fromX
+ * @param {number} fromY
+ * @param {number} toX
+ * @param {number} toY
  * @param {ItemId} [itemId]
  */
-export function computeSlottedArea(inv, fromX, fromY, toX, toY, itemId = undefined) {
+export function computeSlottedArea(
+  inv,
+  fromX,
+  fromY,
+  toX,
+  toY,
+  itemId = undefined,
+) {
   let minX = Number.POSITIVE_INFINITY;
   let minY = Number.POSITIVE_INFINITY;
   let maxX = 0;

@@ -1,8 +1,8 @@
-import styles from './SocketBox.module.css';
 import { createInvViewInStore } from '../../stores';
+import { registerView } from '../ViewRegistry';
 import ContainerBox from '../container/ContainerBox';
 import SocketSlot from '../slots/SocketSlot';
-import { registerView } from '../ViewRegistry';
+import styles from './SocketBox.module.css';
 
 /**
  * @typedef {import('../../stores').Store} Store
@@ -13,23 +13,37 @@ import { registerView } from '../ViewRegistry';
 registerView('socket', SocketBox);
 
 export default function SocketBox({ store, view }) {
-    return (
-        <ContainerBox store={store} view={view}>
-            <SocketSlot className={styles.socket} store={store} view={view} slotIndex={0}/>
-        </ContainerBox>
-    );
+  return (
+    <ContainerBox store={store} view={view}>
+      <SocketSlot
+        className={styles.socket}
+        store={store}
+        view={view}
+        slotIndex={0}
+      />
+    </ContainerBox>
+  );
 }
 
 /**
- * @param {Store} store 
+ * @param {Store} store
  * @param {number} coordX
  * @param {number} coordY
  * @returns {ViewId}
  */
 export function createSocketBoxInStore(store, coordX, coordY) {
-    return createInvViewInStore(
-        store, coordX, coordY, 1, 1,
-        'socket', 'single',
-        1, 1, 1,
-        'all', ['workspace']);
+  return createInvViewInStore(
+    store,
+    coordX,
+    coordY,
+    1,
+    1,
+    'socket',
+    'single',
+    1,
+    1,
+    1,
+    'all',
+    ['workspace'],
+  );
 }

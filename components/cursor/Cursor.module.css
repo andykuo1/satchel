@@ -22,10 +22,10 @@
 
 .danger {
   opacity: 0.8;
-  filter: brightness(70%) drop-shadow(0 0 0.5em #FF0000);
+  filter: brightness(70%) drop-shadow(0 0 0.5em #ff0000);
 }
 
 .important {
   opacity: 0.8;
-  filter: brightness(70%) drop-shadow(0 0 0.5em #FFFFFF);
+  filter: brightness(70%) drop-shadow(0 0 0.5em #ffffff);
 }

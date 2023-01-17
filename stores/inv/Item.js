@@ -36,8 +36,8 @@ export function createItem(itemId) {
 }
 
 /**
- * @param {Item} other 
- * @param {Item} [dst] 
+ * @param {Item} other
+ * @param {Item} [dst]
  * @returns {Item}
  */
 export function copyItem(other, dst = undefined) {
@@ -49,8 +49,8 @@ export function copyItem(other, dst = undefined) {
 }
 
 /**
- * @param {Item} item 
- * @param {Item} other 
+ * @param {Item} item
+ * @param {Item} other
  */
 export function compareItem(item, other) {
   if (item.displayName !== other.displayName) {
@@ -91,7 +91,7 @@ export function cloneItem(other, dst = undefined) {
     dst = createItem(itemId || uuid());
   } else if (itemId) {
     dst.itemId = itemId;
-  } else if (!(dst.itemId)) {
+  } else if (!dst.itemId) {
     dst.itemId = uuid();
   }
   if (typeof other.width === 'number') {
@@ -281,10 +281,18 @@ export class ItemBuilder {
     let width = Number(this._width);
     let height = Number(this._height);
     if (!Number.isFinite(width) || !Number.isSafeInteger(width) || width <= 0) {
-      throw new Error('Invalid item width - must be a finite positive integer.');
+      throw new Error(
+        'Invalid item width - must be a finite positive integer.',
+      );
     }
-    if (!Number.isFinite(height) || !Number.isSafeInteger(height) || height <= 0) {
-      throw new Error('Invalid item height - must be a finite positive integer.');
+    if (
+      !Number.isFinite(height) ||
+      !Number.isSafeInteger(height) ||
+      height <= 0
+    ) {
+      throw new Error(
+        'Invalid item height - must be a finite positive integer.',
+      );
     }
     let imgSrc = String(this._imageSrc.trim());
     let displayName = String(this._displayName.trim());

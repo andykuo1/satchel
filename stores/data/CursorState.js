@@ -13,9 +13,9 @@ export class CursorState {
     this.startHeldY = 0;
     this.ignoreFirstPutDown = false;
     this.gridUnit = 50;
-    
+
     this.visible = false;
-    
+
     this.screenPos = [0, 0];
     this.forceUpdate = null;
 
@@ -39,8 +39,15 @@ export class CursorState {
 
   /** @param {number} now */
   onAnimationFrame(now) {
-    if (this.ignoreFirstPutDown
-      && distanceSquared(this.clientX, this.clientY, this.startHeldX, this.startHeldY) >= PLACE_BUFFER_RANGE_SQUARED) {
+    if (
+      this.ignoreFirstPutDown &&
+      distanceSquared(
+        this.clientX,
+        this.clientY,
+        this.startHeldX,
+        this.startHeldY,
+      ) >= PLACE_BUFFER_RANGE_SQUARED
+    ) {
       // This is a drag motion. Next putDown should be intentful.
       this.ignoreFirstPutDown = false;
     }
@@ -51,18 +58,18 @@ export class CursorState {
   }
 
   /**
-   * @param {Function} forceUpdate 
+   * @param {Function} forceUpdate
    */
   onComponentMount(forceUpdate) {
     this.forceUpdate = forceUpdate;
   }
 
   getCursorWorldX() {
-    return (this.clientX - this.screenPos[0]);
+    return this.clientX - this.screenPos[0];
   }
 
   getCursorWorldY() {
-    return (this.clientY - this.screenPos[1]);
+    return this.clientY - this.screenPos[1];
   }
 
   getCursorScreenX() {

@@ -1,25 +1,25 @@
 .socket {
-    position: relative;
-    width: calc(var(--item-w, 1) * var(--grid-unit) + 5px);
-    height: calc(var(--item-h, 1) * var(--grid-unit) + 5px);
-    background-color: var(--subgrid-outline);
-    border: 1px solid var(--subgrid-shadow);
-    border-radius: 1em;
+  position: relative;
+  width: calc(var(--item-w, 1) * var(--grid-unit) + 5px);
+  height: calc(var(--item-h, 1) * var(--grid-unit) + 5px);
+  background-color: var(--subgrid-outline);
+  border: 1px solid var(--subgrid-shadow);
+  border-radius: 1em;
 }
 
 .socket .item {
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    right: 0;
-    bottom: 0;
-    overflow: auto;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
 }
 
 .socket.maxWidth {
-    max-width: calc(var(--slot-max-w, 1) * var(--grid-unit) + 4px);
+  max-width: calc(var(--slot-max-w, 1) * var(--grid-unit) + 4px);
 }
 
 .socket.maxHeight {
-    max-height: calc(var(--slot-max-h, 1) * var(--grid-unit) + 4px);
+  max-height: calc(var(--slot-max-h, 1) * var(--grid-unit) + 4px);
 }

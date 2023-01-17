@@ -1,22 +1,25 @@
 # Satchel
 
 ## Ideas
+
 [ ] Different item styles: foil, metallic, pearlescent, etc.
 [ ] Resizable inventory
 [ ] Moveable inventory
 
-
 Missing Online status for remote inventories
+
 - Need a way to keep a list of those and update that over time.
 
 Join a lobby then pick a profile to be the role as. Switch profiles later?
-+ Create/Import Porfile
+
+- Create/Import Porfile
 
 Password protect a profile. This is a temporary profile and does not save for autoload.
 
 Gift box - right click to open and reveal contents. Should be the same size at the item within.
 
 Each profile can be toggle online or offline.
+
 - Cannot be chosen by players if offline.
 - But what if changed while the player has already assumed the role?
   - Kick them out and have them restart
@@ -25,8 +28,8 @@ Each profile can be toggle online or offline.
 
 Does not work on Firefox yet.
 
-
 Feedback
+
 - Paste Item code is confusing.
 - Limited, Limitless, Single
 - Rename to Recent
@@ -36,7 +39,6 @@ Feedback
 - Cloud icon should show the time since last save.
 
 Gift box or loot boxes. Right click opens a menu so that you can open it? Or right click always opens it?
-
 
 - ZOOM
 
@@ -51,11 +53,10 @@ What if for a Boundless board, it becomes inset and scrollable inside???
 
 - What do we need? A scrollable inside. A view-resizable board (doesn't resize internal inventory, just the viewport)
 
-
-
 To make chunked inventories, we need something like albums. Maybe infinite maps? Is this a Crawl?
 
 A Crawl - a crawling map
+
 - Each inventory chunk is 16 by 16 (cause tradition)
 - The viewport keeps track of the current position (should this be saved to the data object?)
   - METADATA!!!
@@ -68,22 +69,19 @@ A Crawl - a crawling map
 - Similar to albums or profiles:
 
 CrawlData:
+
 - crawlId
 - chunks: {
   chunkId: chunkData
-}
-ChunkData:
+  }
+  ChunkData:
 - chunkId
 - chunkX
 - chunkY
 - invId
 
-
-
 drag select box to move multiple items
+
 - after the box is drawn, all items within "pop" into the middle and that can be dragged around to the next spot. On lose focus, it dumps its items into its neighbors in the original position if possible.
 
-
 metadata should force no stacksize. This way we can have item views that store their item info in the metadata.
-
-

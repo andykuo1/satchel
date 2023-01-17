@@ -1,7 +1,7 @@
-import styles from './ContainerBox.module.css';
 import Box from '../box/Box';
-import ContainerHandles from './ContainerHandles';
 import { handleMouseDownCallback } from '../cursor/CursorCallback';
+import styles from './ContainerBox.module.css';
+import ContainerHandles from './ContainerHandles';
 
 /**
  * @typedef {import('../../stores').Store} Store
@@ -21,9 +21,11 @@ import { handleMouseDownCallback } from '../cursor/CursorCallback';
 export default function ContainerBox({
   store,
   view,
-  left = false, right = true,
-  top = false, bottom = true,
-  children
+  left = false,
+  right = true,
+  top = false,
+  bottom = true,
+  children,
 }) {
   if (!view) {
     return null;
@@ -35,15 +37,31 @@ export default function ContainerBox({
   const y = view.coordY;
   const w = view.width;
   const h = view.height;
-  const outlineSides = `${left && styles.left} ${right && styles.right} ${top && styles.top} ${bottom && styles.bottom}`;
+  const outlineSides = `${left && styles.left} ${right && styles.right} ${
+    top && styles.top
+  } ${bottom && styles.bottom}`;
   return (
     <>
-      <Box x={x} y={y} w={w} h={h} className={`${styles.box} ${styles.background} ${outlineSides}`}></Box>
-      <Box x={x} y={y} w={w} h={h} className={`${styles.box} ${styles.foreground} ${outlineSides}`}>
-        <div className={styles.content}>
-          {children}
-        </div>
-        <ContainerHandles left={left} right={right} top={top} bottom={bottom} handleProps={{ onMouseDown: onHandleMouseDown }} />
+      <Box
+        x={x}
+        y={y}
+        w={w}
+        h={h}
+        className={`${styles.box} ${styles.background} ${outlineSides}`}></Box>
+      <Box
+        x={x}
+        y={y}
+        w={w}
+        h={h}
+        className={`${styles.box} ${styles.foreground} ${outlineSides}`}>
+        <div className={styles.content}>{children}</div>
+        <ContainerHandles
+          left={left}
+          right={right}
+          top={top}
+          bottom={bottom}
+          handleProps={{ onMouseDown: onHandleMouseDown }}
+        />
       </Box>
     </>
   );

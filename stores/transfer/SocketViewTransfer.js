@@ -1,10 +1,27 @@
-import { clearHeldItem, getCursorInvId, getHeldItem, setHeldItem } from './CursorTransfer';
-import { isInputDisabled, isOutputDisabled } from '../inv/View';
-import { getCursor } from './CursorTransfer';
-import { getClientCoordX, getClientCoordY, getDeltaCoords, tryDropPartialItem, tryMergeItems, tryPickUp } from './ViewTransfer';
-import { addItemToInv, getInv, getItemAtSlotIndex, removeItemFromInv } from './InvTransfer';
-import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/Slots';
 import { getItemByItemId } from '../inv/InvItems';
+import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/Slots';
+import { isInputDisabled, isOutputDisabled } from '../inv/View';
+import {
+  clearHeldItem,
+  getCursorInvId,
+  getHeldItem,
+  setHeldItem,
+} from './CursorTransfer';
+import { getCursor } from './CursorTransfer';
+import {
+  addItemToInv,
+  getInv,
+  getItemAtSlotIndex,
+  removeItemFromInv,
+} from './InvTransfer';
+import {
+  getClientCoordX,
+  getClientCoordY,
+  getDeltaCoords,
+  tryDropPartialItem,
+  tryMergeItems,
+  tryPickUp,
+} from './ViewTransfer';
 
 /**
  * @typedef {import('..').Store} Store
@@ -16,13 +33,13 @@ import { getItemByItemId } from '../inv/InvItems';
  */
 
 export const SocketViewTransfer = {
-    itemMouseDownCallback,
-    containerMouseUpCallback,
+  itemMouseDownCallback,
+  containerMouseUpCallback,
 };
 
 /**
  * Perform pickup logic for item elements.
- * 
+ *
  * @param {MouseEvent} e The triggering mouse event
  * @param {Store} store The store
  * @param {View} view The current view
@@ -32,14 +49,21 @@ export const SocketViewTransfer = {
  * @returns {boolean} Whether to allow the event to propagate
  */
 function itemMouseDownCallback(e, store, view, inv, item, element) {
-    const cursor = getCursor(store);
-    const [deltaCoordX, deltaCoordY] = getDeltaCoords(inv, item.itemId, e.clientX, e.clientY, cursor.gridUnit, element);
-    return tryPickUp(e, cursor, store, view, inv, item, deltaCoordX, deltaCoordY);
+  const cursor = getCursor(store);
+  const [deltaCoordX, deltaCoordY] = getDeltaCoords(
+    inv,
+    item.itemId,
+    e.clientX,
+    e.clientY,
+    cursor.gridUnit,
+    element,
+  );
+  return tryPickUp(e, cursor, store, view, inv, item, deltaCoordX, deltaCoordY);
 }
 
 /**
  * Perform putdown logic for container elements.
- * 
+ *
  * @param {MouseEvent} e The triggering mouse event
  * @param {Store} store The store
  * @param {View} view The current view
@@ -48,39 +72,55 @@ function itemMouseDownCallback(e, store, view, inv, item, element) {
  * @returns {boolean} Whether to allow the event to propagate
  */
 function containerMouseUpCallback(e, store, view, inv, element) {
-    if (e.button !== 0) {
-        return;
+  if (e.button !== 0) {
+    return;
+  }
+  if (isInputDisabled(view)) {
+    return;
+  }
+  const cursor = getCursor(store);
+  const invId = view.invId;
+  const shiftKey = e.shiftKey;
+  const boundingRect = element.getBoundingClientRect();
+  const clientCoordX = getClientCoordX(
+    boundingRect,
+    e.clientX,
+    cursor.gridUnit,
+  );
+  const clientCoordY = getClientCoordY(
+    boundingRect,
+    e.clientY,
+    cursor.gridUnit,
+  );
+
+  const swappable = !isOutputDisabled(view);
+  const mergable = !isInputDisabled(view);
+
+  let result = false;
+
+  const heldItem = getHeldItem(store);
+  if (heldItem) {
+    if (cursor.ignoreFirstPutDown) {
+      // First put down has been ignored. Don't ignore the next intentful one.
+      cursor.ignoreFirstPutDown = false;
+      result = true;
+    } else {
+      // playSound('putdown');
+      result = putDownToSocketInventory(
+        cursor,
+        store,
+        getCursorInvId(store),
+        invId,
+        clientCoordX,
+        clientCoordY,
+        swappable,
+        mergable,
+        shiftKey,
+      );
     }
-    if (isInputDisabled(view)) {
-        return;
-    }
-    const cursor = getCursor(store);
-    const invId = view.invId;
-    const shiftKey = e.shiftKey;
-    const boundingRect = element.getBoundingClientRect();
-    const clientCoordX = getClientCoordX(boundingRect, e.clientX, cursor.gridUnit);
-    const clientCoordY = getClientCoordY(boundingRect, e.clientY, cursor.gridUnit);
+  }
 
-    const swappable = !isOutputDisabled(view);
-    const mergable = !isInputDisabled(view);
-
-    let result = false;
-
-    const heldItem = getHeldItem(store);
-    if (heldItem) {
-        if (cursor.ignoreFirstPutDown) {
-            // First put down has been ignored. Don't ignore the next intentful one.
-            cursor.ignoreFirstPutDown = false;
-            result = true;
-        } else {
-            // playSound('putdown');
-            result = putDownToSocketInventory(
-                cursor, store, getCursorInvId(store), invId,
-                clientCoordX, clientCoordY, swappable, mergable, shiftKey);
-        }
-    }
-
-    return result;
+  return result;
 }
 
 /**
@@ -94,53 +134,78 @@ function containerMouseUpCallback(e, store, view, inv, element) {
  * @param {boolean} shiftKey
  */
 function putDownToSocketInventory(
-    cursorState,
-    store,
-    heldInvId,
-    toInvId,
-    coordX,
-    coordY,
-    swappable,
-    mergable,
-    shiftKey
+  cursorState,
+  store,
+  heldInvId,
+  toInvId,
+  coordX,
+  coordY,
+  swappable,
+  mergable,
+  shiftKey,
 ) {
-    let heldItem = getHeldItem(store);
-    let prevItem = getItemAtSlotIndex(store, toInvId, 0);
-    let prevItemX = -1;
-    let prevItemY = -1;
-    if (prevItem) {
-        if (swappable) {
-            // Has an item to swap. So pick up this one for later.
-            let inv = getInv(store, toInvId);
-            let prevItemId = prevItem.itemId;
-            let slotIndex = getSlotIndexByItemId(inv, prevItemId);
-            let [x, y] = getSlotCoordsByIndex(inv, slotIndex);
-            prevItemX = x;
-            prevItemY = y;
-            prevItem = getItemByItemId(inv, prevItemId);
-            // If we can merge, do it now.
-            if (tryMergeItems(cursorState, store, toInvId, prevItem, heldInvId, heldItem, mergable, shiftKey)) {
-                return true;
-            }
-            // ...otherwise we continue with the swap.
-            removeItemFromInv(store, toInvId, prevItemId);
-        } else {
-            // Cannot swap. Exit early.
-            return false;
-        }
-    } else if (tryDropPartialItem(store, heldInvId, toInvId, heldItem, mergable, shiftKey, 0, 0)) {
-        // No item in the way and we want to partially drop singles.
+  let heldItem = getHeldItem(store);
+  let prevItem = getItemAtSlotIndex(store, toInvId, 0);
+  let prevItemX = -1;
+  let prevItemY = -1;
+  if (prevItem) {
+    if (swappable) {
+      // Has an item to swap. So pick up this one for later.
+      let inv = getInv(store, toInvId);
+      let prevItemId = prevItem.itemId;
+      let slotIndex = getSlotIndexByItemId(inv, prevItemId);
+      let [x, y] = getSlotCoordsByIndex(inv, slotIndex);
+      prevItemX = x;
+      prevItemY = y;
+      prevItem = getItemByItemId(inv, prevItemId);
+      // If we can merge, do it now.
+      if (
+        tryMergeItems(
+          cursorState,
+          store,
+          toInvId,
+          prevItem,
+          heldInvId,
+          heldItem,
+          mergable,
+          shiftKey,
+        )
+      ) {
         return true;
+      }
+      // ...otherwise we continue with the swap.
+      removeItemFromInv(store, toInvId, prevItemId);
+    } else {
+      // Cannot swap. Exit early.
+      return false;
     }
-    // Now there are no items in the way. Place it down!
-    clearHeldItem(cursorState, store);
-    addItemToInv(store, toInvId, heldItem, 0, 0);
-    // ...finally put the remaining item back now that there is space.
-    if (prevItem) {
-        setHeldItem(
-            cursorState, store, prevItem,
-            Math.min(0, prevItemX - coordX),
-            Math.min(0, prevItemY - coordY));
-    }
+  } else if (
+    tryDropPartialItem(
+      store,
+      heldInvId,
+      toInvId,
+      heldItem,
+      mergable,
+      shiftKey,
+      0,
+      0,
+    )
+  ) {
+    // No item in the way and we want to partially drop singles.
     return true;
+  }
+  // Now there are no items in the way. Place it down!
+  clearHeldItem(cursorState, store);
+  addItemToInv(store, toInvId, heldItem, 0, 0);
+  // ...finally put the remaining item back now that there is space.
+  if (prevItem) {
+    setHeldItem(
+      cursorState,
+      store,
+      prevItem,
+      Math.min(0, prevItemX - coordX),
+      Math.min(0, prevItemY - coordY),
+    );
+  }
+  return true;
 }

@@ -3,8 +3,8 @@
  */
 
 export const CursorStore = {
-    /** @param {Store} store */
-    get(store) {
-        return store.cursor;
-    }
+  /** @param {Store} store */
+  get(store) {
+    return store.cursor;
+  },
 };

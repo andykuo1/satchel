@@ -1,11 +1,29 @@
-import { clearHeldItem, getCursorInvId, getHeldItem, setHeldItem } from './CursorTransfer';
-import { isInputDisabled, isOutputDisabled } from '../inv/View';
-import { getCursor } from './CursorTransfer';
-import { getClientCoordX, getClientCoordY, getDeltaCoords, tryDropPartialItem, tryMergeItems, tryPickUp } from './ViewTransfer';
-import { addItemToInv, getInv, getItemAtSlotCoords, getItemIdAtSlotCoords, removeItemFromInv } from './InvTransfer';
 import { dijkstra2d } from '../../lib/util/dijkstra2d';
 import { getItemByItemId } from '../inv/InvItems';
 import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/Slots';
+import { isInputDisabled, isOutputDisabled } from '../inv/View';
+import {
+  clearHeldItem,
+  getCursorInvId,
+  getHeldItem,
+  setHeldItem,
+} from './CursorTransfer';
+import { getCursor } from './CursorTransfer';
+import {
+  addItemToInv,
+  getInv,
+  getItemAtSlotCoords,
+  getItemIdAtSlotCoords,
+  removeItemFromInv,
+} from './InvTransfer';
+import {
+  getClientCoordX,
+  getClientCoordY,
+  getDeltaCoords,
+  tryDropPartialItem,
+  tryMergeItems,
+  tryPickUp,
+} from './ViewTransfer';
 
 /**
  * @typedef {import('..').Store} Store
@@ -23,7 +41,7 @@ export const GridViewTransfer = {
 
 /**
  * Perform pickup logic for item elements.
- * 
+ *
  * @param {MouseEvent} e The triggering mouse event
  * @param {Store} store The store
  * @param {View} view The current view
@@ -34,13 +52,20 @@ export const GridViewTransfer = {
  */
 function itemMouseDownCallback(e, store, view, inv, item, element) {
   const cursor = getCursor(store);
-  const [deltaCoordX, deltaCoordY] = getDeltaCoords(inv, item.itemId, e.clientX, e.clientY, cursor.gridUnit, element);
+  const [deltaCoordX, deltaCoordY] = getDeltaCoords(
+    inv,
+    item.itemId,
+    e.clientX,
+    e.clientY,
+    cursor.gridUnit,
+    element,
+  );
   return tryPickUp(e, cursor, store, view, inv, item, deltaCoordX, deltaCoordY);
 }
 
 /**
  * Perform putdown logic for container elements.
- * 
+ *
  * @param {MouseEvent} e The triggering mouse event
  * @param {Store} store The store
  * @param {View} view The current view
@@ -59,8 +84,16 @@ function containerMouseUpCallback(e, store, view, inv, element) {
   const invId = view.invId;
   const shiftKey = e.shiftKey;
   const boundingRect = element.getBoundingClientRect();
-  const clientCoordX = getClientCoordX(boundingRect, e.clientX, cursor.gridUnit);
-  const clientCoordY = getClientCoordY(boundingRect, e.clientY, cursor.gridUnit);
+  const clientCoordX = getClientCoordX(
+    boundingRect,
+    e.clientX,
+    cursor.gridUnit,
+  );
+  const clientCoordY = getClientCoordY(
+    boundingRect,
+    e.clientY,
+    cursor.gridUnit,
+  );
 
   const swappable = !isOutputDisabled(view);
   const mergable = !isInputDisabled(view);
@@ -76,10 +109,16 @@ function containerMouseUpCallback(e, store, view, inv, element) {
     } else {
       // playSound('putdown');
       result = putDownToGridInventory(
-        cursor, store, getCursorInvId(store), invId,
+        cursor,
+        store,
+        getCursorInvId(store),
+        invId,
         clientCoordX + cursor.heldOffsetX,
         clientCoordY + cursor.heldOffsetY,
-        swappable, mergable, shiftKey);
+        swappable,
+        mergable,
+        shiftKey,
+      );
     }
   }
   return result;
@@ -129,7 +168,7 @@ function putDownToGridInventory(
         store,
         toInvId,
         targetCoordX + x,
-        targetCoordY + y
+        targetCoordY + y,
       );
       if (itemId) {
         if (prevItemId) {
@@ -158,12 +197,34 @@ function putDownToGridInventory(
       prevItemY = y;
       prevItem = getItemByItemId(inv, prevItemId);
       // If we can merge, do it now.
-      if (tryMergeItems(cursorState, store, toInvId, prevItem, heldInvId, heldItem, mergable, shiftKey)) {
+      if (
+        tryMergeItems(
+          cursorState,
+          store,
+          toInvId,
+          prevItem,
+          heldInvId,
+          heldItem,
+          mergable,
+          shiftKey,
+        )
+      ) {
         return true;
       }
       // ...otherwise we continue with the swap.
       removeItemFromInv(store, toInvId, prevItemId);
-    } else if (tryDropPartialItem(store, heldInvId, toInvId, heldItem, mergable, shiftKey, targetCoordX, targetCoordY)) {
+    } else if (
+      tryDropPartialItem(
+        store,
+        heldInvId,
+        toInvId,
+        heldItem,
+        mergable,
+        shiftKey,
+        targetCoordX,
+        targetCoordY,
+      )
+    ) {
       // No item in the way and we want to partially drop singles.
       return true;
     }
@@ -173,10 +234,11 @@ function putDownToGridInventory(
     // ...finally put the remaining item back now that there is space.
     if (prevItem) {
       setHeldItem(
-        cursorState, store,
+        cursorState,
+        store,
         prevItem,
         Math.min(0, prevItemX - targetCoordX),
-        Math.min(0, prevItemY - targetCoordY)
+        Math.min(0, prevItemY - targetCoordY),
       );
     }
     return true;
@@ -187,7 +249,7 @@ function putDownToGridInventory(
       targetCoordY,
       maxCoordX,
       maxCoordY,
-      (x, y) => canPlaceAt(store, toInvId, x, y, itemWidth, itemHeight)
+      (x, y) => canPlaceAt(store, toInvId, x, y, itemWidth, itemHeight),
     );
     if (x >= 0 && y >= 0) {
       clearHeldItem(cursorState, store);
@@ -215,7 +277,7 @@ function canPlaceAt(
   coordY,
   itemWidth,
   itemHeight,
-  exclude = null
+  exclude = null,
 ) {
   for (let y = 0; y < itemHeight; ++y) {
     for (let x = 0; x < itemWidth; ++x) {
@@ -241,7 +303,7 @@ function findEmptyCoords(
   coordY,
   maxCoordX,
   maxCoordY,
-  isEmptyCallback = () => true
+  isEmptyCallback = () => true,
 ) {
   return dijkstra2d(
     coordX,
@@ -253,7 +315,8 @@ function findEmptyCoords(
     isEmptyCallback,
     getNeighborsFromCoords,
     fromCoordsToNode,
-    toCoordsFromNode);
+    toCoordsFromNode,
+  );
 }
 
 /**

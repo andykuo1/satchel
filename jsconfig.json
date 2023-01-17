@@ -1,9 +1,9 @@
 {
-    "compilerOptions": {
-        "lib": ["DOM", "ES2022"],
-        "target": "ES2022",
-        "moduleResolution": "node",
-        "jsx": "react-jsx",
-        "checkJs": true
-    }
+  "compilerOptions": {
+    "lib": ["DOM", "ES2022"],
+    "target": "ES2022",
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "checkJs": true
+  }
 }

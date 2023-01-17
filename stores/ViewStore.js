@@ -7,4 +7,7 @@ import { RecordStoreable } from '../lib/store/RecordStoreable';
  */
 
 /** @type {RecordStoreable<Store, ViewId, View>} */
-export const ViewStore = new RecordStoreable(s => s.values.views, s => s.listeners.views);
+export const ViewStore = new RecordStoreable(
+  (s) => s.values.views,
+  (s) => s.listeners.views,
+);

@@ -1,14 +1,24 @@
-import styles from './Cursor.module.css';
-
 import { useEffect } from 'react';
+
 import { useAnimationFrame } from '../../lib/hooks/UseAnimationFrame';
 import { useEventListener } from '../../lib/hooks/UseEventListener';
 import { useForceUpdate } from '../../lib/hooks/UseForceUpdate';
-import { getCursor, getCursorInvId, getCursorViewId } from '../../stores/transfer/CursorTransfer';
-import { useStore, ViewStore, InvStore, createInvInStore, createViewInStore } from '../../stores';
-import Viewport from '../viewport/Viewport';
-import { renderItem } from '../renderer/ItemsRenderer';
+import {
+  InvStore,
+  ViewStore,
+  createInvInStore,
+  createViewInStore,
+  useStore,
+} from '../../stores';
+import {
+  getCursor,
+  getCursorInvId,
+  getCursorViewId,
+} from '../../stores/transfer/CursorTransfer';
 import Box from '../box/Box';
+import { renderItem } from '../renderer/ItemsRenderer';
+import Viewport from '../viewport/Viewport';
+import styles from './Cursor.module.css';
 
 /**
  * @typedef {import('../../stores/data/CursorState').CursorState} CursorState
@@ -25,14 +35,27 @@ export default function Cursor() {
     if (ViewStore.has(store, getCursorViewId(store))) {
       return;
     }
-    createCursorInvViewInStore(store, getCursorViewId(store), getCursorInvId(store));
+    createCursorInvViewInStore(
+      store,
+      getCursorViewId(store),
+      getCursorInvId(store),
+    );
   }, []);
 
-  useEventListener(() => window.document, 'mousemove', cursor.onMouseMove, undefined, []);
+  useEventListener(
+    () => window.document,
+    'mousemove',
+    cursor.onMouseMove,
+    undefined,
+    [],
+  );
 
   return (
     <PositionalCursor cursor={cursor}>
-      <Viewport gridOffsetX={0} gridOffsetY={0} containerProps={{ className: styles.contained }}>
+      <Viewport
+        gridOffsetX={0}
+        gridOffsetY={0}
+        containerProps={{ className: styles.contained }}>
         {view && inv && <CursorRenderer store={store} view={view} inv={inv} />}
       </Viewport>
     </PositionalCursor>
@@ -44,7 +67,7 @@ function CursorRenderer({ store, view, inv }) {
   let maxHeight = inv.height;
   let element = renderItem(store, view, inv, 0, (store, view, inv, item, i) => {
     if (!item) {
-        return null;
+      return null;
     }
     let w = item.width;
     let h = item.height;
@@ -61,7 +84,18 @@ function CursorRenderer({ store, view, inv }) {
 
 function createCursorInvViewInStore(store, viewId, invId) {
   createInvInStore(store, invId, 'single', 1, 1, 1);
-  createViewInStore(store, viewId, invId, 0, 0, ['cursor'], 'all', 'cursor', 1, 1);
+  createViewInStore(
+    store,
+    viewId,
+    invId,
+    0,
+    0,
+    ['cursor'],
+    'all',
+    'cursor',
+    1,
+    1,
+  );
   return viewId;
 }
 
@@ -77,7 +111,8 @@ function PositionalCursor({ cursor, children = undefined }) {
   let cursorX = cursor.getCursorScreenX() - gridUnit / 2;
   let cursorY = cursor.getCursorScreenY() - gridUnit / 2;
   return (
-    <div className={styles.cursor}
+    <div
+      className={styles.cursor}
       style={{
         // @ts-ignore
         '--cursor-x': `${cursorX}px`,

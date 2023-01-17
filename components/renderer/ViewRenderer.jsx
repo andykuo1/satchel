@@ -1,5 +1,5 @@
 /**
- * @param {Element} element 
+ * @param {Element} element
  */
 export function getViewIdForElement(element) {
   if (element.hasAttribute('data-view-id')) {

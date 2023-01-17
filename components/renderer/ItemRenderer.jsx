@@ -1,7 +1,8 @@
-import styles from './ItemRenderer.module.css';
 import Image from 'next/image';
 import { join } from 'path';
+
 import { prefix } from '../../lib/prefix';
+import styles from './ItemRenderer.module.css';
 
 /**
  * @typedef {import('../../stores').Store} Store
@@ -18,7 +19,15 @@ import { prefix } from '../../lib/prefix';
  * @param {number} props.h
  * @param {object} [props.containerProps]
  */
-export default function ItemRenderer({ store, item, x, y, w, h, containerProps = {} }) {
+export default function ItemRenderer({
+  store,
+  item,
+  x,
+  y,
+  w,
+  h,
+  containerProps = {},
+}) {
   const containerPropsWithItemId = {
     'data-item-id': item.itemId,
     ...containerProps,
@@ -28,7 +37,8 @@ export default function ItemRenderer({ store, item, x, y, w, h, containerProps =
     src = join(prefix, src);
   }
   return (
-    <div className={styles.item}
+    <div
+      className={styles.item}
       style={{
         // @ts-ignore
         '--item-x': x,
@@ -40,13 +50,15 @@ export default function ItemRenderer({ store, item, x, y, w, h, containerProps =
       title={item.displayName}
       {...containerPropsWithItemId}>
       <Image src={src} alt={item.displayName} fill={true} />
-      {item.stackSize > 0 && <label className={styles.stackSize}>×{item.stackSize}</label>}
+      {item.stackSize > 0 && (
+        <label className={styles.stackSize}>×{item.stackSize}</label>
+      )}
     </div>
   );
 }
 
 /**
- * @param {HTMLElement} element 
+ * @param {HTMLElement} element
  */
 export function getItemIdForElement(element) {
   if (element.hasAttribute('data-item-id')) {
@@ -57,7 +69,7 @@ export function getItemIdForElement(element) {
 }
 
 /**
- * @param {HTMLElement} element 
+ * @param {HTMLElement} element
  * @returns {HTMLElement}
  */
 export function getClosestItemForElement(element) {

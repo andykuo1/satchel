@@ -8,12 +8,12 @@
 const RENDERERS = {};
 
 /**
- * 
- * @param {ViewType} viewType 
- * @param {ViewRenderer} renderer 
+ *
+ * @param {ViewType} viewType
+ * @param {ViewRenderer} renderer
  */
 export function registerView(viewType, renderer) {
-    RENDERERS[viewType] = renderer;
+  RENDERERS[viewType] = renderer;
 }
 
 /**
@@ -21,5 +21,5 @@ export function registerView(viewType, renderer) {
  * @returns {ViewRenderer}
  */
 export function getViewRenderer(viewType) {
-    return RENDERERS[viewType];
+  return RENDERERS[viewType];
 }

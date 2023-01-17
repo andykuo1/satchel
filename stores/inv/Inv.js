@@ -53,7 +53,7 @@ export function createInv(invId, invType, slotCount, maxCoordX, maxCoordY) {
 /**
  * Copies the target inventory to destination as a new inventory. Unlike cloneInv(),
  * the resultant inventory can be added to the store with its copy.
- * 
+ *
  * @param {Inv} other
  * @param {Inv} [dst]
  * @returns {Inv}
@@ -71,7 +71,7 @@ export function copyInv(other, dst = undefined) {
  * to store an exact replica of an inventory state, including ids. Unlike copyInv(),
  * the resultant inventory CANNOT be added to the store with its clone. It must replace
  * its clone.
- * 
+ *
  * @param {Inv} other
  * @param {Inv} [dst]
  * @param {object} [opts]
@@ -97,12 +97,12 @@ export function cloneInv(other, dst = undefined, opts = {}) {
   let overrideItemIds = {};
   if (typeof other.items === 'object') {
     if (preserveItemId) {
-      for(let item of Object.values(other.items)) {
+      for (let item of Object.values(other.items)) {
         let newItem = cloneItem(item);
         dst.items[newItem.itemId] = newItem;
       }
     } else {
-      for(let item of Object.values(other.items)) {
+      for (let item of Object.values(other.items)) {
         let newItem = copyItem(item);
         overrideItemIds[item.itemId] = newItem.itemId;
         dst.items[newItem.itemId] = newItem;

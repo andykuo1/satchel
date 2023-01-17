@@ -1,4 +1,5 @@
 import { Doc } from 'yjs';
+
 import { createStoreContext } from '../lib/store/StoreContext';
 import { CursorState } from './data/CursorState';
 
@@ -11,18 +12,18 @@ import { CursorState } from './data/CursorState';
  */
 
 export const { StoreContext, StoreProvider, useStore } = createStoreContext({
-    ydoc: new Doc(),
-    cursor: new CursorState(),
-    values: {
-        /** @type {Record<InvId, Inv>} */
-        invs: {},
-        /** @type {Record<ViewId, View>} */
-        views: {},
-    },
-    listeners: {
-        /** @type {Record<InvId, Array<Function>>} */
-        invs: {},
-        /** @type {Record<ViewId, Array<Function>>} */
-        views: {},
-    },
+  ydoc: new Doc(),
+  cursor: new CursorState(),
+  values: {
+    /** @type {Record<InvId, Inv>} */
+    invs: {},
+    /** @type {Record<ViewId, View>} */
+    views: {},
+  },
+  listeners: {
+    /** @type {Record<InvId, Array<Function>>} */
+    invs: {},
+    /** @type {Record<ViewId, Array<Function>>} */
+    views: {},
+  },
 });

@@ -3,8 +3,8 @@
  */
 
 export const YDocStore = {
-    /** @param {Store} store */
-    get(store) {
-        return store.ydoc;
-    }
+  /** @param {Store} store */
+  get(store) {
+    return store.ydoc;
+  },
 };

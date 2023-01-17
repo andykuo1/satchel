@@ -5,11 +5,13 @@ The goal is to make a reliable peer-to-peer system that does not lose data and c
 Server -> Many Clients
 
 What we need:
+
 - On Client connection, Server gives source of truth back to start the Client where they should be.
 - Client makes local changes and sends to Server
 - Server stores Client data
 
 Actions:
+
 - Create
   - A new player has joined.
   - Do they have an existing inventory for them?
@@ -29,12 +31,11 @@ Actions:
   - The server has an update for an item.
   - Send it.
 - Gift
-  - A player (or Server) wants to give an Item to another player.
 
+  - A player (or Server) wants to give an Item to another player.
 
 - Always use Player positioning.
 - Item details can be remedied in a special menu.
-
 
 - Every Player should be able to Create an Item and Gift it to Someone.
 - The Server should be able to restore any lost data on Player side.
@@ -44,10 +45,8 @@ Actions:
     - DisplayName: (same as player name, but can be changed?)
 - The Server should also be a Player.
 
-
 Auto-Join: (inventory to be non-existant)
 
 PlayerList (reassign per inventory)
-- 
 
-
+-

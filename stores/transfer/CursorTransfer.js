@@ -1,7 +1,12 @@
+import { CursorStore, InvStore } from '..';
 import { uuid } from '../../lib/util/uuid';
 import { isSlotIndexEmpty } from '../inv/Slots';
-import { CursorStore, InvStore } from '..';
-import { addItemToInv, clearItemsInInv, getInv, getItemAtSlotIndex } from './InvTransfer';
+import {
+  addItemToInv,
+  clearItemsInInv,
+  getInv,
+  getItemAtSlotIndex,
+} from './InvTransfer';
 
 /**
  * @typedef {import('..').Store} Store
@@ -63,7 +68,9 @@ export function getHeldItem(store) {
  */
 export function setHeldItem(cursor, store, item, offsetX = 0, offsetY = 0) {
   if (!item) {
-    throw new Error('Cannot set held item to null - use clearHeldItem() instead.');
+    throw new Error(
+      'Cannot set held item to null - use clearHeldItem() instead.',
+    );
   }
   if (hasHeldItem(store)) {
     throw new Error('Cannot set held item - already holding another item.');
