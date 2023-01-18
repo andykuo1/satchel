@@ -10,6 +10,7 @@
     "format": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@material-symbols/svg-400": "0.4.2",
     "@next/font": "13.1.2",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.2",
@@ -20,6 +21,7 @@
     "yjs": "13.5.44"
   },
   "devDependencies": {
+    "@svgr/webpack": "6.5.1",
     "@trivago/prettier-plugin-sort-imports": "4.0.0",
     "prettier": "2.8.3"
   }
