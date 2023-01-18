@@ -4,6 +4,10 @@
     "target": "ES2022",
     "moduleResolution": "node",
     "jsx": "react-jsx",
-    "checkJs": true
+    "checkJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }
