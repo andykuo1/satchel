@@ -1,4 +1,4 @@
-import { dijkstra2d } from '../../lib/util/dijkstra2d';
+import { dijkstra2d } from '../../utils/dijkstra2d';
 import { getItemByItemId } from '../inv/InvItems';
 import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/Slots';
 import { isInputDisabled, isOutputDisabled } from '../inv/View';

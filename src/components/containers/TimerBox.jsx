@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import { useAnimationFrame } from '../../lib/hooks/UseAnimationFrame';
+import { useAnimationFrame } from '../../hooks/UseAnimationFrame';
 import { registerView } from '../ViewRegistry';
 import ContainerBox from '../container/ContainerBox';
 import styles from './TimerBox.module.css';

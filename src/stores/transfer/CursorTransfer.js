@@ -1,5 +1,5 @@
 import { CursorStore, InvStore } from '..';
-import { uuid } from '../../lib/util/uuid';
+import { uuid } from '../../utils/uuid';
 import { isSlotIndexEmpty } from '../inv/Slots';
 import {
   addItemToInv,

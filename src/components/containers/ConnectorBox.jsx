@@ -1,4 +1,4 @@
-import { uuid } from '../../lib/util/uuid';
+import { uuid } from '../../utils/uuid';
 import { createInvInStore, createViewInStore } from '../../stores';
 import { putItem } from '../../stores/inv/InvItems';
 import { createItem } from '../../stores/inv/Item';

@@ -1,6 +1,6 @@
 import { Map } from 'yjs';
 
-import { uuid } from '../lib/util/uuid';
+import { uuid } from '../utils/uuid';
 import { CursorStore } from './CursorStore';
 import { InvStore } from './InvStore';
 import { ViewStore } from './ViewStore';

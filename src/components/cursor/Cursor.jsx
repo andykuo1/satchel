@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-import { useAnimationFrame } from '../../lib/hooks/UseAnimationFrame';
-import { useEventListener } from '../../lib/hooks/UseEventListener';
-import { useForceUpdate } from '../../lib/hooks/UseForceUpdate';
+import { useAnimationFrame } from '../../hooks/UseAnimationFrame';
+import { useEventListener } from '../../hooks/UseEventListener';
+import { useForceUpdate } from '../../hooks/UseForceUpdate';
 import {
   InvStore,
   ViewStore,

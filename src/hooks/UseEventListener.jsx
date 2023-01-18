@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 /**
- * @param {() => HTMLElement} getElement
+ * @param {() => HTMLElement} getClientElement
  * @param {keyof HTMLElementEventMap} event
  * @param {EventListener} callback
  * @param {boolean} [opts]

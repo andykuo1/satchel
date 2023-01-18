@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react';
 
-import { useAnimationFrame } from '../../lib/hooks/UseAnimationFrame';
+import { useAnimationFrame } from '../../hooks/UseAnimationFrame';
 import { ViewStore, useStore } from '../../stores';
 import { getItemAtSlotIndex } from '../../stores/transfer/InvTransfer';
 import styles from './Wiring.module.css';

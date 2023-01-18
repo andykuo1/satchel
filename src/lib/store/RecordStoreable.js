@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useForceUpdate } from '../hooks/UseForceUpdate';
+import { useForceUpdate } from '../../hooks/UseForceUpdate';
 
 const KEYS_LISTENERS = Symbol('keys');
 

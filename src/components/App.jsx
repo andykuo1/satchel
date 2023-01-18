@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { uuid } from '../lib/util/uuid';
+import { uuid } from '../utils/uuid';
 import { StoreProvider, ViewStore, useStore } from '../stores';
 import { createItem } from '../stores/inv/Item';
 import {

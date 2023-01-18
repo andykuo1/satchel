@@ -1,4 +1,4 @@
-import { uuid } from '../../lib/util/uuid';
+import { uuid } from '../../utils/uuid';
 import { cloneItem, copyItem } from './Item';
 
 /**

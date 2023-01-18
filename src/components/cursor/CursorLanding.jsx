@@ -1,5 +1,5 @@
-import { useAnimationFrame } from '../../lib/hooks/UseAnimationFrame';
-import { useForceUpdate } from '../../lib/hooks/UseForceUpdate';
+import { useAnimationFrame } from '../../hooks/UseAnimationFrame';
+import { useForceUpdate } from '../../hooks/UseForceUpdate';
 import { CursorStore, useStore } from '../../stores';
 import { getHeldItem, hasHeldItem } from '../../stores/transfer/CursorTransfer';
 import { getPackedInfo } from '../../stores/transfer/Unpacker';

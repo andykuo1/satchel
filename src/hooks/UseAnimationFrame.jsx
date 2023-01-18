@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useRef } from 'react';
 
+/**
+ * @param {Function} callback 
+ * @param {React.DependencyList} deps 
+ */
 export function useAnimationFrame(callback, deps = undefined) {
   const handle = useRef(null);
   const handler = useCallback(function handler(now) {

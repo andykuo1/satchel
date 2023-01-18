@@ -1,6 +1,6 @@
 import { Map as YMap } from 'yjs';
 
-import { uuid } from '../../lib/util/uuid';
+import { uuid } from '../../utils/uuid';
 import { createProxyYMap } from './YProxy';
 
 /**

@@ -1,4 +1,4 @@
-import { distanceSquared } from '../../lib/util/math';
+import { distanceSquared } from '../../utils/math';
 
 const PLACE_BUFFER_RANGE = 10;
 const PLACE_BUFFER_RANGE_SQUARED = PLACE_BUFFER_RANGE * PLACE_BUFFER_RANGE;

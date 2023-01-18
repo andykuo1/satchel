@@ -1,6 +1,6 @@
 import { Array as YArray, Map as YMap } from 'yjs';
 
-import { uuid } from '../../lib/util/uuid';
+import { uuid } from '../../utils/uuid';
 import { copyYItem } from './YItem';
 import { createProxyYArray, createProxyYMap } from './YProxy';
 
