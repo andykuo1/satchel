@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import styles from './Settings.module.css';
 
+import SettingsIcon from '@material-symbols/svg-400/rounded/settings.svg';
+
 export default function Settings({}) {
   const [open, setOpen] = useState(false);
   const [roomCode, setRoomCode] = useState('satchel-test');
@@ -9,7 +11,7 @@ export default function Settings({}) {
     <>
       <div className={styles.floating}>
         <button className={styles.button} onClick={(e) => setOpen(!open)}>
-          Settings
+          <SettingsIcon fill="white"/>
         </button>
       </div>
       <div className={styles.container + ' ' + (!open && styles.hidden)}>
