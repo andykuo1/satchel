@@ -5,16 +5,16 @@ import { CursorStore } from './CursorStore';
 import { InvStore } from './InvStore';
 import { ViewStore } from './ViewStore';
 import { YDocStore } from './YDocStore';
-import { createYInv } from './yinv/YInv';
-import { createYView } from './yinv/YView';
+import { createYInv } from '../inv/yinv/YInv';
+import { createYView } from '../inv/yinv/YView';
 
 /**
  * @typedef {import('./StoreContext').Store} Store
- * @typedef {import('./inv/Inv').InvId} InvId
- * @typedef {import('./inv/Inv').InvType} InvType
- * @typedef {import('./inv/View').ViewId} ViewId
- * @typedef {import('./inv/View').ViewUsage} ViewUsage
- * @typedef {import('./inv/View').ViewType} ViewType
+ * @typedef {import('../inv/Inv').InvId} InvId
+ * @typedef {import('../inv/Inv').InvType} InvType
+ * @typedef {import('../inv/View').ViewId} ViewId
+ * @typedef {import('../inv/View').ViewUsage} ViewUsage
+ * @typedef {import('../inv/View').ViewType} ViewType
  */
 
 export { StoreContext, StoreProvider, useStore } from './StoreContext';

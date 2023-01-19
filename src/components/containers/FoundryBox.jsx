@@ -4,7 +4,7 @@ import { InvStore, createInvViewInStore } from '../../stores';
 import {
   getItemAtSlotIndex,
   updateItem,
-} from '../../stores/transfer/InvTransfer';
+} from '../../inv/transfer/InvTransfer';
 import { registerView } from '../ViewRegistry';
 import ContainerBox from '../container/ContainerBox';
 import SocketSlot from '../slots/SocketSlot';

@@ -1,5 +1,5 @@
 import { InvStore, createInvViewInStore } from '../../stores';
-import { getItemAtSlotIndex } from '../../stores/transfer/InvTransfer';
+import { getItemAtSlotIndex } from '../../inv/transfer/InvTransfer';
 import { registerView } from '../ViewRegistry';
 import ContainerBox from '../container/ContainerBox';
 import {
@@ -12,8 +12,8 @@ import styles from './ListBox.module.css';
 
 /**
  * @typedef {import('../../stores').Store} Store
- * @typedef {import('../../stores/inv/View').ViewId} ViewId
- * @typedef {import('../../stores/inv/View').ViewUsage} ViewUsage
+ * @typedef {import('../../inv/View').ViewId} ViewId
+ * @typedef {import('../../inv/View').ViewUsage} ViewUsage
  */
 
 registerView('list', ListBox);

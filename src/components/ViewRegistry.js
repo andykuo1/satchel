@@ -1,7 +1,7 @@
-/** @typedef {import('../stores/inv/View').ViewType} ViewType */
+/** @typedef {import('../inv/View').ViewType} ViewType */
 
 /**
- * @typedef {import('react').FC<{ store: import('../stores').Store, view: import('../stores/inv/View').View }>} ViewRenderer
+ * @typedef {import('react').FC<{ store: import('../stores').Store, view: import('../inv/View').View }>} ViewRenderer
  */
 
 /** @type {Record<string, ViewRenderer>} */

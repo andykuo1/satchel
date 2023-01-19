@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 
 import { uuid } from '../utils/uuid';
 import { StoreProvider, ViewStore, useStore } from '../stores';
-import { createItem } from '../stores/inv/Item';
+import { createItem } from '../inv/Item';
 import {
   getCursor,
   hasHeldItem,
   setHeldItem,
-} from '../stores/transfer/CursorTransfer';
-import { addItemToInv, getView } from '../stores/transfer/InvTransfer';
+} from '../inv/transfer/CursorTransfer';
+import { addItemToInv, getView } from '../inv/transfer/InvTransfer';
 import Settings from './Settings';
 import { useViewOrganizer } from './ViewOrganizer';
 import { createAlbumBoxInStore } from './containers/AlbumBox';

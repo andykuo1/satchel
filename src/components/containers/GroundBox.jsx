@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 
 import { InvStore, ViewStore, createInvViewInStore } from '../../stores';
-import { isInvEmpty } from '../../stores/transfer/InvTransfer';
+import { isInvEmpty } from '../../inv/transfer/InvTransfer';
 import { registerView } from '../ViewRegistry';
 import InvBox from './InvBox';
 
 /**
  * @typedef {import('../../stores').Store} Store
- * @typedef {import('../../stores/inv/View').ViewId} ViewId
- * @typedef {import('../../stores/inv/View').ViewUsage} ViewUsage
+ * @typedef {import('../../inv/View').ViewId} ViewId
+ * @typedef {import('../../inv/View').ViewUsage} ViewUsage
  */
 
 registerView('ground', GroundBox);

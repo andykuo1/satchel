@@ -5,7 +5,7 @@ import ContainerHandles from './ContainerHandles';
 
 /**
  * @typedef {import('../../stores').Store} Store
- * @typedef {import('../../stores/inv/View').View} View
+ * @typedef {import('../../inv/View').View} View
  */
 
 /**

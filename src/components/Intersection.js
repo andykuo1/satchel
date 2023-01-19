@@ -1,5 +1,5 @@
 import { ViewStore } from '../stores';
-import { getView } from '../stores/transfer/InvTransfer';
+import { getView } from '../inv/transfer/InvTransfer';
 
 export function findEmptyViewArea(out, store, x, y, w, h) {
   const viewIds = ViewStore.keys(store);

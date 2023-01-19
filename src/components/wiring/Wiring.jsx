@@ -2,7 +2,7 @@ import { useCallback, useRef } from 'react';
 
 import { useAnimationFrame } from '../../hooks/UseAnimationFrame';
 import { ViewStore, useStore } from '../../stores';
-import { getItemAtSlotIndex } from '../../stores/transfer/InvTransfer';
+import { getItemAtSlotIndex } from '../../inv/transfer/InvTransfer';
 import styles from './Wiring.module.css';
 
 let DELTATIME = 0;

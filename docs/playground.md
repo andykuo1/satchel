@@ -16,3 +16,9 @@ Box Types
   - Album
 - Crafting Box
   - Create other items and boxes?
+
+BOX TYPES
+[] Album
+- Infinite Inventories?
+- Self-expanding invesntories?
+

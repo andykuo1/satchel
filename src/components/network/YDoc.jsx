@@ -3,8 +3,8 @@ import { WebrtcProvider } from 'y-webrtc';
 
 import { InvStore, ViewStore, useStore } from '../../stores';
 import { YDocStore } from '../../stores/YDocStore';
-import { toYInv } from '../../stores/yinv/YInv';
-import { toYView } from '../../stores/yinv/YView';
+import { toYInv } from '../../inv/yinv/YInv';
+import { toYView } from '../../inv/yinv/YView';
 
 const ROOM_NAME = 'satchel-test';
 

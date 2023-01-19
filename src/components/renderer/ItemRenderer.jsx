@@ -6,7 +6,7 @@ import styles from './ItemRenderer.module.css';
 
 /**
  * @typedef {import('../../stores').Store} Store
- * @typedef {import('../../stores/inv/Item').Item} Item
+ * @typedef {import('../../inv/Item').Item} Item
  */
 
 /**

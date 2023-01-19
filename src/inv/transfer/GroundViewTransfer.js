@@ -1,15 +1,15 @@
 import { getLanding } from '../../components/cursor/CursorLanding';
-import { posToCoord } from '../data/CursorState';
+import { posToCoord } from '../../stores/CursorState';
 import { clearHeldItem, getHeldItem } from './CursorTransfer';
 import { getCursor } from './CursorTransfer';
 import { tryUnpackItem } from './Unpacker';
 
 /**
- * @typedef {import('..').Store} Store
- * @typedef {import('../inv/Item').Item} Item
- * @typedef {import('../inv/View').View} View
- * @typedef {import('../inv/Inv').Inv} Inv
- * @typedef {import('../data/CursorState').CursorState} CursorState
+ * @typedef {import('../../stores').Store} Store
+ * @typedef {import('../Item').Item} Item
+ * @typedef {import('../View').View} View
+ * @typedef {import('../Inv').Inv} Inv
+ * @typedef {import('../../stores/CursorState').CursorState} CursorState
  */
 
 export const GroundViewTransfer = {

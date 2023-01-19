@@ -1,11 +1,11 @@
-import { getItemAtSlotIndex } from '../../stores/transfer/InvTransfer';
+import { getItemAtSlotIndex } from '../../inv/transfer/InvTransfer';
 import ItemRenderer from './ItemRenderer';
 
 /**
  * @typedef {import('../../stores').Store} Store
- * @typedef {import('../../stores/inv/View').View} View
- * @typedef {import('../../stores/inv/Inv').Inv} Inv
- * @typedef {import('../../stores/inv/Item').Item} Item
+ * @typedef {import('../../inv/View').View} View
+ * @typedef {import('../../inv/Inv').Inv} Inv
+ * @typedef {import('../../inv/Item').Item} Item
  */
 
 /**

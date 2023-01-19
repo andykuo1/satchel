@@ -1,14 +1,14 @@
 import { Doc } from 'yjs';
 
 import { createStoreContext } from '../lib/store/StoreContext';
-import { CursorState } from './data/CursorState';
+import { CursorState } from './CursorState';
 
 /**
  * @typedef {ReturnType<typeof useStore>} Store
- * @typedef {import('./inv/Inv').InvId} InvId
- * @typedef {import('./inv/Inv').Inv} Inv
- * @typedef {import('./inv/View').View} View
- * @typedef {import('./inv/View').ViewId} ViewId
+ * @typedef {import('../inv/Inv').InvId} InvId
+ * @typedef {import('../inv/Inv').Inv} Inv
+ * @typedef {import('../inv/View').View} View
+ * @typedef {import('../inv/View').ViewId} ViewId
  */
 
 export const { StoreContext, StoreProvider, useStore } = createStoreContext({

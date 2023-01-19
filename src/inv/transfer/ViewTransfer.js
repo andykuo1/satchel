@@ -1,18 +1,18 @@
-import { InvStore } from '..';
-import { copyItem } from '../inv/Item';
-import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../inv/Slots';
-import { isOutputCopied, isOutputDisabled } from '../inv/View';
+import { InvStore } from '../../stores';
+import { copyItem } from '../Item';
+import { getSlotCoordsByIndex, getSlotIndexByItemId } from '../Slots';
+import { isOutputCopied, isOutputDisabled } from '../View';
 import { clearHeldItem, hasHeldItem, setHeldItem } from './CursorTransfer';
 import { addItemToInv, removeItemFromInv } from './InvTransfer';
 
 /**
- * @typedef {import('..').Store} Store
- * @typedef {import('../data/CursorState').CursorState} CursorState
- * @typedef {import('../inv/Inv').InvId} InvId
- * @typedef {import('../inv/Inv').Inv} Inv
- * @typedef {import('../inv/Item').ItemId} ItemId
- * @typedef {import('../inv/Item').Item} Item
- * @typedef {import('../inv/View').View} View
+ * @typedef {import('../../stores').Store} Store
+ * @typedef {import('../../stores/CursorState').CursorState} CursorState
+ * @typedef {import('../Inv').InvId} InvId
+ * @typedef {import('../Inv').Inv} Inv
+ * @typedef {import('../Item').ItemId} ItemId
+ * @typedef {import('../Item').Item} Item
+ * @typedef {import('../View').View} View
  */
 
 /**

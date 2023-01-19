@@ -1,4 +1,4 @@
-import { uuid } from '../../utils/uuid';
+import { uuid } from '@/utils/uuid';
 
 /**
  * @typedef {string} ViewId
@@ -16,6 +16,7 @@ import { uuid } from '../../utils/uuid';
  * @property {number} width
  * @property {number} height
  * @property {Array<string>} topics
+ * @property {object} metadata
  */
 
 /**
@@ -39,6 +40,7 @@ export function createView(viewId, invId, type, usage, topics) {
     width: 1,
     height: 1,
     topics,
+    metadata: {},
   };
   return view;
 }

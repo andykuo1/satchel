@@ -7,10 +7,10 @@ import { createProxyYMap } from './YProxy';
 
 /**
  * @param {import('yjs').Map} src
- * @param {import('../inv/View').ViewId} viewId
- * @param {import('../inv/Inv').InvId} invId
- * @param {import('../inv/View').ViewType} viewType
- * @param {import('../inv/View').ViewUsage} usage
+ * @param {import('../View').ViewId} viewId
+ * @param {import('../Inv').InvId} invId
+ * @param {import('../View').ViewType} viewType
+ * @param {import('../View').ViewUsage} usage
  * @param {Array<string>} topics
  */
 export function createYView(src, viewId, invId, viewType, usage, topics) {

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { ViewStore, useStore } from '../../stores';
-import { getCursor } from '../../stores/transfer/CursorTransfer';
-import { getView } from '../../stores/transfer/InvTransfer';
+import { getCursor } from '../../inv/transfer/CursorTransfer';
+import { getView } from '../../inv/transfer/InvTransfer';
 import { getViewRenderer } from '../ViewRegistry';
 import CursorLanding from '../cursor/CursorLanding';
 import Viewport from '../viewport/Viewport';

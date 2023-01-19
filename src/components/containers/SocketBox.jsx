@@ -6,8 +6,8 @@ import styles from './SocketBox.module.css';
 
 /**
  * @typedef {import('../../stores').Store} Store
- * @typedef {import('../../stores/inv/View').ViewId} ViewId
- * @typedef {import('../../stores/inv/View').ViewUsage} ViewUsage
+ * @typedef {import('../../inv/View').ViewId} ViewId
+ * @typedef {import('../../inv/View').ViewUsage} ViewUsage
  */
 
 registerView('socket', SocketBox);

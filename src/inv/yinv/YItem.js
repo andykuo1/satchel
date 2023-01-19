@@ -9,7 +9,7 @@ import { createProxyYMap } from './YProxy';
 
 /**
  * @param {import('yjs').Doc} yDoc
- * @param {import('../inv/Item').ItemId} itemId
+ * @param {import('../Item').ItemId} itemId
  */
 export function createYItem(yDoc, itemId) {
   let src = yDoc.getMap();

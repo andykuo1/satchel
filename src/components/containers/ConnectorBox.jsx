@@ -1,8 +1,8 @@
 import { uuid } from '../../utils/uuid';
 import { createInvInStore, createViewInStore } from '../../stores';
-import { putItem } from '../../stores/inv/InvItems';
-import { createItem } from '../../stores/inv/Item';
-import { getInv } from '../../stores/transfer/InvTransfer';
+import { putItem } from '../../inv/InvItems';
+import { createItem } from '../../inv/Item';
+import { getInv } from '../../inv/transfer/InvTransfer';
 import { registerView } from '../ViewRegistry';
 import ContainerBox from '../container/ContainerBox';
 

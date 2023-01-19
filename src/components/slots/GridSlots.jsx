@@ -2,7 +2,7 @@ import { InvStore } from '../../stores';
 import {
   computeSlottedArea,
   getSlotCoordsByIndex,
-} from '../../stores/inv/Slots';
+} from '../../inv/Slots';
 import {
   containerMouseUpCallback,
   itemMouseDownCallback,
@@ -12,7 +12,7 @@ import styles from './GridSlots.module.css';
 
 /**
  * @typedef {import('../../stores').Store} Store
- * @typedef {import('../../stores/inv/View').View} View
+ * @typedef {import('../../inv/View').View} View
  */
 
 /**

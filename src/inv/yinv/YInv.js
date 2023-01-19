@@ -8,8 +8,8 @@ import { createProxyYArray, createProxyYMap } from './YProxy';
 
 /**
  * @param {import('yjs').Map} src
- * @param {import('../inv/Inv').InvId} invId
- * @param {import('../inv/Inv').InvType} invType
+ * @param {import('../Inv').InvId} invId
+ * @param {import('../Inv').InvType} invType
  * @param {number} slotCount
  * @param {number} maxCoordX
  * @param {number} maxCoordY

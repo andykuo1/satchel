@@ -14,14 +14,14 @@ import {
   getCursor,
   getCursorInvId,
   getCursorViewId,
-} from '../../stores/transfer/CursorTransfer';
+} from '../../inv/transfer/CursorTransfer';
 import Box from '../box/Box';
 import { renderItem } from '../renderer/ItemsRenderer';
 import Viewport from '../viewport/Viewport';
 import styles from './Cursor.module.css';
 
 /**
- * @typedef {import('../../stores/data/CursorState').CursorState} CursorState
+ * @typedef {import('../../stores/CursorState').CursorState} CursorState
  * @typedef {import('../../stores').Store} Store
  */
 

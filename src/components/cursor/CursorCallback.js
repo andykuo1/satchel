@@ -1,9 +1,9 @@
 import { ViewStore } from '../../stores';
-import { getItemByItemId } from '../../stores/inv/InvItems';
-import { getCursor } from '../../stores/transfer/CursorTransfer';
-import { GridViewTransfer } from '../../stores/transfer/GridViewTransfer';
-import { getInv } from '../../stores/transfer/InvTransfer';
-import { ListViewTransfer } from '../../stores/transfer/ListViewTransfer';
+import { getItemByItemId } from '../../inv/InvItems';
+import { getCursor } from '../../inv/transfer/CursorTransfer';
+import { GridViewTransfer } from '../../inv/transfer/GridViewTransfer';
+import { getInv } from '../../inv/transfer/InvTransfer';
+import { ListViewTransfer } from '../../inv/transfer/ListViewTransfer';
 import { findValidPosition } from '../ViewOrganizer';
 import {
   getClosestItemForElement,
@@ -13,8 +13,8 @@ import { getClosestViewForElement } from '../renderer/ViewRenderer';
 
 /**
  * @typedef {import('../../stores').Store} Store
- * @typedef {import('../../stores/inv/Item').Item} Item
- * @typedef {import('../../stores/inv/View').View} View
+ * @typedef {import('../../inv/Item').Item} Item
+ * @typedef {import('../../inv/View').View} View
  */
 
 /**

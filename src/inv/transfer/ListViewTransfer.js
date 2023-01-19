@@ -2,8 +2,8 @@ import {
   getSlotCoordsByIndex,
   getSlotIndexByItemId,
   isSlotIndexEmpty,
-} from '../inv/Slots';
-import { isInputDisabled, isOutputCopied, isOutputDisabled } from '../inv/View';
+} from '../Slots';
+import { isInputDisabled, isOutputCopied, isOutputDisabled } from '../View';
 import {
   clearHeldItem,
   getCursorInvId,
@@ -16,12 +16,12 @@ import { addItemToInv, getInv, removeItemFromInv } from './InvTransfer';
 import { tryDropPartialItem, tryMergeItems, tryPickUp } from './ViewTransfer';
 
 /**
- * @typedef {import('..').Store} Store
- * @typedef {import('../inv/Item').Item} Item
- * @typedef {import('../inv/View').View} View
- * @typedef {import('../inv/Inv').Inv} Inv
- * @typedef {import('../inv/Inv').InvId} InvId
- * @typedef {import('../data/CursorState').CursorState} CursorState
+ * @typedef {import('../../stores').Store} Store
+ * @typedef {import('../Item').Item} Item
+ * @typedef {import('../View').View} View
+ * @typedef {import('../Inv').Inv} Inv
+ * @typedef {import('../Inv').InvId} InvId
+ * @typedef {import('../../stores/CursorState').CursorState} CursorState
  */
 
 export const ListViewTransfer = {

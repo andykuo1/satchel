@@ -1,4 +1,4 @@
-import { InvStore, ViewStore } from '..';
+import { InvStore, ViewStore } from '../../stores';
 import {
   clearItems,
   getItemByItemId,
@@ -7,22 +7,22 @@ import {
   hasItem,
   putItem,
   removeItem,
-} from '../inv/InvItems';
-import { cloneItem } from '../inv/Item';
+} from '../InvItems';
+import { cloneItem } from '../Item';
 import {
   getItemIdBySlotCoords,
   getItemIdBySlotIndex,
   getSlottedItemIds,
-} from '../inv/Slots';
+} from '../Slots';
 
 /**
- * @typedef {import('../StoreContext').Store} Store
- * @typedef {import('../inv/Inv').InvId} InvId
- * @typedef {import('../inv/Inv').Inv} Inv
- * @typedef {import('../inv/Item').Item} Item
- * @typedef {import('../inv/Item').ItemId} ItemId
- * @typedef {import('../inv/View').ViewId} ViewId
- * @typedef {import('../inv/View').View} View
+ * @typedef {import('../../stores/StoreContext').Store} Store
+ * @typedef {import('../Inv').InvId} InvId
+ * @typedef {import('../Inv').Inv} Inv
+ * @typedef {import('../Item').Item} Item
+ * @typedef {import('../Item').ItemId} ItemId
+ * @typedef {import('../View').ViewId} ViewId
+ * @typedef {import('../View').View} View
  */
 
 export function getItemInInv(store, invId, itemId) {

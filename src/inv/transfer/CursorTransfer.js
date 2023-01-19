@@ -1,6 +1,6 @@
-import { CursorStore, InvStore } from '..';
+import { CursorStore, InvStore } from '../../stores';
 import { uuid } from '../../utils/uuid';
-import { isSlotIndexEmpty } from '../inv/Slots';
+import { isSlotIndexEmpty } from '../Slots';
 import {
   addItemToInv,
   clearItemsInInv,
@@ -9,11 +9,11 @@ import {
 } from './InvTransfer';
 
 /**
- * @typedef {import('..').Store} Store
- * @typedef {import('../inv/Item').Item} Item
- * @typedef {import('../inv/Item').ItemId} ItemId
- * @typedef {import('../inv/Inv').InvId} InvId
- * @typedef {import('../data/CursorState').CursorState} CursorState
+ * @typedef {import('../../stores').Store} Store
+ * @typedef {import('../Item').Item} Item
+ * @typedef {import('../Item').ItemId} ItemId
+ * @typedef {import('../Inv').InvId} InvId
+ * @typedef {import('../../stores/CursorState').CursorState} CursorState
  */
 
 const CURSOR_INV_ID = uuid();

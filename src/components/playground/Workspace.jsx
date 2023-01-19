@@ -1,5 +1,5 @@
 import { useStore } from '../../stores';
-import { GroundViewTransfer } from '../../stores/transfer/GroundViewTransfer';
+import { GroundViewTransfer } from '../../inv/transfer/GroundViewTransfer';
 import Playground from './Playground';
 import styles from './Workspace.module.css';
 
