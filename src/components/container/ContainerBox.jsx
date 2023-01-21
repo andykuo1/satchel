@@ -21,9 +21,9 @@ import ContainerHandles from './ContainerHandles';
 export default function ContainerBox({
   store,
   view,
-  left = false,
+  left = true,
   right = true,
-  top = false,
+  top = true,
   bottom = true,
   children,
 }) {
@@ -37,9 +37,15 @@ export default function ContainerBox({
   const y = view.coordY;
   const w = view.width;
   const h = view.height;
-  const outlineSides = `${left && styles.left} ${right && styles.right} ${
+  const outlineSides = `${
+    left && styles.left
+  } ${
+    right && styles.right
+  } ${
     top && styles.top
-  } ${bottom && styles.bottom}`;
+  } ${
+    bottom && styles.bottom
+  }`;
   return (
     <>
       <Box

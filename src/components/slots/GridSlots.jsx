@@ -58,7 +58,9 @@ export default function GridSlots({
       data-view-id={view.viewId}
       onMouseUp={onContainerMouseUp}>
       <legend className={styles.title}>{inv.displayName}</legend>
-      {elements}
+      <div className={styles.items}>
+        {elements}
+      </div>
       {children}
     </fieldset>
   );

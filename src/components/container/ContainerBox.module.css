@@ -8,6 +8,8 @@
   --subgrid-background: #222222;
   --subgrid-text: var(--grid-outline);
   --subgrid-outline: var(--grid-outline);
+
+  --subgrid-margin: 0.66em;
 }
 
 .content {
@@ -35,53 +37,53 @@
 .right.background,
 .top.background,
 .bottom.background {
-  border: 1em solid var(--subgrid-shadow);
+  border: 1em ridge var(--subgrid-shadow);
 }
 
 .left {
-  margin-left: -0.5em;
-  --subgrid-offset-x: 0.5em;
-  --subgrid-offset-w: 0.5em;
+  margin-left: calc(-1 * var(--subgrid-margin));
+  --subgrid-offset-x: var(--subgrid-margin);
+  --subgrid-offset-w: var(--subgrid-margin);
 }
 .left .content {
-  margin-left: 0.5em;
+  margin-left: var(--subgrid-margin);
 }
 
 .right {
-  --subgrid-offset-w: 0.5em;
+  --subgrid-offset-w: var(--subgrid-margin);
 }
 .right .content {
-  width: calc(100% - 0.5em - 1px);
+  width: calc(100% - var(--subgrid-margin) - 1px);
 }
 
 .left.right {
-  --subgrid-offset-x: 0.5em;
-  --subgrid-offset-w: 1em;
+  --subgrid-offset-x: 0px;
+  --subgrid-offset-w: calc(2 * var(--subgrid-margin));
 }
 .left.right .content {
-  width: calc(100% - 1em - 1px);
+  width: calc(100% - 2 * var(--subgrid-margin) - 1px);
 }
 
 .top {
-  margin-top: -0.5em;
-  --subgrid-offset-y: 0.5em;
-  --subgrid-offset-h: 0.5em;
+  margin-top: calc(-1 * var(--subgrid-margin));
+  --subgrid-offset-y: var(--subgrid-margin);
+  --subgrid-offset-h: var(--subgrid-margin);
 }
 .top .content {
-  margin-top: 0.5em;
+  margin-top: var(--subgrid-margin);
 }
 
 .bottom {
-  --subgrid-offset-h: 0.5em;
+  --subgrid-offset-h: var(--subgrid-margin);
 }
 .bottom .content {
-  height: calc(100% - 0.5em - 1px);
+  height: calc(100% - var(--subgrid-margin) - 1px);
 }
 
 .top.bottom {
-  --subgrid-offset-y: 0.5em;
-  --subgrid-offset-h: 1em;
+  --subgrid-offset-y: 0px;
+  --subgrid-offset-h: calc(2 * var(--subgrid-margin));
 }
 .top.bottom .content {
-  height: calc(100% - 1em - 1px);
+  height: calc(100% - 2 * var(--subgrid-margin) - 1px);
 }

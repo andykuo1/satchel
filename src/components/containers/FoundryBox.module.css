@@ -77,11 +77,11 @@ input.displayName {
   left: 0.5em;
   display: flex;
   flex-direction: column;
+  padding: 0.5em;
 }
 
-.toolbar button {
-  margin-top: 0.5em;
-  margin-left: 0.5em;
+.toolbar button, .menubar button {
+  margin: 0.25em 0;
   padding: 0.5em;
   width: 2.5em;
   height: 2.5em;
@@ -91,4 +91,13 @@ input.displayName {
 
 .rotated {
   transform: rotateZ(90deg);
+}
+
+.menubar {
+  position: absolute;
+  top: 0.5em;
+  right: 1em;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
 }
