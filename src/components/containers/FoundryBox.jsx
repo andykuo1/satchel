@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import styles from './FoundryBox.module.css';
 
 import { InvStore, createInvViewInStore } from '../../stores';
 import {
@@ -8,7 +9,12 @@ import {
 import { registerView } from '../ViewRegistry';
 import ContainerBox from '../container/ContainerBox';
 import SocketSlot from '../slots/SocketSlot';
-import styles from './FoundryBox.module.css';
+
+import ZoomIn from '@material-symbols/svg-400/outlined/zoom_in.svg';
+import ZoomOut from '@material-symbols/svg-400/outlined/zoom_out.svg';
+import VerticalAlignCenter from '@material-symbols/svg-400/outlined/vertical_align_center.svg';
+import AspectRatio from '@material-symbols/svg-400/outlined/aspect_ratio.svg';
+import IconButton from '../IconButton';
 
 /**
  * @typedef {import('../../stores').Store} Store
@@ -62,6 +68,106 @@ export default function FoundryBox({ store, view }) {
     }
   }
 
+  function onZoomIn() {
+    if (!currentItem.current) {
+      return;
+    }
+    let item = currentItem.current;
+    let width = Math.min(8, item.width + 1);
+    let height = Math.min(8, item.height + 1);
+    updateItem(store, view.invId, item.itemId, { width, height });
+  }
+
+  function onZoomOut() {
+    if (!currentItem.current) {
+      return;
+    }
+    let item = currentItem.current;
+    let width = Math.max(1, item.width - 1);
+    let height = Math.max(1, item.height - 1);
+    updateItem(store, view.invId, item.itemId, { width, height });
+  }
+
+  function onFlattenX() {
+    if (!currentItem.current) {
+      return;
+    }
+    let item = currentItem.current;
+    let oldWidth = item.width;
+    let oldHeight = item.height;
+    let newWidth;
+    let newHeight;
+    if (oldHeight > oldWidth) {
+      // Rotate it
+      newWidth = oldHeight;
+      newHeight = oldWidth;
+    } else if (oldHeight === 1) {
+      if (oldWidth === 1) {
+        // Flat & Tiny
+        newWidth = 2;
+        newHeight = 1;
+      } else {
+        // No change
+        return;
+      }
+    } else {
+      // Flatten it
+      newWidth = oldWidth + 1;
+      newHeight = Math.ceil(oldHeight / 2);
+      if (newWidth === newHeight && newWidth !== 1) {
+        newWidth -= 1;
+        newHeight -= 1;
+      }
+    }
+    updateItem(store, view.invId, item.itemId, { width: newWidth, height: newHeight });
+  }
+
+  function onFlattenY() {
+    if (!currentItem.current) {
+      return;
+    }
+    let item = currentItem.current;
+    let oldWidth = item.width;
+    let oldHeight = item.height;
+    let newWidth;
+    let newHeight;
+    if (oldWidth > oldHeight) {
+      // Rotate it
+      newWidth = oldHeight;
+      newHeight = oldWidth;
+    } else if (oldWidth === 1) {
+      if (oldHeight === 1) {
+        // Flat & Tiny
+        newWidth = 1;
+        newHeight = 2;
+      } else {
+        // No change
+        return;
+      }
+    } else {
+      // Flatten it
+      newWidth = Math.ceil(oldWidth / 2);
+      newHeight = oldHeight + 1;
+      if (newWidth === newHeight && newHeight !== 1) {
+        newWidth -= 1;
+        newHeight -= 1;
+      }
+    }
+    updateItem(store, view.invId, item.itemId, { width: newWidth, height: newHeight });
+  }
+
+  function onFit() {
+    if (!currentItem.current) {
+      return;
+    }
+    let item = currentItem.current;
+    let oldWidth = item.width;
+    let oldHeight = item.height;
+    // NOTE: Finds the nearest square size that is even (min 1)
+    let newSize = Math.max(1, Math.floor(Math.floor((oldWidth + oldHeight) / 2) / 2) * 2);
+    updateItem(store, view.invId, item.itemId, { width: newSize, height: newSize });
+  }
+
   let inv = InvStore.useValue(store, view.invId);
   let item = getItemAtSlotIndex(store, inv.invId, 0);
   currentItem.current = item;
@@ -72,6 +178,7 @@ export default function FoundryBox({ store, view }) {
     displayName = '',
     description = '',
   } = item || {};
+  let disabled = !Boolean(item);
   return (
     <ContainerBox store={store} view={view}>
       <fieldset className={styles.container}>
@@ -131,6 +238,13 @@ export default function FoundryBox({ store, view }) {
           />
           <button>Reset</button>
           <button>Clone</button>
+        </div>
+        <div className={styles.toolbar}>
+          <IconButton Icon={ZoomIn} disabled={disabled} onClick={onZoomIn} />
+          <IconButton Icon={ZoomOut} disabled={disabled} onClick={onZoomOut} />
+          <IconButton Icon={VerticalAlignCenter} disabled={disabled} onClick={onFlattenX} />
+          <IconButton Icon={VerticalAlignCenter} className={styles.rotated} disabled={disabled} onClick={onFlattenY} />
+          <IconButton Icon={AspectRatio} disabled={disabled} onClick={onFit} />
         </div>
       </fieldset>
     </ContainerBox>
