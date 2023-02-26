@@ -4,7 +4,7 @@ import { CursorStore, useStore } from '../../stores';
 import { getHeldItem, hasHeldItem } from '../../inv/transfer/CursorTransfer';
 import { getPackedInfo } from '../../inv/transfer/Unpacker';
 import { findEmptyViewArea, getViewAtCoords } from '../Intersection';
-import styles from './CursorLanding.module.css';
+import Styles from './CursorLanding.module.css';
 
 export default function LandingCursor() {
   const store = useStore();
@@ -30,7 +30,7 @@ export default function LandingCursor() {
     cursor.getCursorScreenY();
   return (
     <div
-      className={`${styles.landing} ${valid && styles.valid}`}
+      className={`${Styles.landing} ${valid && Styles.valid}`}
       style={{
         // @ts-ignore
         '--cursor-x': `${screenX}px`,

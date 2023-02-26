@@ -9,7 +9,7 @@
   --subgrid-text: var(--grid-outline);
   --subgrid-outline: var(--grid-outline);
 
-  --subgrid-margin: 0.66em;
+  --subgrid-margin: 1px;
 }
 
 .content {
@@ -37,7 +37,7 @@
 .right.background,
 .top.background,
 .bottom.background {
-  border: 1em ridge var(--subgrid-shadow);
+  border: 1px solid var(--subgrid-shadow);
 }
 
 .left {

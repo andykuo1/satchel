@@ -2,7 +2,7 @@ import { createInvViewInStore } from '../../stores';
 import { registerView } from '../ViewRegistry';
 import ContainerBox from '../container/ContainerBox';
 import SocketSlot from '../slots/SocketSlot';
-import styles from './SocketBox.module.css';
+import Styles from './SocketBox.module.css';
 
 /**
  * @typedef {import('../../stores').Store} Store
@@ -16,7 +16,7 @@ export default function SocketBox({ store, view }) {
   return (
     <ContainerBox store={store} view={view}>
       <SocketSlot
-        className={styles.socket}
+        className={Styles.socket}
         store={store}
         view={view}
         slotIndex={0}

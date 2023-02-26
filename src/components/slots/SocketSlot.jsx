@@ -8,7 +8,7 @@ import {
   itemMouseDownCallback,
 } from '../cursor/CursorCallback';
 import { renderItem } from '../renderer/ItemsRenderer';
-import styles from './SocketSlot.module.css';
+import Styles from './SocketSlot.module.css';
 
 /**
  * @typedef {import('../../stores').Store} Store
@@ -81,9 +81,9 @@ export default function SocketSlot({
   );
   return (
     <div
-      className={`${styles.socket} ${
-        Number.isFinite(maxWidth) && styles.maxWidth
-      } ${Number.isFinite(maxHeight) && styles.maxHeight} ${className}`}
+      className={`${Styles.socket} ${
+        Number.isFinite(maxWidth) && Styles.maxWidth
+      } ${Number.isFinite(maxHeight) && Styles.maxHeight} ${className}`}
       style={{
         // @ts-ignore
         '--item-w': width,
@@ -93,7 +93,7 @@ export default function SocketSlot({
       }}
       data-view-id={view.viewId}
       onMouseUp={onContainerMouseUp}>
-      <div className={styles.item}>{element}</div>
+      <div className={Styles.item}>{element}</div>
       {children}
     </div>
   );

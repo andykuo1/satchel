@@ -7,7 +7,7 @@ import { getViewRenderer } from '../ViewRegistry';
 import CursorLanding from '../cursor/CursorLanding';
 import Viewport from '../viewport/Viewport';
 import Wiring from '../wiring/Wiring';
-import styles from './Playground.module.css';
+import Styles from './Playground.module.css';
 
 export default function Playground({
   className = '',
@@ -60,7 +60,7 @@ export default function Playground({
       gridOffsetY={pos[1]}
       containerProps={{ className }}>
       <div
-        className={styles.background}
+        className={Styles.background}
         onWheel={onWheel}
         {...backgroundProps}></div>
       <CursorLanding />

@@ -8,7 +8,7 @@ import {
   itemMouseDownCallback,
 } from '../cursor/CursorCallback';
 import ItemRenderer from '../renderer/ItemRenderer';
-import styles from './ListBox.module.css';
+import Styles from './ListBox.module.css';
 
 /**
  * @typedef {import('../../stores').Store} Store
@@ -102,9 +102,9 @@ function ListViewRenderer({
   }
   return (
     <ContainerBox store={store} view={view}>
-      <ul className={styles.container} {...containerProps}>
+      <ul className={Styles.container} {...containerProps}>
         {elements}
-        {elements.length < inv.length && <div className={styles.anchor}></div>}
+        {elements.length < inv.length && <div className={Styles.anchor}></div>}
       </ul>
     </ContainerBox>
   );
@@ -117,12 +117,12 @@ function ListViewItem({ store, item, containerProps }) {
   };
   return (
     <li {...containerPropsWithItemId}>
-      <span className={styles.item}>
+      <span className={Styles.item}>
         <ItemRenderer store={store} item={item} x={0} y={0} w={1} h={1} />
       </span>
-      <span className={styles.name}>{item.displayName || 'Item'}</span>
+      <span className={Styles.name}>{item.displayName || 'Item'}</span>
       {item.stackSize > 0 && (
-        <label className={styles.stackSize}>×{item.stackSize}</label>
+        <label className={Styles.stackSize}>×{item.stackSize}</label>
       )}
     </li>
   );

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import styles from './FoundryBox.module.css';
+import Styles from './FoundryBox.module.css';
 
 import { InvStore, createInvViewInStore } from '../../stores';
 import {
@@ -39,9 +39,9 @@ export default function FoundryBox({ store, view }) {
   let disabled = !Boolean(item);
   return (
     <ContainerBox store={store} view={view}>
-      <fieldset className={styles.container}>
+      <fieldset className={Styles.container}>
         <SocketSlot
-          className={styles.socket}
+          className={Styles.socket}
           store={store}
           view={view}
           fullSize={true}
@@ -52,21 +52,21 @@ export default function FoundryBox({ store, view }) {
           <HeightInput store={store} view={view} itemRef={currentItem} disabled={disabled} />
           <StackSizeInput store={store} view={view} itemRef={currentItem} disabled={disabled} />
         </SocketSlot>
-        <div className={styles.detail}>
-          <div className={styles.header}>
+        <div className={Styles.detail}>
+          <div className={Styles.header}>
             <DisplayNameInput store={store} view={view} itemRef={currentItem} disabled={disabled} />
           </div>
           <DescriptionInput store={store} view={view} itemRef={currentItem} disabled={disabled} />
           <button disabled={disabled} onClick={onCopy}>+ Item</button>
         </div>
-        <div className={styles.toolbar}>
+        <div className={Styles.toolbar}>
           <ZoomInButton store={store} view={view} itemRef={currentItem} disabled={disabled} />
           <ZoomOutButton store={store} view={view} itemRef={currentItem} disabled={disabled} />
           <FlattenXButton store={store} view={view} itemRef={currentItem} disabled={disabled} />
           <FlattenYButton store={store} view={view} itemRef={currentItem} disabled={disabled} />
           <FitButton store={store} view={view} itemRef={currentItem} disabled={disabled} />
         </div>
-        <div className={styles.menubar}>
+        <div className={Styles.menubar}>
           <ImageContextMenu store={store} view={view} itemRef={currentItem} disabled={disabled}/>
         </div>
       </fieldset>
@@ -200,7 +200,7 @@ function FlattenYButton({ store, view, itemRef, disabled }) {
     updateItem(store, view.invId, item.itemId, { width: newWidth, height: newHeight });
   }
   return (
-    <IconButton Icon={VerticalAlignCenter} className={styles.rotated} disabled={disabled} onClick={onFlattenY} />
+    <IconButton Icon={VerticalAlignCenter} className={Styles.rotated} disabled={disabled} onClick={onFlattenY} />
   );
 }
 
@@ -235,7 +235,7 @@ function WidthInput({ store, view, itemRef, disabled }) {
     <input
       type="number"
       name="width"
-      className={styles.width}
+      className={Styles.width}
       value={width}
       placeholder="--"
       onChange={onChange}
@@ -258,7 +258,7 @@ function HeightInput({ store, view, itemRef, disabled }) {
     <input
       type="number"
       name="height"
-      className={styles.height}
+      className={Styles.height}
       value={height}
       placeholder="--"
       onChange={onChange}
@@ -278,12 +278,12 @@ function StackSizeInput({ store, view, itemRef, disabled }) {
   let item = itemRef.current;
   let stackSize = item ? item.stackSize : '';
   return (
-    <span className={styles.stackSizeContainer}>
-      <span className={styles.stackSizeMarker}>×</span>
+    <span className={Styles.stackSizeContainer}>
+      <span className={Styles.stackSizeMarker}>×</span>
       <input
         type="number"
         name="stackSize"
-        className={styles.stackSize}
+        className={Styles.stackSize}
         value={stackSize}
         placeholder="--"
         onChange={onChange}
@@ -307,7 +307,7 @@ function DisplayNameInput({ store, view, itemRef, disabled }) {
     <input
       type="text"
       name="displayName"
-      className={styles.displayName}
+      className={Styles.displayName}
       value={displayName}
       placeholder="--"
       onChange={onChange}
@@ -329,7 +329,7 @@ function DescriptionInput({ store, view, itemRef, disabled }) {
   return (
     <textarea
       name="description"
-      className={styles.description}
+      className={Styles.description}
       value={description}
       placeholder="Notes..."
       onChange={onChange}

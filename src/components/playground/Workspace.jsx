@@ -1,13 +1,13 @@
 import { useStore } from '../../stores';
 import { GroundViewTransfer } from '../../inv/transfer/GroundViewTransfer';
 import Playground from './Playground';
-import styles from './Workspace.module.css';
+import Styles from './Workspace.module.css';
 
 export default function Workspace() {
   const store = useStore();
   return (
     <Playground
-      className={styles.workspace}
+      className={`${Styles.workspace} ${Styles.gridProvider}`}
       topic="workspace"
       backgroundProps={{
         onMouseUp(e) {

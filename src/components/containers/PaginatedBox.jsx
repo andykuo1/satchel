@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import ContainerBox from '../container/ContainerBox';
-import styles from './PaginatedBox.module.css';
+import Styles from './PaginatedBox.module.css';
 
 export default function PaginatedBox({
   store,
@@ -12,13 +12,13 @@ export default function PaginatedBox({
 }) {
   return (
     <ContainerBox store={store} view={view}>
-      <fieldset className={styles.container}>
-        <div className={styles.content}>{children}</div>
-        <div className={styles.controls}>
+      <fieldset className={Styles.container}>
+        <div className={Styles.content}>{children}</div>
+        <div className={Styles.controls}>
           <button onClick={() => setPageIndex((page) => Math.max(0, page - 1))}>
             ←
           </button>
-          <label className={styles.pageNumber}>
+          <label className={Styles.pageNumber}>
             {pageIndex > 0 ? pageIndex : ''}
           </label>
           <button onClick={() => setPageIndex((page) => page + 1)}>→</button>

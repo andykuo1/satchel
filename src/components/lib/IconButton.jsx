@@ -1,4 +1,4 @@
-import styles from './IconButton.module.css';
+import Styles from './IconButton.module.css';
 
 /**
  * @param {object} props
@@ -9,7 +9,7 @@ import styles from './IconButton.module.css';
  */
 export default function IconButton({ className, Icon, ...props }) {
     return (
-        <button className={`${styles.container} ${className}`} {...props}>
+        <button className={`${Styles.container} ${className}`} {...props}>
             <Icon viewBox="0 0 48 48"/>
         </button>
     );

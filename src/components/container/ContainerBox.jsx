@@ -1,6 +1,6 @@
 import Box from '../box/Box';
 import { handleMouseDownCallback } from '../cursor/CursorCallback';
-import styles from './ContainerBox.module.css';
+import Styles from './ContainerBox.module.css';
 import ContainerHandles from './ContainerHandles';
 
 /**
@@ -38,13 +38,13 @@ export default function ContainerBox({
   const w = view.width;
   const h = view.height;
   const outlineSides = `${
-    left && styles.left
+    left && Styles.left
   } ${
-    right && styles.right
+    right && Styles.right
   } ${
-    top && styles.top
+    top && Styles.top
   } ${
-    bottom && styles.bottom
+    bottom && Styles.bottom
   }`;
   return (
     <>
@@ -53,14 +53,14 @@ export default function ContainerBox({
         y={y}
         w={w}
         h={h}
-        className={`${styles.box} ${styles.background} ${outlineSides}`}></Box>
+        className={`${Styles.box} ${Styles.background} ${outlineSides}`}></Box>
       <Box
         x={x}
         y={y}
         w={w}
         h={h}
-        className={`${styles.box} ${styles.foreground} ${outlineSides}`}>
-        <div className={styles.content}>{children}</div>
+        className={`${Styles.box} ${Styles.foreground} ${outlineSides}`}>
+        <div className={Styles.content}>{children}</div>
         <ContainerHandles
           left={left}
           right={right}

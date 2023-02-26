@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import styles from './Settings.module.css';
+import Styles from './Settings.module.css';
 
 import SettingsIcon from '@material-symbols/svg-400/outlined/settings.svg';
 import Modal from './modals/Modal';
@@ -11,11 +11,11 @@ export default function Settings({ }) {
   const [roomCode, setRoomCode] = useState('satchel-test');
   return (
     <>
-      <div className={styles.floating}>
-        <IconButton Icon={SettingsIcon} className={styles.button} onClick={(e) => setOpen(!open)}/>
+      <div className={Styles.floating}>
+        <IconButton Icon={SettingsIcon} className={Styles.button} onClick={(e) => setOpen(!open)}/>
       </div>
       <Modal open={open} onClose={() => setOpen(false)} vertical={true}>
-        <span className={styles.roomCode}>
+        <span className={Styles.roomCode}>
           <label>Room:</label>
           <input
             value={roomCode}

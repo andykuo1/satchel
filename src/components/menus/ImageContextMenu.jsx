@@ -1,6 +1,6 @@
 import { updateItem } from '@/inv/transfer/InvTransfer';
 import IconButton from '../lib/IconButton';
-import styles from './ImageContextMenu.module.css';
+import Styles from './ImageContextMenu.module.css';
 
 import AddPhoto from '@material-symbols/svg-400/outlined/add_photo_alternate.svg';
 import { useEffect, useRef, useState } from 'react';
@@ -48,7 +48,7 @@ export default function ImageContextMenu({ store, view, itemRef, disabled }) {
     return (
         <>
         <ImageButton store={store} view={view} itemRef={itemRef} disabled={disabled} onClick={onClick}/>
-        <div className={styles.contextMenu + ' ' + (!visible && styles.hidden)} ref={menuRef}>
+        <div className={Styles.contextMenu + ' ' + (!visible && Styles.hidden)} ref={menuRef}>
             <input
                 type="url"
                 name="imgSrc"

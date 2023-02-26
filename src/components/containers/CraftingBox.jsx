@@ -1,14 +1,14 @@
 import { createInvViewInStore } from '../../stores';
 import { registerView } from '../ViewRegistry';
 import ContainerBox from '../container/ContainerBox';
-import styles from './CraftingBox.module.css';
+import Styles from './CraftingBox.module.css';
 
 registerView('crafting', CraftingBox);
 
 export default function CraftingBox({ store, view }) {
   return (
     <ContainerBox store={store} view={view}>
-      <fieldset className={styles.container}>
+      <fieldset className={Styles.container}>
         <button>HELLO</button>
       </fieldset>
     </ContainerBox>

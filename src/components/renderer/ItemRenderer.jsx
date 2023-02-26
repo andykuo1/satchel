@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { join } from 'path';
 
 import { prefix } from '../../lib/prefix';
-import styles from './ItemRenderer.module.css';
+import Styles from './ItemRenderer.module.css';
 
 /**
  * @typedef {import('../../stores').Store} Store
@@ -38,7 +38,7 @@ export default function ItemRenderer({
   }
   return (
     <div
-      className={styles.item}
+      className={Styles.item}
       style={{
         // @ts-ignore
         '--item-x': x,
@@ -51,7 +51,7 @@ export default function ItemRenderer({
       {...containerPropsWithItemId}>
       <img src={src} alt={item.displayName}/>
       {item.stackSize > 0 && (
-        <label className={styles.stackSize}>×{item.stackSize}</label>
+        <label className={Styles.stackSize}>×{item.stackSize}</label>
       )}
     </div>
   );

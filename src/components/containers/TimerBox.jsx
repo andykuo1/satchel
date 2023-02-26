@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { useAnimationFrame } from '../../hooks/UseAnimationFrame';
 import { registerView } from '../ViewRegistry';
 import ContainerBox from '../container/ContainerBox';
-import styles from './TimerBox.module.css';
+import Styles from './TimerBox.module.css';
 
 registerView('timer', TimerBox);
 
@@ -35,21 +35,21 @@ export default function TimerBox({ store, view }) {
   useAnimationFrame(onAnimationFrame, [counting]);
 
   return (
-    <ContainerBox w={3} h={2} containerProps={{ className: styles.container }}>
-      <div className={styles.time}>
-        <label className={styles.hours}>
+    <ContainerBox w={3} h={2} containerProps={{ className: Styles.container }}>
+      <div className={Styles.time}>
+        <label className={Styles.hours}>
           {formatTimeDigits(millisToHours(time))}
         </label>
         <span>:</span>
-        <label className={styles.minutes}>
+        <label className={Styles.minutes}>
           {formatTimeDigits(millisToMinutes(time))}
         </label>
         <span>:</span>
-        <label className={styles.seconds}>
+        <label className={Styles.seconds}>
           {formatTimeDigits(millisToSeconds(time))}
         </label>
       </div>
-      <button className={styles.action} onClick={onClick}>
+      <button className={Styles.action} onClick={onClick}>
         O
       </button>
     </ContainerBox>

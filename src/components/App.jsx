@@ -8,7 +8,7 @@ import {
   hasHeldItem,
   setHeldItem,
 } from '../inv/transfer/CursorTransfer';
-import { addItemToInv, getView } from '../inv/transfer/InvTransfer';
+import { addItemToInv, getView, getInv } from '../inv/transfer/InvTransfer';
 import Settings from './Settings';
 import { useViewOrganizer } from './ViewOrganizer';
 import { createAlbumBoxInStore } from './containers/AlbumBox';
@@ -18,9 +18,11 @@ import { createFoundryBoxInStore } from './containers/FoundryBox';
 import { createInvBoxInStore } from './containers/InvBox';
 import { createListBoxInStore } from './containers/ListBox';
 import { createSocketBoxInStore } from './containers/SocketBox';
+import { createDispenserBoxInStore } from './containers/DispenserBox';
 import Cursor from './cursor/Cursor';
 import { useYDoc } from './network/YDoc';
 import Workspace from './playground/Workspace';
+import { getSlotCoordsByIndex } from '@/inv/Slots';
 
 export default function App() {
   return (
@@ -89,6 +91,14 @@ function Content() {
     createConnectorBoxInStore(store, rand(), rand());
     // createCraftingBoxInStore(store, rand(), rand());
     createAlbumBoxInStore(store, rand(), rand());
+    /**/
+    withItems(store, createDispenserBoxInStore(store, rand(), rand()), [
+      randItem(),
+      randItem(),
+      randItem(),
+      randItem(),
+    ]);
+    /**/
   }, []);
 
   return (
@@ -102,4 +112,40 @@ function Content() {
 const MAX_RANGE = 10;
 function rand(max = MAX_RANGE, min = 0) {
   return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function choose(list) {
+  return list[rand(list.length)];
+}
+
+function randItem() {
+  let item = createItem(uuid());
+  item.imgSrc = '/images/potion.png';
+  item.width = rand(4, 1);
+  item.height = rand(4, 1);
+  item.background = choose(['#00FF00', '#FF0000', '#FF00FF', '#00FFFF']);
+  item.displayName = 'Item';
+  item.metadata = {};
+  if (rand(3) === 0) {
+    item.metadata.packed = {
+      type: 'grid',
+      width: 4,
+      height: 3,
+    };
+  }
+  return item;
+}
+
+function withItems(store, viewId, items) {
+  let invId = getView(store, viewId).invId;
+  let inv = getInv(store, invId);
+  for(let i = 0; i < items.length;  ++i) {
+    let item = items[i];
+    if (!item) {
+      continue;
+    }
+    let [x, y] = getSlotCoordsByIndex(inv, i);
+    addItemToInv(store, invId, item, x, y);
+  }
+  return viewId;
 }

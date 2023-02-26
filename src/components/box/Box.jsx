@@ -1,4 +1,4 @@
-import styles from './Box.module.css';
+import Styles from './Box.module.css';
 
 /**
  * @param {object} props
@@ -19,7 +19,7 @@ export default function Box({
 }) {
   return (
     <div
-      className={`${styles.container} ${className}`}
+      className={`${Styles.container} ${className}`}
       style={{
         // @ts-ignore
         '--box-x': x,

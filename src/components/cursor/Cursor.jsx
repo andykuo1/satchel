@@ -18,7 +18,7 @@ import {
 import Box from '../box/Box';
 import { renderItem } from '../renderer/ItemsRenderer';
 import Viewport from '../viewport/Viewport';
-import styles from './Cursor.module.css';
+import Styles from './Cursor.module.css';
 
 /**
  * @typedef {import('../../stores/CursorState').CursorState} CursorState
@@ -55,7 +55,7 @@ export default function Cursor() {
       <Viewport
         gridOffsetX={0}
         gridOffsetY={0}
-        containerProps={{ className: styles.contained }}>
+        containerProps={{ className: Styles.contained }}>
         {view && inv && <CursorRenderer store={store} view={view} inv={inv} />}
       </Viewport>
     </PositionalCursor>
@@ -112,7 +112,7 @@ function PositionalCursor({ cursor, children = undefined }) {
   let cursorY = cursor.getCursorScreenY() - gridUnit / 2;
   return (
     <div
-      className={styles.cursor}
+      className={Styles.cursor}
       style={{
         // @ts-ignore
         '--cursor-x': `${cursorX}px`,

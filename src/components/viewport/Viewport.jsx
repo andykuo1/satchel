@@ -1,4 +1,5 @@
-import styles from './Viewport.module.css';
+import Styles from './Viewport.module.css';
+import GridStyles from './Grid.module.css';
 
 /**
  * @param {object} props
@@ -19,8 +20,7 @@ export default function Viewport({
     ...propsContainer
   } = containerProps;
   return (
-    <div
-      className={`${styles.view} ${styles.grid} ${classNameContainer}`}
+    <div className={`${Styles.view} ${GridStyles.grid} ${classNameContainer}`}
       style={{
         // @ts-ignore
         '--grid-offset-x': `${gridOffsetX}px`,
@@ -28,7 +28,9 @@ export default function Viewport({
         ...styleContainer,
       }}
       {...propsContainer}>
+      <div className={`${GridStyles.dotted}`}>
       {children}
+      </div>
     </div>
   );
 }

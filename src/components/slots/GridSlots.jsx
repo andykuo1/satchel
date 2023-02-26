@@ -8,7 +8,7 @@ import {
   itemMouseDownCallback,
 } from '../cursor/CursorCallback';
 import { renderItems } from '../renderer/ItemsRenderer';
-import styles from './GridSlots.module.css';
+import Styles from './GridSlots.module.css';
 
 /**
  * @typedef {import('../../stores').Store} Store
@@ -49,7 +49,7 @@ export default function GridSlots({
   });
   return (
     <fieldset
-      className={`${styles.container} ${styles.subgrid} ${className}`}
+      className={`${Styles.container} ${Styles.subgrid} ${className}`}
       style={{
         // @ts-ignore
         '--slots-w': `${inv.width}`,
@@ -57,8 +57,8 @@ export default function GridSlots({
       }}
       data-view-id={view.viewId}
       onMouseUp={onContainerMouseUp}>
-      <legend className={styles.title}>{inv.displayName}</legend>
-      <div className={styles.items}>
+      <legend className={Styles.title}>{inv.displayName}</legend>
+      <div className={Styles.items}>
         {elements}
       </div>
       {children}

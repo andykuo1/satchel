@@ -3,7 +3,7 @@ import { useCallback, useRef } from 'react';
 import { useAnimationFrame } from '../../hooks/UseAnimationFrame';
 import { ViewStore, useStore } from '../../stores';
 import { getItemAtSlotIndex } from '../../inv/transfer/InvTransfer';
-import styles from './Wiring.module.css';
+import Styles from './Wiring.module.css';
 
 let DELTATIME = 0;
 let VALUE = 0;
@@ -55,9 +55,9 @@ export default function Wiring() {
       let viewY = view.coordY;
       let viewW = view.width;
       let viewH = view.height;
-      ctx.fillStyle = 'green';
-      ctx.translate(viewX * u, viewY * u);
-      ctx.fillRect(0, 0, viewW * u, viewH * u);
+      // ctx.fillStyle = 'green';
+      // ctx.translate(viewX * u, viewY * u);
+      // ctx.fillRect(0, 0, viewW * u, viewH * u);
       // ctx.roundRect(0, 0, viewW * u, viewH * u, 20);
       // ctx.fill();
     }
@@ -98,5 +98,5 @@ export default function Wiring() {
   }, []);
 
   useAnimationFrame(onAnimationFrame, []);
-  return <canvas ref={canvasRef} className={styles.canvas} />;
+  return <canvas ref={canvasRef} className={Styles.canvas} />;
 }

@@ -1,4 +1,4 @@
-import styles from './ContainerHandles.module.css';
+import Styles from './ContainerHandles.module.css';
 
 /**
  * @param {object} props
@@ -20,22 +20,22 @@ export default function ContainerHandles({
     <>
       {top && (
         <button
-          className={`${styles.handlebar} ${styles.topbar} ${classNameHandle}}`}
+          className={`${Styles.handlebar} ${Styles.topbar} ${classNameHandle}}`}
           {...propsHandle}></button>
       )}
       {left && (
         <button
-          className={`${styles.handlebar} ${styles.leftbar} ${classNameHandle}`}
+          className={`${Styles.handlebar} ${Styles.leftbar} ${classNameHandle}`}
           {...propsHandle}></button>
       )}
       {right && (
         <button
-          className={`${styles.handlebar} ${styles.rightbar} ${classNameHandle}`}
+          className={`${Styles.handlebar} ${Styles.rightbar} ${classNameHandle}`}
           {...propsHandle}></button>
       )}
       {bottom && (
         <button
-          className={`${styles.handlebar} ${styles.bottombar} ${classNameHandle}`}
+          className={`${Styles.handlebar} ${Styles.bottombar} ${classNameHandle}`}
           {...propsHandle}></button>
       )}
     </>
