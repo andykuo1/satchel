@@ -1,5 +1,5 @@
-import Styles from './Viewport.module.css';
-import GridStyles from './Grid.module.css';
+import BackgroundGrid from '../../styles/BackgroundGrid.module.css';
+import Container from '../../styles/Container.module.css';
 
 /**
  * @param {object} props
@@ -20,16 +20,25 @@ export default function Viewport({
     ...propsContainer
   } = containerProps;
   return (
-    <div className={`${Styles.view} ${GridStyles.grid} ${classNameContainer}`}
+    <div
+      className={[
+        Container.containerFill,
+        Container.overflowHidden,
+        BackgroundGrid.backgroundGrid,
+        classNameContainer,
+      ].join(' ')}
       style={{
-        // @ts-ignore
         '--grid-offset-x': `${gridOffsetX}px`,
         '--grid-offset-y': `${gridOffsetY}px`,
         ...styleContainer,
       }}
       {...propsContainer}>
-      <div className={`${GridStyles.dotted}`}>
-      {children}
+      <div
+        className={[
+          Container.containerFill,
+          BackgroundGrid.backgroundDotted,
+        ].join(' ')}>
+        {children}
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 import { useAnimationFrame } from '../../hooks/UseAnimationFrame';
 import { useForceUpdate } from '../../hooks/UseForceUpdate';
-import { CursorStore, useStore } from '../../stores';
 import { getHeldItem, hasHeldItem } from '../../inv/transfer/CursorTransfer';
 import { getPackedInfo } from '../../inv/transfer/Unpacker';
+import { CursorStore, useStore } from '../../stores';
 import { findEmptyViewArea, getViewAtCoords } from '../Intersection';
 import Styles from './CursorLanding.module.css';
 

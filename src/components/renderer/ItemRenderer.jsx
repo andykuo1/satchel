@@ -49,7 +49,7 @@ export default function ItemRenderer({
       }}
       title={item.displayName}
       {...containerPropsWithItemId}>
-      <img src={src} alt={item.displayName}/>
+      <img src={src} alt={item.displayName} />
       {item.stackSize > 0 && (
         <label className={Styles.stackSize}>×{item.stackSize}</label>
       )}

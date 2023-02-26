@@ -2,6 +2,7 @@ import { distanceSquared } from '../utils/math';
 
 const PLACE_BUFFER_RANGE = 10;
 const PLACE_BUFFER_RANGE_SQUARED = PLACE_BUFFER_RANGE * PLACE_BUFFER_RANGE;
+const CURSOR_MODES = ['action', 'move'];
 
 export class CursorState {
   constructor() {
@@ -13,6 +14,7 @@ export class CursorState {
     this.startHeldY = 0;
     this.ignoreFirstPutDown = false;
     this.gridUnit = 50;
+    this.mode = CURSOR_MODES[0];
 
     this.visible = false;
 
@@ -101,6 +103,10 @@ export class CursorState {
     if (this.forceUpdate) {
       this.forceUpdate();
     }
+  }
+
+  changeMode(newMode) {
+    this.mode = newMode;
   }
 }
 

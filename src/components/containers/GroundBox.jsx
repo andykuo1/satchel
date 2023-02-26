@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-import { InvStore, ViewStore, createInvViewInStore } from '../../stores';
 import { isInvEmpty } from '../../inv/transfer/InvTransfer';
+import { InvStore, ViewStore, createInvViewInStore } from '../../stores';
 import { registerView } from '../ViewRegistry';
 import InvBox from './InvBox';
 

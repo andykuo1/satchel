@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { WebrtcProvider } from 'y-webrtc';
 
-import { InvStore, ViewStore, useStore } from '../../stores';
-import { YDocStore } from '../../stores/YDocStore';
 import { toYInv } from '../../inv/yinv/YInv';
 import { toYView } from '../../inv/yinv/YView';
+import { InvStore, ViewStore, useStore } from '../../stores';
+import { YDocStore } from '../../stores/YDocStore';
 
 const ROOM_NAME = 'satchel-test';
 

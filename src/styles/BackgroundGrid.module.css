@@ -1,0 +1,26 @@
+.defaultProvider {
+  --grid-unit: 32px;
+  --grid-offset-x: 0;
+  --grid-offset-y: 0;
+  --grid-outline: gray;
+  --grid-dotted: white;
+}
+
+.backgroundGrid {
+  background-size: var(--grid-unit) var(--grid-unit);
+  background-position-x: var(--grid-offset-x);
+  background-position-y: var(--grid-offset-y);
+  background-image: linear-gradient(
+      to right,
+      var(--grid-outline),
+      transparent 1px
+    ),
+    linear-gradient(to bottom, var(--grid-outline), transparent 1px);
+}
+
+.backgroundDotted {
+  background-size: calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 2);
+  background-position-x: calc(var(--grid-offset-x) - var(--grid-unit));
+  background-position-y: calc(var(--grid-offset-y) - var(--grid-unit));
+  background-image: radial-gradient(var(--grid-dotted) 3px, transparent 3px);
+}

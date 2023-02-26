@@ -1,8 +1,5 @@
+import { computeSlottedArea, getSlotCoordsByIndex } from '../../inv/Slots';
 import { InvStore } from '../../stores';
-import {
-  computeSlottedArea,
-  getSlotCoordsByIndex,
-} from '../../inv/Slots';
 import {
   containerMouseUpCallback,
   itemMouseDownCallback,

@@ -1,0 +1,22 @@
+.floating {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: none;
+}
+
+.center {
+  margin: 0.5em;
+}
+
+.center > * {
+  margin: 0 0.5em;
+  padding: 0.5em;
+  border-radius: 30%;
+  border: none;
+}
+
+.spacer {
+  flex: 1;
+}

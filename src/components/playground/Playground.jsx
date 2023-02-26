@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { ViewStore, useStore } from '../../stores';
 import { getCursor } from '../../inv/transfer/CursorTransfer';
 import { getView } from '../../inv/transfer/InvTransfer';
+import { ViewStore, useStore } from '../../stores';
+import Container from '../../styles/Container.module.css';
 import { getViewRenderer } from '../ViewRegistry';
 import CursorLanding from '../cursor/CursorLanding';
 import Viewport from '../viewport/Viewport';
 import Wiring from '../wiring/Wiring';
-import Styles from './Playground.module.css';
 
 export default function Playground({
   className = '',
@@ -25,24 +25,25 @@ export default function Playground({
 
   // Keep it centered.
   const resizeState = useRef(null);
-  function onResize(e) {
-    const { x, y, animationFrameHandle } = resizeState.current;
-    let dx = x - window.innerWidth;
-    let dy = y - window.innerHeight;
-    const cursor = getCursor(store);
-    cursor.screenPos[0] -= dx / 2;
-    cursor.screenPos[1] -= dy / 2;
-    cancelAnimationFrame(animationFrameHandle);
-    resizeState.current = {
-      x: window.innerWidth,
-      y: window.innerHeight,
-      animationFrameHandle: requestAnimationFrame(() =>
-        setPos([cursor.screenPos[0], cursor.screenPos[1]]),
-      ),
-    };
-  }
 
   useEffect(() => {
+    function onResize(e) {
+      const { x, y, animationFrameHandle } = resizeState.current;
+      let dx = x - window.innerWidth;
+      let dy = y - window.innerHeight;
+      const cursor = getCursor(store);
+      cursor.screenPos[0] -= dx / 2;
+      cursor.screenPos[1] -= dy / 2;
+      cancelAnimationFrame(animationFrameHandle);
+      resizeState.current = {
+        x: window.innerWidth,
+        y: window.innerHeight,
+        animationFrameHandle: requestAnimationFrame(() =>
+          setPos([cursor.screenPos[0], cursor.screenPos[1]]),
+        ),
+      };
+    }
+
     resizeState.current = {
       x: window.innerWidth,
       y: window.innerHeight,
@@ -52,7 +53,7 @@ export default function Playground({
     return () => {
       window.removeEventListener('resize', onResize);
     };
-  }, []);
+  }, [store]);
 
   return (
     <Viewport
@@ -60,7 +61,7 @@ export default function Playground({
       gridOffsetY={pos[1]}
       containerProps={{ className }}>
       <div
-        className={Styles.background}
+        className={Container.containerInset}
         onWheel={onWheel}
         {...backgroundProps}></div>
       <CursorLanding />

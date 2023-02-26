@@ -37,15 +37,9 @@ export default function ContainerBox({
   const y = view.coordY;
   const w = view.width;
   const h = view.height;
-  const outlineSides = `${
-    left && Styles.left
-  } ${
-    right && Styles.right
-  } ${
+  const outlineSides = `${left && Styles.left} ${right && Styles.right} ${
     top && Styles.top
-  } ${
-    bottom && Styles.bottom
-  }`;
+  } ${bottom && Styles.bottom}`;
   return (
     <>
       <Box

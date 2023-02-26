@@ -1,6 +1,4 @@
 /**
- * @param {import('@/inv/Item').Item} item 
+ * @param {import('@/inv/Item').Item} item
  */
-export function isItemPacked(item) {
-
-}
+export function isItemPacked(item) {}

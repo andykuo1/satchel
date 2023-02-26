@@ -80,7 +80,8 @@ input.displayName {
   padding: 0.5em;
 }
 
-.toolbar button, .menubar button {
+.toolbar button,
+.menubar button {
   margin: 0.25em 0;
   padding: 0.5em;
   width: 2.5em;

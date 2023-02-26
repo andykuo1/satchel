@@ -4,17 +4,17 @@ import { useAnimationFrame } from '../../hooks/UseAnimationFrame';
 import { useEventListener } from '../../hooks/UseEventListener';
 import { useForceUpdate } from '../../hooks/UseForceUpdate';
 import {
+  getCursor,
+  getCursorInvId,
+  getCursorViewId,
+} from '../../inv/transfer/CursorTransfer';
+import {
   InvStore,
   ViewStore,
   createInvInStore,
   createViewInStore,
   useStore,
 } from '../../stores';
-import {
-  getCursor,
-  getCursorInvId,
-  getCursorViewId,
-} from '../../inv/transfer/CursorTransfer';
 import Box from '../box/Box';
 import { renderItem } from '../renderer/ItemsRenderer';
 import Viewport from '../viewport/Viewport';
@@ -40,7 +40,7 @@ export default function Cursor() {
       getCursorViewId(store),
       getCursorInvId(store),
     );
-  }, []);
+  }, [store]);
 
   useEventListener(
     () => window.document,

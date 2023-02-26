@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 
-import { fisherYatesShuffle } from '../utils/shuffle';
-import { ViewStore, useStore } from '../stores';
 import { getView } from '../inv/transfer/InvTransfer';
+import { ViewStore, useStore } from '../stores';
+import { fisherYatesShuffle } from '../utils/shuffle';
 
 export function useViewOrganizer() {
   const store = useStore();

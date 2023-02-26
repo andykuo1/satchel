@@ -1,12 +1,12 @@
 import { Map } from 'yjs';
 
+import { createYInv } from '../inv/yinv/YInv';
+import { createYView } from '../inv/yinv/YView';
 import { uuid } from '../utils/uuid';
 import { CursorStore } from './CursorStore';
 import { InvStore } from './InvStore';
 import { ViewStore } from './ViewStore';
 import { YDocStore } from './YDocStore';
-import { createYInv } from '../inv/yinv/YInv';
-import { createYView } from '../inv/yinv/YView';
 
 /**
  * @typedef {import('./StoreContext').Store} Store

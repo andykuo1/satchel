@@ -1,9 +1,9 @@
-import { ViewStore } from '../../stores';
 import { getItemByItemId } from '../../inv/InvItems';
 import { getCursor } from '../../inv/transfer/CursorTransfer';
 import { GridViewTransfer } from '../../inv/transfer/GridViewTransfer';
 import { getInv } from '../../inv/transfer/InvTransfer';
 import { ListViewTransfer } from '../../inv/transfer/ListViewTransfer';
+import { ViewStore } from '../../stores';
 import { findValidPosition } from '../ViewOrganizer';
 import {
   getClosestItemForElement,

@@ -1,88 +1,88 @@
 .container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  flex-direction: column;
 }
 
 .container.vertical {
-    flex-direction: row;
+  flex-direction: row;
 }
 
 .container dialog {
-    position: relative;
-    border-color: #333333;
-    box-shadow: inset 0 0 2em 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+  border-color: #333333;
+  box-shadow: inset 0 0 2em 0 rgba(0, 0, 0, 0.3);
 }
 
 .container.vertical dialog {
-    max-width: 70vw;
-    width: 25em;
-    height: 100%;
-    border-width: 0 1em;
-    background: linear-gradient(to bottom, #1a1a1a, #111111);
+  max-width: 70vw;
+  width: 25em;
+  height: 100%;
+  border-width: 0 1em;
+  background: linear-gradient(to bottom, #1a1a1a, #111111);
 }
 
 .container:not(.vertical) dialog {
-    max-height: 70vw;
-    height: 25em;
-    width: 100%;
-    border-width: 1em 0;
-    background: linear-gradient(to right, #1a1a1a, #111111);
+  max-height: 70vw;
+  height: 25em;
+  width: 100%;
+  border-width: 1em 0;
+  background: linear-gradient(to right, #1a1a1a, #111111);
 }
 
 .hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    padding: 2em;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  width: 100%;
+  height: 100%;
 }
 
-.content>* {
-    margin: 0.5em 0;
+.content > * {
+  margin: 0.5em 0;
 }
 
-.content>button {
-    font-size: 1.5em;
+.content > button {
+  font-size: 1.5em;
 }
 
-.content>hr {
-    border: 1px solid #333333;
-    margin: 1em 20%;
+.content > hr {
+  border: 1px solid #333333;
+  margin: 1em 20%;
 }
 
 .padding {
-    flex: 1;
+  flex: 1;
 }
 
 .floating {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .button {
-    margin: 1em;
-    padding: 0.5em 2em;
-    border-radius: 0.5em;
-    border: none;
+  margin: 1em;
+  padding: 0.5em 2em;
+  border-radius: 0.5em;
+  border: none;
 }
 
 .button:hover {
-    background-color: #888888;
+  background-color: #888888;
 }
 
 .button:active {
-    background-color: #333333;
+  background-color: #333333;
 }

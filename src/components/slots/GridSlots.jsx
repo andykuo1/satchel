@@ -1,8 +1,5 @@
+import { computeSlottedArea, getSlotCoordsByIndex } from '../../inv/Slots';
 import { InvStore } from '../../stores';
-import {
-  computeSlottedArea,
-  getSlotCoordsByIndex,
-} from '../../inv/Slots';
 import {
   containerMouseUpCallback,
   itemMouseDownCallback,
@@ -58,9 +55,7 @@ export default function GridSlots({
       data-view-id={view.viewId}
       onMouseUp={onContainerMouseUp}>
       <legend className={Styles.title}>{inv.displayName}</legend>
-      <div className={Styles.items}>
-        {elements}
-      </div>
+      <div className={Styles.items}>{elements}</div>
       {children}
     </fieldset>
   );

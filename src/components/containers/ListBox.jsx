@@ -1,5 +1,5 @@
-import { InvStore, createInvViewInStore } from '../../stores';
 import { getItemAtSlotIndex } from '../../inv/transfer/InvTransfer';
+import { InvStore, createInvViewInStore } from '../../stores';
 import { registerView } from '../ViewRegistry';
 import ContainerBox from '../container/ContainerBox';
 import {
