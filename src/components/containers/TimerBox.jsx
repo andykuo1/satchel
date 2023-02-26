@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 
 import { useAnimationFrame } from '../../hooks/UseAnimationFrame';
 import { registerView } from '../ViewRegistry';
-import ContainerBox from '../container/ContainerBox';
+import ContainerBox from './ContainerBox';
 import Styles from './TimerBox.module.css';
 
 registerView('timer', TimerBox);

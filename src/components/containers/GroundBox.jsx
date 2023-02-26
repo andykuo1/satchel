@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { isInvEmpty } from '../../inv/transfer/InvTransfer';
 import { InvStore, ViewStore, createInvViewInStore } from '../../stores';
 import { registerView } from '../ViewRegistry';
-import InvBox from './InvBox';
+import InvBox from '../boxes/InvBox';
 
 /**
  * @typedef {import('../../stores').Store} Store

@@ -4,7 +4,7 @@ import { getInv } from '../../inv/transfer/InvTransfer';
 import { createInvInStore, createViewInStore } from '../../stores';
 import { uuid } from '../../utils/uuid';
 import { registerView } from '../ViewRegistry';
-import ContainerBox from '../container/ContainerBox';
+import ContainerBox from './ContainerBox';
 
 registerView('connectorIn', ConnectorBox);
 registerView('connectorOut', ConnectorBox);

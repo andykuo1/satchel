@@ -1,6 +1,6 @@
 import { createInvViewInStore } from '../../stores';
 import { registerView } from '../ViewRegistry';
-import ContainerBox from '../container/ContainerBox';
+import ContainerBox from '../containers/ContainerBox';
 import GridSlots from '../slots/GridSlots';
 
 /**

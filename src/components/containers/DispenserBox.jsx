@@ -4,7 +4,7 @@ import { getInv } from '@/inv/transfer/InvTransfer';
 
 import { createInvViewInStore } from '../../stores';
 import { registerView } from '../ViewRegistry';
-import ContainerBox from '../container/ContainerBox';
+import ContainerBox from './ContainerBox';
 import SocketSlot from '../slots/SocketSlot';
 import Styles from './DispenserBox.module.css';
 

@@ -1,27 +1,31 @@
 import { createInvViewInStore } from '../../stores';
 import { registerView } from '../ViewRegistry';
-import ContainerBox from '../container/ContainerBox';
 import SocketSlot from '../slots/SocketSlot';
 import Styles from './SocketBox.module.css';
+import BoundedBox from './BoundedBox';
 
 /**
  * @typedef {import('../../stores').Store} Store
- * @typedef {import('../../inv/View').ViewId} ViewId
- * @typedef {import('../../inv/View').ViewUsage} ViewUsage
+ * @typedef {import('../../inv/View').View} View
  */
 
 registerView('socket', SocketBox);
 
+/**
+ * @param {object} props 
+ * @param {Store} props.store
+ * @param {View} props.view
+ */
 export default function SocketBox({ store, view }) {
   return (
-    <ContainerBox store={store} view={view}>
+    <BoundedBox store={store} view={view}>
       <SocketSlot
         className={Styles.socket}
         store={store}
         view={view}
         slotIndex={0}
       />
-    </ContainerBox>
+    </BoundedBox>
   );
 }
 
@@ -29,7 +33,6 @@ export default function SocketBox({ store, view }) {
  * @param {Store} store
  * @param {number} coordX
  * @param {number} coordY
- * @returns {ViewId}
  */
 export function createSocketBoxInStore(store, coordX, coordY) {
   return createInvViewInStore(

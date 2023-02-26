@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import ContainerBox from '../container/ContainerBox';
+import ContainerBox from './ContainerBox';
 import Styles from './PaginatedBox.module.css';
 
 export default function PaginatedBox({

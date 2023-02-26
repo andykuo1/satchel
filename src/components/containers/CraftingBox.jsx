@@ -1,6 +1,6 @@
 import { createInvViewInStore } from '../../stores';
 import { registerView } from '../ViewRegistry';
-import ContainerBox from '../container/ContainerBox';
+import ContainerBox from './ContainerBox';
 import Styles from './CraftingBox.module.css';
 
 registerView('crafting', CraftingBox);

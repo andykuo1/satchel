@@ -16,10 +16,11 @@ import { createAlbumBoxInStore } from './containers/AlbumBox';
 import { createConnectorBoxInStore } from './containers/ConnectorBox';
 import { createCraftingBoxInStore } from './containers/CraftingBox';
 import { createDispenserBoxInStore } from './containers/DispenserBox';
-import { createFoundryBoxInStore } from './containers/FoundryBox';
-import { createInvBoxInStore } from './containers/InvBox';
+import { createFoundryBoxInStore } from './boxes/FoundryBox';
+import { createInvBoxInStore } from './boxes/InvBox';
 import { createListBoxInStore } from './containers/ListBox';
-import { createSocketBoxInStore } from './containers/SocketBox';
+import { createSocketBoxInStore } from './boxes/SocketBox';
+import { createStackBoxInStore } from './boxes/StackBox';
 import Cursor from './cursor/Cursor';
 import { useYDoc } from './network/YDoc';
 import Workspace from './playground/Workspace';
@@ -52,6 +53,12 @@ export default function Content() {
     };
     addItemToInv(store, invId, item, 0, 0);
     /**/
+    {
+      createStackBoxInStore(store, 0, 0);
+    }
+    {
+      createFoundryBoxInStore(store, 1, 1);
+    }
     /*
         {
             let w = 6;

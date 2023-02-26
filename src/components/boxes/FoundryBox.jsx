@@ -1,24 +1,31 @@
+import { useRef } from 'react';
 import AspectRatio from '@material-symbols/svg-400/outlined/aspect_ratio.svg';
 import VerticalAlignCenter from '@material-symbols/svg-400/outlined/vertical_align_center.svg';
 import ZoomIn from '@material-symbols/svg-400/outlined/zoom_in.svg';
 import ZoomOut from '@material-symbols/svg-400/outlined/zoom_out.svg';
-import { useRef } from 'react';
 
-import { getItemAtSlotIndex, updateItem } from '../../inv/transfer/InvTransfer';
-import { InvStore, createInvViewInStore } from '../../stores';
+import Styles from './FoundryBox.module.css';
+
+import { getItemAtSlotIndex, updateItem } from '@/inv/transfer/InvTransfer';
+import { InvStore, createInvViewInStore } from '@/stores';
 import { registerView } from '../ViewRegistry';
-import ContainerBox from '../container/ContainerBox';
 import IconButton from '../lib/IconButton';
 import ImageContextMenu from '../menus/ImageContextMenu';
 import SocketSlot from '../slots/SocketSlot';
-import Styles from './FoundryBox.module.css';
+import BoundedBox from './BoundedBox';
 
 /**
  * @typedef {import('../../stores').Store} Store
+ * @typedef {import('../../inv/View').View} View
  */
 
 registerView('foundry', FoundryBox);
 
+/**
+ * @param {object} props 
+ * @param {Store} props.store
+ * @param {View} props.view
+ */
 export default function FoundryBox({ store, view }) {
   const currentItem = useRef(null);
 
@@ -33,7 +40,7 @@ export default function FoundryBox({ store, view }) {
   currentItem.current = item;
   let disabled = !Boolean(item);
   return (
-    <ContainerBox store={store} view={view}>
+    <BoundedBox store={store} view={view}>
       <fieldset className={Styles.container}>
         <SocketSlot
           className={Styles.socket}
@@ -122,7 +129,7 @@ export default function FoundryBox({ store, view }) {
           />
         </div>
       </fieldset>
-    </ContainerBox>
+    </BoundedBox>
   );
 }
 

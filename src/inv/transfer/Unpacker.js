@@ -1,5 +1,5 @@
 import { isEmptyViewArea } from '../../components/Intersection';
-import { createInvBoxInStore } from '../../components/containers/InvBox';
+import { createInvBoxInStore } from '../../components/boxes/InvBox';
 
 export function tryUnpackItem(store, item, coordX, coordY) {
   if (!canUnpackItem(store, item, coordX, coordY)) {
